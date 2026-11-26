@@ -1,0 +1,56 @@
+MCP FAZ 2 ANOS — NA PRÁTICA
+Lojinha na Black Friday · servidor MCP "loja" (stdio)
+Conectado · protocolo 2026-07-28 · extensões: skills, tasks
+
+━━ PASSO 1 DE 3 — SKILL ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+O servidor entrega o playbook junto com as tools.
+
+→ skills/list
+  1 skill no servidor: promocao  (no Claude Code: loja:promocao)
+  Promoção de Black Friday sem prejuízo. Use antes de mudar qualquer preço da loja.
+  Manifesto: 2 arquivos com SHA-256
+
+→ resources/read skill://promocao/SKILL.md  (só quando precisa)
+  1. Margem mínima de 15% sobre o custo.
+  2. Nunca abaixo do custo.
+  3. Arredonde para ,90.
+  ✓ Skill carregada e conferida (tamanho + SHA-256 batem)
+
+━━ PASSO 2 DE 3 — TASK ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Trabalho longo roda em segundo plano. Ninguém trava.
+
+→ tools/call atualizar_precos  (20% off em 300 produtos)
+  Servidor devolveu na hora: task f443a089 · working
+→ tasks/get a cada 0,5 s
+  working   ███░░░░░░░░░░░░░░░░░  50 de 300
+  working   ███████░░░░░░░░░░░░░  100 de 300
+  working   ██████████░░░░░░░░░░  150 de 300
+  working   █████████████░░░░░░░  200 de 300
+  working   █████████████████░░░  250 de 300
+  completed ████████████████████  pronto
+  ✓ 299 preços novos no rascunho · 43 travados na margem de 15%
+
+━━ PASSO 3 DE 3 — PERGUNTA ANTES DE AGIR ━━━━━━━━━━━━━━━━━━━━━━
+O servidor pausa e pergunta. Você decide.
+
+→ tools/call publicar_precos
+  ? Servidor pergunta: "Publicar 299 preços novos agora?"
+  Resposta: NÃO
+  ✗ Usuário não confirmou. Nada publicado.
+
+→ tools/call publicar_precos
+  ? Servidor pergunta: "Publicar 299 preços novos agora?"
+  Resposta: SIM
+  ✓ 299 preços publicados na loja.
+
+→ tools/call apagar_produto SKU001  (destrutivo)
+  ? Servidor pergunta: "Apagar não tem volta. Digite o nome exato: Caneca Azul P"
+  Digitado: "Caneca"
+  ✗ Nome não confere ('Caneca'). SKU001 continua na loja.
+
+→ tools/call apagar_produto SKU001  (destrutivo)
+  ? Servidor pergunta: "Apagar não tem volta. Digite o nome exato: Caneca Azul P"
+  Digitado: "Caneca Azul P"
+  ✓ SKU001 (Caneca Azul P) apagado.
+
+FIM · Skills, Tasks e Elicitation num servidor só. Código aberto (MIT).

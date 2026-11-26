@@ -1,0 +1,37 @@
+PROVA NO CLAUDE CODE — 26/11/2026, Claude Code v2.1.332, Linux
+(caminhos pessoais trocados por <kit> e <pasta-temporaria>; outros servidores da máquina removidos)
+
+1) Escopo de projeto (.mcp.json) — fica esperando aprovação até abrir o claude
+$ cd <pasta-temporaria>
+$ claude mcp add --scope project loja -- <kit>/.venv/bin/python <kit>/servidor.py
+Added stdio MCP server loja with command: <kit>/.venv/bin/python <kit>/servidor.py to project config
+$ claude mcp list
+loja: <kit>/.venv/bin/python <kit>/servidor.py - ⏸ Pending approval (run `claude` to approve)
+
+2) Escopo local — conecta direto
+$ claude mcp remove --scope project loja
+$ claude mcp add --scope local loja -- <kit>/.venv/bin/python <kit>/servidor.py
+$ claude mcp list
+loja: <kit>/.venv/bin/python <kit>/servidor.py - ✔ Connected
+
+3) Dentro do claude (sessão interativa em tmux, menos de 2 minutos, sem pedir nada ao modelo)
+❯ /skills          (digitado "loja" na busca)
+  Skills
+  1 of 108 skills
+  ❯ ✔ loja:promocao   mcp · ~30 tokens
+  Skills from MCP servers are in beta
+
+❯ /mcp  →  loja
+  loja
+  MCP server
+  Status:           ✔ connected
+  Command:          <kit>/.venv/bin/python <kit>/servidor.py
+  Protocol:         2026-07-28
+  Capabilities:     3 tools · 2 resources · 1 skill
+
+4) Limpeza
+$ claude mcp remove --scope local loja
+
+O que esta prova NÃO mostra: não pedimos ao modelo para rodar as tools dentro do
+Claude Code, então aqui não vimos a task (polling) nem as perguntas (elicitation)
+funcionando nele. Essas duas estão provadas pelo demo.py e pelos testes (tests/).
