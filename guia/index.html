@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP 2 na prática — seu agente segue o manual, trabalha sozinho e pergunta antes</title>
+<meta name="description" content="Kit grátis e aberto: as novidades do MCP de 24/11/2026 (o manual da ferramenta vem junto, trabalho demorado em segundo plano e pergunta antes de agir) funcionando numa lojinha na Black Friday.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/mcp2-na-pratica/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/mcp2-na-pratica/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/mcp2-na-pratica/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#FACC15; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    --fill:#FACC15; --tint:rgba(250,204,21,.12); --ok:#7CE0C6; --bad:#F0918A;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#a16207; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    --fill:#FACC15; --tint:#FEF9C3; --ok:#0E6B55; --bad:#A83426;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light nav{background:rgba(246,247,249,.85)}
+  body.light .amb{color:var(--txt);background:linear-gradient(transparent 55%,#FACC15 55%)}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  body.light main a:not(.btn),body.light footer a{color:#854d0e;text-decoration:underline;text-decoration-color:#FACC15;text-decoration-thickness:3px}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb);white-space:nowrap}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover,nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut);white-space:nowrap} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:var(--tint)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--fill);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:1500px){nav .links a.opt{display:none}}
+  @media(max-width:960px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(250,204,21,.18),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;grid-template-areas:"top f2" "bot f1";column-gap:40px;row-gap:28px;align-items:center;padding:74px 22px}
+  .h-top{grid-area:top}.h-bot{grid-area:bot}.f1{grid-area:f1}.f2{grid-area:f2}
+  .hero h1{font-size:clamp(1.9rem,4.2vw,3rem);font-weight:800;letter-spacing:-.025em;margin-top:.35em}
+  .hero p.lead{font-size:1.12rem;color:var(--mut);margin:0 0 1.6em;max-width:50ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;grid-template-areas:"top" "f2" "bot" "f1";padding:48px 22px}}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:66ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.95rem;margin:0}
+  .card p+p{margin-top:.6em}
+  .card ul{margin:8px 0 0;padding-left:20px;color:var(--mut);font-size:.95rem}.card li{margin:5px 0}
+  .card .tag{display:inline-block;font:600 .75rem Sora;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:.5em}
+  .card.antes{border-left:3px solid var(--bad)} .card.depois{border-left:3px solid var(--ok)}
+  .quem-img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;margin:0 0 14px;display:block;border:1px solid var(--line)}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  @media(max-width:720px){.stats{grid-template-columns:1fr}}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .stat b{display:block;font:800 clamp(1.7rem,3.6vw,2.4rem)/1.05 Sora,sans-serif;letter-spacing:-.02em;color:var(--amb)}
+  body.light .stat b{color:var(--txt)}
+  .stat span{display:block;color:var(--mut);font-size:.93rem;margin-top:.5em}
+  .fonte{font-size:.86rem;color:var(--mut);margin-top:14px;max-width:80ch}
+  .status{display:inline-block;font:600 .75rem Sora;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:.2em .7em;margin:0 0 .6em}
+  .status.ga{border-color:var(--ok);color:var(--ok)} .status.beta{border-color:var(--amb);color:var(--amb)} .status.nao{border-color:var(--bad);color:var(--bad)}
+  .tl{list-style:none;margin:0;padding:0;counter-reset:t}
+  .tl li{position:relative;padding:0 0 18px 48px;counter-increment:t}
+  .tl li::before{content:counter(t);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:10px;background:var(--fill);color:#1a1206;font:800 .95rem/32px Sora,sans-serif;text-align:center}
+  .tl li::after{content:"";position:absolute;left:15px;top:36px;bottom:4px;width:2px;background:var(--line)}
+  .tl li:last-child::after{display:none}
+  .tl b{font-family:Sora}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:28px}
+  .step>div{min-width:0}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--fill);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .5em}
+  .pedido{position:relative;background:var(--card);border:1px solid var(--amb);border-radius:12px;padding:16px 18px;margin-top:10px}
+  .pedido p{margin:0;color:var(--txt);font-size:.95rem;padding-right:84px;overflow-wrap:anywhere}
+  .copiar{position:absolute;top:10px;right:10px;background:var(--fill);color:#1a1206;border:0;border-radius:8px;padding:.35em .8em;font:600 .82rem Sora;cursor:pointer}
+  @media(max-width:520px){.pedido p{padding-right:0;padding-top:30px}}
+  .prova{background:var(--card);border:1px solid var(--amb);border-radius:16px;padding:26px 26px 22px;margin-top:6px}
+  body.light .prova{border-color:#EAB308}
+  blockquote{margin:6px 0 0;padding:14px 18px;border-left:3px solid var(--fill);background:var(--bg2);border-radius:0 10px 10px 0;font-size:1.02rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:4px}
+  .banner{margin:0 0 30px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .banner img{width:100%;display:block}
+  .peca{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:34px;align-items:start;padding:34px 0;border-top:1px solid var(--line)}
+  .peca:first-of-type{border-top:none;padding-top:8px}
+  @media(max-width:820px){.peca{grid-template-columns:1fr}}
+  .peca h3{font-size:1.4rem;margin:.2em 0 .45em}
+  .peca p{margin:.4em 0;max-width:62ch}
+  .peca .n{font:800 .8rem Sora;letter-spacing:.14em;text-transform:uppercase;color:var(--amb)}
+  .peca .analog{margin-top:.9em;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;font-size:.95rem;color:var(--mut)}
+  .peca .analog b{color:var(--txt)}
+  .peca figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .peca figure img{width:100%;height:auto;display:block}
+  .peca figcaption{padding:10px 14px;font-size:.86rem;color:var(--mut);background:var(--card)}
+  .video-ph{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:center}
+  @media(max-width:780px){.video-ph{grid-template-columns:1fr}}
+  .video-ph figure{margin:0;border-radius:14px;overflow:hidden;border:1px dashed var(--amb)}
+  .video-ph img{width:100%;display:block;opacity:.85}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow-x:auto;font-size:.84rem;line-height:1.6;color:#d6d6e0;margin:10px 0 0;max-width:100%}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)}
+  .tec{background:var(--bg2)}
+  .tec code{font-size:.88em;background:var(--tint);padding:.05em .35em;border-radius:5px;color:var(--txt)}
+  .aviso{border:1px dashed var(--amb);border-radius:12px;padding:12px 16px;color:var(--mut);font-size:.92rem;margin:0 0 22px}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a class="brand" href="#top"><span class="emoji">🔌</span> MCP 2 na prática</a>
+<span class="sep">|</span>
+<span class="clubpro">
+<a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+<span class="sep">-</span>
+<a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+</span>
+<div class="links">
+<a class="sec" href="#explicado">O ganho</a>
+<a class="sec opt" href="#base">De onde vem</a>
+<a class="sec" href="#como">Como funciona</a>
+<a class="sec opt" href="#falta">Ainda não saiu</a>
+<a class="sec" href="#comecar">Como começar</a>
+<a class="sec opt" href="#construir">Para quem constrói</a>
+<a class="sec" href="#prova">A prova</a>
+<span class="lang"><a class="on" href="./">PT</a><a href="en/">EN</a><a href="es/">ES</a></span>
+<button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
+<a class="btn" href="https://github.com/inematds/mcp2-na-pratica" target="_blank" rel="noopener">GitHub</a>
+</div>
+</div></nav>
+
+<header class="hero" id="top">
+<div class="glow"></div>
+<div class="wrap">
+<div class="h-top"><span class="chip">Kit grátis · baseado no anúncio oficial da Anthropic e no blog do MCP · 24/11/2026</span>
+<h1>O seu agente agora segue o manual da ferramenta, faz o trabalho demorado sozinho e só te chama no momento que importa. <span class="amb">MCP 2 na prática</span> mostra como.</h1></div>
+<figure class="f2"><img src="assets/banner.jpg" alt="MCP 2 na prática: seu agente segue o manual, trabalha sozinho e pergunta antes"></figure>
+<div class="h-bot"><p class="lead">Hoje, para a IA mexer na sua loja ou no seu sistema, você explica as regras de novo a cada conversa, fica olhando a tela enquanto o trabalho longo anda e torce para ela não publicar nem apagar nada sem perguntar. Em 24/11/2026 o MCP, o “plugue” que liga a IA aos programas, ganhou as peças que resolvem isso. Este kit mostra as três funcionando numa lojinha na Black Friday.</p>
+<div class="cta">
+<a class="btn" href="#explicado">O que você ganha</a>
+<a class="btn ghost" href="#comecar">Como começar</a>
+</div></div>
+<figure class="f1"><img src="assets/hero.jpg" alt="Robô trabalha sozinho numa central escura, diante de uma rede de conexões de luz"></figure>
+</div>
+</header>
+
+<main>
+<section class="resumo" id="resumo"><div class="wrap">
+<span class="chip">Em uma frase</span>
+<p><strong>Você quer deixar a IA trabalhar nos seus programas sem explicar tudo de novo, sem ficar esperando e sem medo de ela fazer algo que não tem volta.</strong> MCP 2 na prática é um kit gratuito e aberto que mostra isso numa lojinha de mentira com 300 produtos. O MCP (Model Context Protocol) é o padrão aberto que liga a IA ao resto do software; em 24/11/2026 ele ganhou o manual que vem junto, o trabalho em segundo plano e a pergunta antes de agir. Serve para quem usa agentes como o Claude e para quem constrói conectores. “MCP 2.0” é só o apelido que circula: tudo aqui vem do anúncio da Anthropic e do blog oficial do MCP.</p>
+</div></section>
+
+<section id="explicado"><div class="wrap">
+<span class="chip">O ganho</span>
+<h2>Da IA que você vigia <span class="amb">à IA que te chama na hora certa</span></h2>
+<p class="sub">Três mudanças, cada uma provada num passo do kit (veja <a href="#como">Como funciona</a>).</p>
+<div class="grid g2">
+<div class="card antes"><span class="tag">Antes</span><h3>Você é o manual, o relógio e o freio</h3><ul><li>Cola as regras da loja no chat toda vez (“margem mínima, nunca abaixo do custo…”).</li><li>Pede para atualizar 300 preços e a conversa fica parada até acabar.</li><li>A IA publica ou apaga e você só descobre depois.</li></ul></div>
+<div class="card depois"><span class="tag">Depois</span><h3>A ferramenta traz o manual e pede licença</h3><ul><li>O manual da loja vem junto com o conector e só entra quando precisa (passo 1).</li><li>O trabalho longo vira uma tarefa em segundo plano; você continua conversando (passo 2).</li><li>Antes de publicar ou apagar, a ferramenta para e pergunta a você (passo 3).</li></ul></div>
+</div>
+<div class="stats">
+<div class="stat"><b>~30 tokens</b><span>o espaço que o manual da loja ocupa no Claude Code até ser usado (medido em <code>/skills</code>).</span></div>
+<div class="stat"><b>299 de 300</b><span>preços novos calculados em segundo plano no demo, com 43 travados na margem mínima de 15%.</span></div>
+<div class="stat"><b>2 travas</b><span>“sim ou não” para publicar e “digite o nome exato” para apagar. Resposta errada, nada acontece.</span></div>
+</div>
+</div></section>
+
+<section id="base"><div class="wrap">
+<span class="chip">De onde vem</span>
+<h2>Fontes oficiais, <span class="amb">não boato</span></h2>
+<p class="sub">O kit só usa o que foi publicado pela Anthropic e pelo projeto MCP. Onde algo ainda não saiu, a página diz.</p>
+<div class="grid g3">
+<div class="card"><h3>📣 Anúncio da Anthropic (24/11/2026)</h3><p>Apresenta as quatro novidades: o manual que vem junto (Skills over MCP), o trabalho em segundo plano (Tasks), a pergunta antes de agir (Elicitation) e o envio de arquivos (File Uploads, ainda não lançado). Diz que já são mais de 10.000 conectores para o Claude e mais de 700 milhões de downloads de SDK por mês.</p><p><a href="https://claude.com/resources/articles/skills-over-mcp-tasks-and-more" target="_blank" rel="noopener">Ler o anúncio</a></p></div>
+<div class="card"><h3>🎂 Blog do MCP: “MCP faz 2 anos”</h3><p>Antes, cada empresa construía uma ponte separada para cada IA; com o MCP, um conector serve para toda IA que fala o padrão. OpenAI, Google e Microsoft adotaram, e o MCP fica na Agentic AI Foundation, sob a Linux Foundation: nenhuma empresa é dona.</p><p><a href="https://blog.modelcontextprotocol.io/posts/mcp-turns-two" target="_blank" rel="noopener">Ler o blog</a></p></div>
+<div class="card"><h3>📘 Documentação oficial</h3><p>A página do MCP no Claude Code diz como ver os manuais que vêm dos conectores. A especificação do MCP descreve cada peça para quem constrói (skills, tasks e elicitation).</p><p><a href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener">MCP no Claude Code</a> · <a href="https://modelcontextprotocol.io/extensions/skills/overview" target="_blank" rel="noopener">Skills</a> · <a href="https://modelcontextprotocol.io/extensions/tasks/overview" target="_blank" rel="noopener">Tasks</a> · <a href="https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation" target="_blank" rel="noopener">Elicitation</a></p></div>
+</div>
+<blockquote style="margin-top:22px">Nas palavras do anúncio: o Claude passa a trabalhar com um servidor como trabalha com outro agente, aprendendo com ele, delegando a ele e trocando informação e arquivos no caminho.</blockquote>
+</div></section>
+
+<section id="quem"><div class="wrap">
+<span class="chip">Duas portas de entrada</span>
+<h2>Você usa agentes <span class="amb">ou constrói conectores?</span></h2>
+<p class="sub">Escolha a sua porta. As duas usam a mesma lojinha.</p>
+<div class="grid g2">
+<div class="card"><img class="quem-img" loading="lazy" src="assets/quem-usa.jpg" alt="Dona de loja olha o celular com calma enquanto o trabalho anda sozinho no monitor"><h3>🧭 Quem usa agentes</h3><p><strong>Ganha:</strong> o Claude já chega sabendo as regras da ferramenta, porque a empresa que fez o conector escreve o manual e, quando melhora, você recebe sozinho. O trabalho longo não trava a conversa, e nada que não tem volta acontece sem o seu sim.</p><p><strong>Como ver no Claude Code:</strong> digite <code>/mcp</code> para ver os conectores ligados e <code>/skills</code> para ver os manuais que vieram deles (o nome aparece como <em>conector:manual</em>, por exemplo <em>loja:promocao</em>). Ligado por padrão nos planos Pro, Max e Ultra.</p><p><a href="#comecar">Como começar →</a></p></div>
+<div class="card"><img class="quem-img" loading="lazy" src="assets/quem-constroi.jpg" alt="Desenvolvedor aponta para um diagrama de caixas ligadas na tela"><h3>🛠️ Quem constrói servidor MCP</h3><p><strong>Ganha:</strong> um servidor pequeno e aberto, em Python, com as três peças funcionando, testes que rodam contra o servidor de verdade e os nomes oficiais de cada peça. Os limites estão escritos, para você não descobrir na produção.</p><p><strong>O que tem lá:</strong> como o servidor lista e entrega o manual, como devolve um tíquete para o trabalho longo e como pergunta no chat ou manda a pessoa para um site.</p><p><a href="#construir">Ir para a parte de quem constrói →</a></p></div>
+</div>
+</div></section>
+
+<section id="dia"><div class="wrap">
+<span class="chip">No seu dia</span>
+<h2>Como isso muda <span class="amb">o seu dia</span></h2>
+<div class="grid g3">
+<div class="card"><h3>🏷️ A promoção de Black Friday</h3><p><strong>Hoje:</strong> você lembra a IA da margem mínima, do arredondamento e do “nunca abaixo do custo” em cada conversa.</p><p><strong>Com o kit:</strong> o manual da loja traz as três regras e a IA o abre só quando vai mexer em preço.</p></div>
+<div class="card"><h3>⏳ Atualizar 300 preços</h3><p><strong>Hoje:</strong> a conversa fica parada até a última etiqueta.</p><p><strong>Com o kit:</strong> o servidor responde na hora com um tíquete, faz o trabalho por trás e avisa quando termina, com quantos produtos travaram na margem.</p></div>
+<div class="card"><h3>🛑 Publicar ou apagar</h3><p><strong>Hoje:</strong> você confia que a IA não vai apertar o botão errado.</p><p><strong>Com o kit:</strong> “Publicar 299 preços novos agora?” espera o seu sim. Para apagar, você precisa digitar o nome exato do produto.</p></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>🌍 Nas ferramentas de verdade (exemplos do anúncio)</h3><ul><li><strong>Manual junto:</strong> Shopify (montar e atualizar a loja de ponta a ponta), HubSpot (configurar cliente novo), Atlassian (contexto da empresa).</li><li><strong>Segundo plano:</strong> ZoomInfo, onde a pesquisa de contas e contatos que levava vários pedidos vira um trabalho só.</li><li><strong>Pergunta antes:</strong> Supabase mostra o custo antes de criar um projeto pago, Railway pergunta antes de remover um serviço e o GitHub exige digitar o nome do repositório antes de um agente apagá-lo.</li></ul></div>
+</div></section>
+
+<section id="video"><div class="wrap">
+<span class="chip">Vídeo</span>
+<h2>Entenda em poucos minutos</h2>
+<!-- VIDEO: entra o explicavideo do projeto quando publicado -->
+<div class="video-ph">
+<figure><img loading="lazy" src="assets/passo2-task.jpg" alt="Tela do demo: a tarefa de 300 preços andando em segundo plano"></figure>
+<div><h3>Vídeo em breve</h3><p class="mut">O vídeo explicativo entra aqui assim que for publicado. Enquanto isso, as três telas do demo estão em <a href="#como">Como funciona</a>.</p></div>
+</div>
+</div></section>
+
+<section id="como"><div class="wrap">
+<span class="chip">Como funciona, sem jargão</span>
+<h2>Três peças, <span class="amb">três passos do demo</span></h2>
+<figure class="banner"><img loading="lazy" src="assets/banner-grade.jpg" alt="As partes do guia: o manual vem junto, trabalho em segundo plano, pergunta antes de agir, como ver no Claude, o que ainda não saiu, kit grátis"></figure>
+
+<div class="peca">
+<div><span class="n">Passo 1 · Skills over MCP</span><h3>O manual vem junto com a ferramenta</h3>
+<p><span class="status beta">Beta pública</span></p>
+<p>O conector entrega, além dos botões que a IA pode apertar, o manual de como usá-los, escrito pela própria empresa da ferramenta. A IA só abre o manual quando precisa, então ele quase não ocupa espaço na conversa.</p>
+<p>No kit, o manual da loja diz: margem mínima de 15% sobre o custo, nunca abaixo do custo e preço terminando em ,90. O demo confere que o manual chegou inteiro.</p>
+<div class="analog"><b>Como no dia a dia:</b> é o eletrodoméstico que já vem com o manual na caixa, e o fabricante troca o manual sozinho quando melhora.</div></div>
+<figure><img loading="lazy" src="assets/passo1-skill.jpg" alt="Tela do demo: o servidor lista o manual promocao e mostra as três regras"><figcaption>Saída real do demo, passo 1.</figcaption></figure>
+</div>
+
+<div class="peca">
+<div><span class="n">Passo 2 · Tasks</span><h3>O trabalho demorado vai para segundo plano</h3>
+<p><span class="status ga">Disponível</span></p>
+<p>Em vez de travar a conversa, a ferramenta responde na hora “recebi, estou trabalhando” e segue sozinha. A IA confere de tempos em tempos e te avisa quando acaba.</p>
+<p>No kit, um desconto de 20% em 300 produtos vira uma tarefa: o andamento aparece de 50 em 50 até “pronto”, com 299 preços novos no rascunho e 43 travados na margem.</p>
+<div class="analog"><b>Como no dia a dia:</b> é deixar a roupa na lavanderia com um tíquete. Você vai embora e volta para perguntar se ficou pronta.</div></div>
+<figure><img loading="lazy" src="assets/passo2-task.jpg" alt="Tela do demo: barra de progresso da tarefa de 300 preços"><figcaption>Saída real do demo, passo 2.</figcaption></figure>
+</div>
+
+<div class="peca">
+<div><span class="n">Passo 3 · Elicitation</span><h3>A ferramenta pergunta antes de agir</h3>
+<p><span class="status ga">Disponível</span></p>
+<p>No meio do trabalho, a ferramenta para e pergunta a você. Pode ser uma pergunta no próprio chat (sim ou não, digite o nome) ou um link para o site da empresa, para senha ou pagamento: assim o dado sensível não passa pelo chat.</p>
+<p>No kit: “Publicar 299 preços novos agora?”. Com “não”, nada é publicado; com “sim”, os preços vão para a loja. Para apagar, digitar só “Caneca” não basta: precisa ser “Caneca Azul P”.</p>
+<div class="analog"><b>Como no dia a dia:</b> é o banco que pede para você confirmar o valor antes de transferir.</div></div>
+<figure><img loading="lazy" src="assets/passo3-pergunta.jpg" alt="Tela do demo: perguntas de publicar e de apagar com as respostas"><figcaption>Saída real do demo, passo 3.</figcaption></figure>
+</div>
+
+<div class="card" style="margin-top:10px"><h3>O que o kit não promete</h3><ul><li>A loja é de mentira: 300 produtos fictícios, e o servidor trabalha numa cópia. Ele não se liga à sua loja real.</li><li>As tarefas ficam só na memória do servidor: se ele reiniciar, somem.</li><li>No Claude Code, o kit provou a conexão e o manual aparecendo; a tarefa e a pergunta foram provadas pelo demo e pelos testes (veja <a href="#prova">A prova</a>).</li></ul></div>
+</div></section>
+
+<section id="falta"><div class="wrap">
+<span class="chip">Sem exagero</span>
+<h2>O que <span class="amb">ainda não saiu</span></h2>
+<div class="grid g3">
+<div class="card"><span class="status nao">Ainda não lançado</span><h3>📎 Envio de arquivos (File Uploads)</h3><p>Mandar PDF, planilha ou imagem direto para a ferramenta sem encher a conversa. O anúncio diz “em breve”, sem data. O kit só menciona.</p></div>
+<div class="card"><span class="status beta">Beta pública</span><h3>📘 O manual que vem junto</h3><p>Pode mudar. Precisa do Claude Code v2.1.331 ou mais novo e não funciona no modo sem tela (<code>claude -p</code>). No plano Team, só depois que o administrador ativar.</p></div>
+<div class="card"><span class="status ga">Disponível com limite</span><h3>⏳ Segundo plano e ❓ pergunta antes</h3><p>Já valem nos planos Pro, Max e Ultra. Para Team e Enterprise, o segundo plano ainda está chegando.</p></div>
+</div>
+<p class="fonte">E o nome: “MCP 2.0” não é oficial. É o apelido de quem acompanha para o salto de 24/11/2026; o padrão continua se chamando MCP.</p>
+</div></section>
+
+<section id="comecar"><div class="wrap">
+<span class="chip">Como começar</span>
+<h2>Você não instala nada <span class="amb">à mão</span></h2>
+<div class="step"><div class="b">1</div><div><h3>Abra um agente de IA no seu computador</h3><p>Agente é a IA que, além de conversar, mexe em arquivos e roda programas, sempre pedindo licença. Para ver o manual que vem junto, use o <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">Claude Code</a> v2.1.331 ou mais novo. O <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a> também consegue baixar e rodar o demo.</p></div></div>
+<div class="step"><div class="b">2</div><div><h3>Cole o pedido</h3><p>A IA lê o kit, explica as novidades em linguagem simples e diz quais conectores seus ganham com elas.</p>
+<div class="pedido"><button class="copiar" type="button">Copiar</button><p>Leia o repositório https://github.com/inematds/mcp2-na-pratica (o README, o COMO-LIGAR-NO-CLAUDE.md e a pasta exemplos). Me explique em linguagem simples as três novidades do MCP que ele mostra (o manual que vem junto, o trabalho em segundo plano e a pergunta antes de agir) e o que ainda não foi lançado. Depois olhe os conectores MCP que eu já uso e me diga quais ganham algo com essas novidades. Não instale nem mude nada antes do meu sim. Com o meu sim: baixe o kit numa pasta separada, crie o ambiente, rode os testes e o demo, ligue o servidor “loja” no Claude Code no escopo local, me mostre onde ver /mcp e /skills e, no fim, me diga como tirar.</p></div></div></div>
+<div class="step"><div class="b">3</div><div><h3>Diga sim ao que fizer sentido</h3><p>Veja o demo rodar os três passos. Se quiser, abra o Claude Code, digite <code>/skills</code> e procure <em>loja:promocao</em>. Quando terminar, peça para a IA tirar o servidor da loja.</p></div></div>
+<div class="grid g2" style="margin-top:10px">
+<div class="card"><h3>🌐 Quer só usar, sem instalar nada?</h3><p>Não há versão online do kit. As novidades em si já chegam pelos conectores oficiais no Claude, nos planos Pro, Max e Ultra (conferido no anúncio de 24/11/2026). O kit serve para você ver as três funcionando por dentro.</p></div>
+<div class="card"><h3>⬇️ Onde baixar?</h3><p>Não há instalador: é uma pasta com um programa pequeno em Python, que a sua IA prepara. Baixe o <a href="https://github.com/inematds/mcp2-na-pratica/archive/refs/heads/main.zip">ZIP do kit</a> ou veja o <a href="https://github.com/inematds/mcp2-na-pratica" target="_blank" rel="noopener">repositório</a>.</p></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>🧑‍💻 É técnico?</h3><p>Pré-requisitos, arquivos, o que o SDK já faz e o que o kit escreveu à mão estão no README.</p><p><a class="btn" href="https://github.com/inematds/mcp2-na-pratica#instalação-técnica" target="_blank" rel="noopener">Ver a parte técnica</a></p></div>
+</div></section>
+
+<section id="construir" class="tec"><div class="wrap">
+<span class="chip">Para quem constrói servidor</span>
+<h2>As três peças <span class="amb">pelo nome oficial</span></h2>
+<p class="sub">Esta é a única parte técnica do guia. Cada termo vem com a frase comum ao lado; o resto está no README.</p>
+<div class="grid g2">
+<div class="card"><h3>📘 Manual junto: <code>skills/list</code> e <code>skills/get</code></h3><p>“O servidor diz quais manuais tem e entrega o que for pedido.” É a extensão <code>io.modelcontextprotocol/skills</code>; os arquivos do manual saem por <code>resources/read</code>. No kit, o manual <code>promocao</code> vem com uma lista de arquivos com tamanho e SHA-256 (uma impressão digital do arquivo), e o cliente confere. No Claude Code o nome aparece como <code>&lt;servidor&gt;:&lt;skill&gt;</code>.</p></div>
+<div class="card"><h3>⏳ Segundo plano: <code>taskId</code> e <code>tasks/get</code></h3><p>“O servidor devolve um tíquete na hora e o cliente pergunta como está.” Os estados são <code>working</code>, <code>completed</code>, <code>failed</code>, <code>cancelled</code> e <code>input_required</code>. Cliente que não declara a extensão recebe o resultado do jeito antigo (espera e devolve).</p></div>
+<div class="card"><h3>❓ Pergunta antes: elicitation <code>form</code> × <code>url</code></h3><p>“Form” é a pergunta no chat: sim ou não, digite o nome. “Url” manda a pessoa para o site da empresa (senha, pagamento), e o dado não passa pelo chat. O kit usa o form; o url só é citado, porque a lojinha não pede dado sensível.</p></div>
+<div class="card"><h3>🏪 O servidor do kit</h3><p><code>servidor.py</code> é um servidor MCP “loja” que fala pela entrada e saída do terminal (stdio): o manual <code>promocao</code>, a tool <code>atualizar_precos</code> (vira tarefa), <code>publicar_precos</code> (pergunta sim ou não) e <code>apagar_produto</code> (pede o nome exato). O SDK Python <code>mcp</code> 2.3.0 não traz as extensões de skills e tasks prontas: o kit as escreve à mão.</p></div>
+</div>
+<div class="grid g2" style="margin-top:16px">
+<div class="card"><h3>Rodar em 3 comandos (Python 3.10+)</h3>
+<pre><span class="k">git clone</span> https://github.com/inematds/mcp2-na-pratica
+<span class="k">cd</span> mcp2-na-pratica
+<span class="k">python3 -m venv</span> .venv <span class="c">&amp;&amp;</span> .venv/bin/pip install -r requirements.txt
+<span class="k">.venv/bin/python</span> demo.py --auto</pre>
+<p style="margin-top:10px">Sem <code>--auto</code>, o demo pergunta para você. Testes: <code>.venv/bin/python -m pytest -q</code>.</p></div>
+<div class="card"><h3>Ligar no Claude Code</h3>
+<pre><span class="k">claude mcp add</span> loja -- "$PWD/.venv/bin/python" "$PWD/servidor.py"
+<span class="k">claude mcp list</span>   <span class="c"># loja: … - ✔ Connected</span></pre>
+<p style="margin-top:10px">Dentro do <code>claude</code>: <code>/mcp</code> → <code>loja</code> e <code>/skills</code> → <code>loja:promocao</code>. Com <code>--scope project</code> ele fica “Pending approval” até você abrir o <code>claude</code> na pasta; o escopo padrão (local) conecta direto. Para tirar: <code>claude mcp remove loja</code>.</p></div>
+</div>
+<p class="fonte">Limites honestos: as tarefas ficam só na memória do servidor, o <code>ttlMs</code> é informado mas não apaga nada sozinho, e <code>tasks/update</code> só confirma o recebimento. O kit fala a versão 2026-07-28 da especificação, a “sem estado”: pedido e resposta simples, que deixa o servidor rodar até em serverless. Detalhes em <a href="https://github.com/inematds/mcp2-na-pratica#instalação-técnica" target="_blank" rel="noopener">README</a> e <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/COMO-LIGAR-NO-CLAUDE.md" target="_blank" rel="noopener">COMO-LIGAR-NO-CLAUDE.md</a>.</p>
+</div></section>
+
+<section id="prova"><div class="wrap">
+<span class="chip">A prova</span>
+<h2>Rodado de verdade, <span class="amb">em 26/11/2026</span></h2>
+<div class="prova">
+<ol class="tl">
+<li><b>Demo:</b> o manual chegou e foi conferido (tamanho e impressão digital batem); a tarefa de 300 produtos terminou com 299 preços novos e 43 travados na margem; com “não”, nada foi publicado; com “sim”, 299 preços foram para a loja; apagar com “Caneca” foi recusado e com “Caneca Azul P” funcionou.</li>
+<li><b>Testes:</b> 17 testes rodam contra o servidor de verdade e todos passaram.</li>
+<li><b>Claude Code v2.1.332 (Linux):</b> o servidor “loja” conectou pela versão 2026-07-28, mostrou “3 tools · 2 resources · 1 skill”, e o <code>/skills</code> listou <em>loja:promocao</em> com cerca de 30 tokens, com o aviso “Skills from MCP servers are in beta”.</li>
+</ol>
+<blockquote>O que a prova não mostra: no Claude Code não pedimos ao modelo para rodar as ferramentas, então lá não vimos a tarefa em segundo plano nem a pergunta. Essas duas estão provadas pelo demo e pelos testes.</blockquote>
+<p class="fonte">Saídas completas no repositório: <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/exemplos/saida-demo.txt" target="_blank" rel="noopener">saida-demo.txt</a> e <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/exemplos/prova-claude-code.txt" target="_blank" rel="noopener">prova-claude-code.txt</a>.</p>
+</div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+<span class="chip">Perguntas</span>
+<h2>Antes de <span class="amb">você perguntar</span></h2>
+<div class="grid g2">
+<div class="card"><h3>Preciso programar?</h3><p>Para ver funcionando, não: você cola o pedido do “Como começar” e a sua IA faz o resto. Para construir o seu próprio servidor, sim, e o kit em Python é o ponto de partida.</p></div>
+<div class="card"><h3>Custa alguma coisa?</h3><p>O kit é grátis e aberto (licença MIT). As novidades no Claude estão ligadas nos planos Pro, Max e Ultra, que são pagos.</p></div>
+<div class="card"><h3>“MCP 2.0” é o nome oficial?</h3><p>Não. É o apelido que circula para o pacote de 24/11/2026. O padrão continua sendo o MCP, que fez 2 anos em novembro de 2026.</p></div>
+<div class="card"><h3>Funciona com outras IAs?</h3><p>O MCP é aberto e foi adotado por OpenAI, Google e Microsoft. Cada aplicativo de IA precisa aceitar as peças novas; o kit foi testado no Claude Code. O demo roda sozinho no terminal, com qualquer agente.</p></div>
+<div class="card"><h3>Mexe na minha loja de verdade?</h3><p>Não. A loja é fictícia e o servidor trabalha numa cópia dos 300 produtos.</p></div>
+<div class="card"><h3>Posso mandar arquivo para a ferramenta?</h3><p>Ainda não. O envio de arquivos (File Uploads) foi anunciado como “em breve”, sem data.</p></div>
+</div>
+<p class="sub" style="margin-top:28px">E você, que ferramenta gostaria que parasse e te perguntasse antes de agir? Venha contar e pegar este e outros kits grátis no <a href="https://inema.club" target="_blank" rel="noopener">inema.club</a>, direto na internet.</p>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<span class="pill">grátis</span><span class="pill">código aberto (MIT)</span><span class="pill">Python</span><span class="pill">MCP 2026-07-28</span>
+<p><a href="https://github.com/inematds/mcp2-na-pratica" target="_blank" rel="noopener">github.com/inematds/mcp2-na-pratica</a> · <a href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a></p>
+</div></footer>
+<script>
+(function(){var b=document.body,t=document.getElementById('themeToggle');
+try{if(localStorage.getItem('mcp2-na-pratica-theme')==='light'){b.classList.add('light');t.textContent='☀️'}}catch(e){}
+t.onclick=function(){b.classList.toggle('light');var l=b.classList.contains('light');t.textContent=l?'☀️':'🌙';try{localStorage.setItem('mcp2-na-pratica-theme',l?'light':'dark')}catch(e){}};
+document.querySelectorAll('.copiar').forEach(function(bt){var orig=bt.textContent;bt.onclick=function(){var p=bt.parentNode.querySelector('p');var txt=p.textContent;
+(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){bt.textContent='✓'},function(){var r=document.createRange();r.selectNodeContents(p);var s=getSelection();s.removeAllRanges();s.addRange(r);bt.textContent='Ctrl+C'});setTimeout(function(){bt.textContent=orig},2500)}});})();
+</script>
+</body>
+</html>

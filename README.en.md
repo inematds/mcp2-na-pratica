@@ -1,10 +1,30 @@
 # MCP 2 in practice — the little shop on Black Friday
 
+[![MCP 2 in practice](guia/assets/banner-en.jpg)](https://inematds.github.io/mcp2-na-pratica/guia/en/)
+
+**🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)** · MIT License
+
+## What it is
+
+**You want to let AI work inside your programs without explaining everything again, without waiting around, and without fearing it will do something that can't be undone.** MCP 2 in practice is a free, open kit that shows this in a pretend shop with 300 products. MCP (Model Context Protocol) is the open standard that connects AI to the rest of your software; on 11/24/2026 it gained the manual that comes along, background work, and asking before acting. It is for people who use agents like Claude and for people who build connectors. "MCP 2.0" is just the nickname going around: everything here comes from Anthropic's announcement and the official MCP blog.
+
+## 📖 Usage guide
+
+Full guide (landing page + step by step, no jargon): **https://inematds.github.io/mcp2-na-pratica/guia/en/**
+
+## How to start (without installing anything by hand)
+
+Open Claude Code (v2.1.331 or newer) or Codex and paste:
+
+> Read the repository https://github.com/inematds/mcp2-na-pratica (the README, COMO-LIGAR-NO-CLAUDE.md and the exemplos folder). Explain to me in plain language the three new MCP features it shows (the manual that comes along, background work, and asking before acting) and what has not been released yet. Then look at the MCP connectors I already use and tell me which ones gain something from these new features. Do not install or change anything before I say yes. Once I say yes: download the kit into a separate folder, create the environment, run the tests and the demo, connect the "loja" server to Claude Code in local scope, show me where to see /mcp and /skills and, at the end, tell me how to remove it.
+
+There is no online version or installer: download the [kit ZIP](https://github.com/inematds/mcp2-na-pratica/archive/refs/heads/main.zip) or clone the repository.
+
+---
+
 **Do you want to let AI change your store's prices without fear of breaking everything?** MCP turned 2 on 11/24/2026 and got what was missing for that: the AI receives the **playbook** together with the tools, slow work runs **in the background**, and the server **asks before acting**.
 
 This kit shows all three working for real, in a small MCP server in Python, with a little shop of 300 products.
-
-[Português](README.md) · [Español](README.es.md) · MIT License
 
 ![Terminal demo](exemplos/demo-terminal.png)
 
@@ -16,6 +36,10 @@ This kit shows all three working for real, in a small MCP server in Python, with
 | **Tasks** | Long work becomes a background task: the server returns a `taskId` right away and the client follows along. | **GA** (available) |
 | **Elicitation** | The server pauses and asks the user: a form (yes/no, type the name) or a link for sensitive data outside the chat. | **GA** (available) |
 | **File Uploads** | Sending a file to the MCP server. | **Not released yet** ("rolling out soon"). This kit only mentions it. |
+
+## Technical install
+
+Prerequisites: Python 3.10 or newer; to see the skill in Claude Code, Claude Code v2.1.331 or newer. Below: how to run it, the real output, the files, what the SDK does, the tests and the process.
 
 ## How to run (3 commands)
 

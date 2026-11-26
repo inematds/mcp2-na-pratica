@@ -1,10 +1,30 @@
 # MCP 2 en la práctica — la tiendita en el Black Friday
 
+[![MCP 2 en la práctica](guia/assets/banner-es.jpg)](https://inematds.github.io/mcp2-na-pratica/guia/es/)
+
+**🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)** · Licencia MIT
+
+## Qué es
+
+**Quieres dejar que la IA trabaje en tus programas sin explicarle todo de nuevo, sin quedarte esperando y sin miedo a que haga algo que no tiene vuelta atrás.** MCP 2 en la práctica es un kit gratuito y abierto que muestra esto en una tienda de mentira con 300 productos. El MCP (Model Context Protocol) es el estándar abierto que conecta la IA con el resto del software; el 24/11/2026 sumó el manual que viene incluido, el trabajo en segundo plano y la pregunta antes de actuar. Sirve para quienes usan agentes como Claude y para quienes construyen conectores. "MCP 2.0" es solo el apodo que circula: todo aquí sale del anuncio de Anthropic y del blog oficial de MCP.
+
+## 📖 Guía de uso
+
+Guía completa (landing + paso a paso, sin jerga): **https://inematds.github.io/mcp2-na-pratica/guia/es/**
+
+## Cómo empezar (sin instalar nada a mano)
+
+Abre Claude Code (v2.1.331 o más nuevo) o Codex y pega:
+
+> Lee el repositorio https://github.com/inematds/mcp2-na-pratica (el README, el COMO-LIGAR-NO-CLAUDE.md y la carpeta exemplos). Explícame en lenguaje simple las tres novedades de MCP que muestra (el manual que viene incluido, el trabajo en segundo plano y la pregunta antes de actuar) y qué todavía no se ha lanzado. Después mira los conectores MCP que ya uso y dime cuáles ganan algo con estas novedades. No instales ni cambies nada antes de que yo diga que sí. Cuando diga que sí: descarga el kit en una carpeta separada, crea el entorno, ejecuta las pruebas y la demo, conecta el servidor "loja" a Claude Code en el alcance local, muéstrame dónde ver /mcp y /skills y, al final, dime cómo quitarlo.
+
+No hay versión en línea ni instalador: descarga el [ZIP del kit](https://github.com/inematds/mcp2-na-pratica/archive/refs/heads/main.zip) o clona el repositorio.
+
+---
+
 **¿Quieres dejar que la IA cambie los precios de tu tienda sin miedo a romper todo?** MCP cumplió 2 años el 24/11/2026 y ganó lo que faltaba para eso: la IA recibe el **playbook** junto con las herramientas, el trabajo lento corre **en segundo plano** y el servidor **pregunta antes de actuar**.
 
 Este kit muestra las tres cosas funcionando de verdad, en un servidor MCP pequeño en Python, con una tiendita de 300 productos.
-
-[Português](README.md) · [English](README.en.md) · Licencia MIT
 
 ![Demo en la terminal](exemplos/demo-terminal.png)
 
@@ -16,6 +36,10 @@ Este kit muestra las tres cosas funcionando de verdad, en un servidor MCP peque�
 | **Tasks** | El trabajo largo se vuelve una tarea en segundo plano: el servidor devuelve un `taskId` al instante y el cliente le da seguimiento. | **GA** (disponible) |
 | **Elicitation** | El servidor pausa y le pregunta al usuario: formulario (sí/no, escribe el nombre) o un enlace para datos sensibles fuera del chat. | **GA** (disponible) |
 | **File Uploads** | Enviar un archivo al servidor MCP. | **Todavía no lanzado** ("rolling out soon"). Este kit solo lo menciona. |
+
+## Instalación técnica
+
+Requisitos previos: Python 3.10 o más nuevo; para ver la skill en Claude Code, Claude Code v2.1.331 o más nuevo. Abajo: cómo ejecutarlo, la salida real, los archivos, lo que hace el SDK, las pruebas y el proceso.
 
 ## Cómo ejecutarlo (3 comandos)
 
