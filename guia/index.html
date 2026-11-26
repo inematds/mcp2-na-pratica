@@ -179,7 +179,7 @@
 <main>
 <section class="resumo" id="resumo"><div class="wrap">
 <span class="chip">Em uma frase</span>
-<p><strong>Você quer deixar a IA trabalhar nos seus programas sem explicar tudo de novo, sem ficar esperando e sem medo de ela fazer algo que não tem volta.</strong> MCP 2 na prática é um kit gratuito e aberto que mostra isso numa lojinha de mentira com 300 produtos. O MCP (Model Context Protocol) é o padrão aberto que liga a IA ao resto do software; em 24/11/2026 ele ganhou o manual que vem junto, o trabalho em segundo plano e a pergunta antes de agir. Serve para quem usa agentes como o Claude e para quem constrói conectores. “MCP 2.0” é só o apelido que circula: tudo aqui vem do anúncio da Anthropic e do blog oficial do MCP.</p>
+<p><strong>Você quer deixar a IA trabalhar nos seus programas sem explicar tudo de novo, sem ficar esperando e sem medo de ela fazer algo que não tem volta.</strong> MCP 2 na prática é um kit gratuito e aberto que mostra isso numa lojinha de mentira com 300 produtos. O MCP (Model Context Protocol) é o padrão aberto que liga a IA ao resto do software; em 24/11/2026 ele ganhou o manual que vem junto, o trabalho em segundo plano e a pergunta antes de agir. Serve para quem usa agentes como o Claude e para quem constrói conectores (as peças que ligam a IA a um programa). “MCP 2.0” é só o apelido que circula: tudo aqui vem do anúncio da Anthropic e do blog oficial do MCP.</p>
 </div></section>
 
 <section id="explicado"><div class="wrap">
@@ -191,8 +191,8 @@
 <div class="card depois"><span class="tag">Depois</span><h3>A ferramenta traz o manual e pede licença</h3><ul><li>O manual da loja vem junto com o conector e só entra quando precisa (passo 1).</li><li>O trabalho longo vira uma tarefa em segundo plano; você continua conversando (passo 2).</li><li>Antes de publicar ou apagar, a ferramenta para e pergunta a você (passo 3).</li></ul></div>
 </div>
 <div class="stats">
-<div class="stat"><b>~30 tokens</b><span>o espaço que o manual da loja ocupa no Claude Code até ser usado (medido em <code>/skills</code>).</span></div>
-<div class="stat"><b>299 de 300</b><span>preços novos calculados em segundo plano no demo, com 43 travados na margem mínima de 15%.</span></div>
+<div class="stat"><b>~30 tokens</b><span>o espaço que o manual da loja ocupa no Claude Code até ser usado (token é o pedacinho de texto com que a IA mede o que lê; medido em <code>/skills</code>).</span></div>
+<div class="stat"><b>299 de 300</b><span>preços novos calculados em segundo plano no demo, com 43 travados na margem mínima de 15%. O que sobra ficou igual: com a margem, não havia desconto de verdade para dar.</span></div>
 <div class="stat"><b>2 travas</b><span>“sim ou não” para publicar e “digite o nome exato” para apagar. Resposta errada, nada acontece.</span></div>
 </div>
 </div></section>
@@ -200,10 +200,11 @@
 <section id="base"><div class="wrap">
 <span class="chip">De onde vem</span>
 <h2>Fontes oficiais, <span class="amb">não boato</span></h2>
-<p class="sub">O kit só usa o que foi publicado pela Anthropic e pelo projeto MCP. Onde algo ainda não saiu, a página diz.</p>
-<div class="grid g3">
-<div class="card"><h3>📣 Anúncio da Anthropic (24/11/2026)</h3><p>Apresenta as quatro novidades: o manual que vem junto (Skills over MCP), o trabalho em segundo plano (Tasks), a pergunta antes de agir (Elicitation) e o envio de arquivos (File Uploads, ainda não lançado). Diz que já são mais de 10.000 conectores para o Claude e mais de 700 milhões de downloads de SDK por mês.</p><p><a href="https://claude.com/resources/articles/skills-over-mcp-tasks-and-more" target="_blank" rel="noopener">Ler o anúncio</a></p></div>
-<div class="card"><h3>🎂 Blog do MCP: “MCP faz 2 anos”</h3><p>Antes, cada empresa construía uma ponte separada para cada IA; com o MCP, um conector serve para toda IA que fala o padrão. OpenAI, Google e Microsoft adotaram, e o MCP fica na Agentic AI Foundation, sob a Linux Foundation: nenhuma empresa é dona.</p><p><a href="https://blog.modelcontextprotocol.io/posts/mcp-turns-two" target="_blank" rel="noopener">Ler o blog</a></p></div>
+<p class="sub">O kit só usa o que foi publicado pela Anthropic e pelo projeto MCP. Onde algo ainda não saiu, a página diz. Por que um padrão importa: sem ele, cada ligação entre uma IA e um programa é feita sob medida; com o MCP, um conector (a peça que liga a IA a um programa, como a loja) serve para toda IA que fala o padrão.</p>
+<div class="grid g2">
+<div class="card"><h3>📣 Anúncio da Anthropic (24/11/2026)</h3><p>Apresenta as quatro novidades: o manual que vem junto (Skills over MCP), o trabalho em segundo plano (Tasks), a pergunta antes de agir (Elicitation) e o envio de arquivos (File Uploads, ainda não lançado). Diz que já são mais de 10.000 conectores para o Claude e mais de 700 milhões de downloads por mês dos kits de programação do MCP (os SDKs, que programadores usam para criar conectores).</p><p><a href="https://claude.com/resources/articles/skills-over-mcp-tasks-and-more" target="_blank" rel="noopener">Ler o anúncio</a></p></div>
+<div class="card"><h3>🎂 Blog do MCP: “MCP faz 2 anos”</h3><p>O post oficial que marca os dois anos do padrão, completados em novembro de 2026.</p><p><a href="https://blog.modelcontextprotocol.io/posts/mcp-turns-two" target="_blank" rel="noopener">Ler o post</a></p></div>
+<div class="card"><h3>🤝 Blog do MCP: o MCP entra na Agentic AI Foundation (09/12/2025)</h3><p>Diz que ChatGPT, Claude, Cursor, Gemini, Microsoft Copilot e Visual Studio Code têm suporte ao MCP. A fundação, sob a Linux Foundation, foi cofundada por Anthropic, Block e OpenAI, com apoio de Google, Microsoft, AWS, Cloudflare e Bloomberg: nenhuma empresa é dona do padrão.</p><p><a href="https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/" target="_blank" rel="noopener">Ler o post</a></p></div>
 <div class="card"><h3>📘 Documentação oficial</h3><p>A página do MCP no Claude Code diz como ver os manuais que vêm dos conectores. A especificação do MCP descreve cada peça para quem constrói (skills, tasks e elicitation).</p><p><a href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener">MCP no Claude Code</a> · <a href="https://modelcontextprotocol.io/extensions/skills/overview" target="_blank" rel="noopener">Skills</a> · <a href="https://modelcontextprotocol.io/extensions/tasks/overview" target="_blank" rel="noopener">Tasks</a> · <a href="https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation" target="_blank" rel="noopener">Elicitation</a></p></div>
 </div>
 <blockquote style="margin-top:22px">Nas palavras do anúncio: o Claude passa a trabalhar com um servidor como trabalha com outro agente, aprendendo com ele, delegando a ele e trocando informação e arquivos no caminho.</blockquote>
@@ -214,7 +215,7 @@
 <h2>Você usa agentes <span class="amb">ou constrói conectores?</span></h2>
 <p class="sub">Escolha a sua porta. As duas usam a mesma lojinha.</p>
 <div class="grid g2">
-<div class="card"><img class="quem-img" loading="lazy" src="assets/quem-usa.jpg" alt="Dona de loja olha o celular com calma enquanto o trabalho anda sozinho no monitor"><h3>🧭 Quem usa agentes</h3><p><strong>Ganha:</strong> o Claude já chega sabendo as regras da ferramenta, porque a empresa que fez o conector escreve o manual e, quando melhora, você recebe sozinho. O trabalho longo não trava a conversa, e nada que não tem volta acontece sem o seu sim.</p><p><strong>Como ver no Claude Code:</strong> digite <code>/mcp</code> para ver os conectores ligados e <code>/skills</code> para ver os manuais que vieram deles (o nome aparece como <em>conector:manual</em>, por exemplo <em>loja:promocao</em>). Ligado por padrão nos planos Pro, Max e Ultra.</p><p><a href="#comecar">Como começar →</a></p></div>
+<div class="card"><img class="quem-img" loading="lazy" src="assets/quem-usa.jpg" alt="Dona de loja olha o celular com calma enquanto o trabalho anda sozinho no monitor"><h3>🧭 Quem usa agentes</h3><p><strong>Ganha:</strong> o Claude já chega sabendo as regras da ferramenta, porque a empresa que fez o conector escreve o manual e, quando melhora, você recebe sozinho. O trabalho longo não trava a conversa, e nada que não tem volta acontece sem o seu sim.</p><p><strong>Como ver no Claude Code:</strong> digite <code>/mcp</code> para ver os conectores ligados e <code>/skills</code> para ver os manuais que vieram deles (o nome aparece como <em>conector:manual</em>, por exemplo <em>loja:promocao</em>). Ligado por padrão nos planos Pro, Max e Ultra; no Team, depois que o administrador ativar; no Enterprise, em breve.</p><p><a href="#comecar">Como começar →</a></p></div>
 <div class="card"><img class="quem-img" loading="lazy" src="assets/quem-constroi.jpg" alt="Desenvolvedor aponta para um diagrama de caixas ligadas na tela"><h3>🛠️ Quem constrói servidor MCP</h3><p><strong>Ganha:</strong> um servidor pequeno e aberto, em Python, com as três peças funcionando, testes que rodam contra o servidor de verdade e os nomes oficiais de cada peça. Os limites estão escritos, para você não descobrir na produção.</p><p><strong>O que tem lá:</strong> como o servidor lista e entrega o manual, como devolve um tíquete para o trabalho longo e como pergunta no chat ou manda a pessoa para um site.</p><p><a href="#construir">Ir para a parte de quem constrói →</a></p></div>
 </div>
 </div></section>
@@ -234,10 +235,7 @@
 <span class="chip">Vídeo</span>
 <h2>Entenda em poucos minutos</h2>
 <!-- VIDEO: entra o explicavideo do projeto quando publicado -->
-<div class="video-ph">
-<figure><img loading="lazy" src="assets/passo2-task.jpg" alt="Tela do demo: a tarefa de 300 preços andando em segundo plano"></figure>
-<div><h3>Vídeo em breve</h3><p class="mut">O vídeo explicativo entra aqui assim que for publicado. Enquanto isso, as três telas do demo estão em <a href="#como">Como funciona</a>.</p></div>
-</div>
+<p class="mut" style="margin-top:.8em">Vídeo em breve. Enquanto isso, veja <a href="#como">Como funciona</a>.</p>
 </div></section>
 
 <section id="como"><div class="wrap">
@@ -258,7 +256,7 @@
 <div><span class="n">Passo 2 · Tasks</span><h3>O trabalho demorado vai para segundo plano</h3>
 <p><span class="status ga">Disponível</span></p>
 <p>Em vez de travar a conversa, a ferramenta responde na hora “recebi, estou trabalhando” e segue sozinha. A IA confere de tempos em tempos e te avisa quando acaba.</p>
-<p>No kit, um desconto de 20% em 300 produtos vira uma tarefa: o andamento aparece de 50 em 50 até “pronto”, com 299 preços novos no rascunho e 43 travados na margem.</p>
+<p>No kit, um desconto de 20% em 300 produtos vira uma tarefa: o andamento aparece de 50 em 50 até “pronto”, com 299 preços novos no rascunho e 43 travados na margem. Um produto ficou com o preço de antes, porque com a margem mínima não havia desconto de verdade para dar.</p>
 <div class="analog"><b>Como no dia a dia:</b> é deixar a roupa na lavanderia com um tíquete. Você vai embora e volta para perguntar se ficou pronta.</div></div>
 <figure><img loading="lazy" src="assets/passo2-task.jpg" alt="Tela do demo: barra de progresso da tarefa de 300 preços"><figcaption>Saída real do demo, passo 2.</figcaption></figure>
 </div>
@@ -280,8 +278,8 @@
 <h2>O que <span class="amb">ainda não saiu</span></h2>
 <div class="grid g3">
 <div class="card"><span class="status nao">Ainda não lançado</span><h3>📎 Envio de arquivos (File Uploads)</h3><p>Mandar PDF, planilha ou imagem direto para a ferramenta sem encher a conversa. O anúncio diz “em breve”, sem data. O kit só menciona.</p></div>
-<div class="card"><span class="status beta">Beta pública</span><h3>📘 O manual que vem junto</h3><p>Pode mudar. Precisa do Claude Code v2.1.331 ou mais novo e não funciona no modo sem tela (<code>claude -p</code>). No plano Team, só depois que o administrador ativar.</p></div>
-<div class="card"><span class="status ga">Disponível com limite</span><h3>⏳ Segundo plano e ❓ pergunta antes</h3><p>Já valem nos planos Pro, Max e Ultra. Para Team e Enterprise, o segundo plano ainda está chegando.</p></div>
+<div class="card"><span class="status beta">Beta pública</span><h3>📘 O manual que vem junto</h3><p>Pode mudar. Precisa do Claude Code v2.1.331 ou mais novo e não funciona no modo sem tela (<code>claude -p</code>). Ligado por padrão nos planos Pro, Max e Ultra; no Team, só depois que o administrador ativar; no Enterprise, “em breve”.</p></div>
+<div class="card"><span class="status ga">Disponível com limite</span><h3>⏳ Segundo plano e ❓ pergunta antes</h3><p>Os dois já valem nos planos Pro, Max e Ultra. Para Team e Enterprise, os dois ainda estão sendo liberados aos poucos.</p></div>
 </div>
 <p class="fonte">E o nome: “MCP 2.0” não é oficial. É o apelido de quem acompanha para o salto de 24/11/2026; o padrão continua se chamando MCP.</p>
 </div></section>
@@ -289,7 +287,7 @@
 <section id="comecar"><div class="wrap">
 <span class="chip">Como começar</span>
 <h2>Você não instala nada <span class="amb">à mão</span></h2>
-<div class="step"><div class="b">1</div><div><h3>Abra um agente de IA no seu computador</h3><p>Agente é a IA que, além de conversar, mexe em arquivos e roda programas, sempre pedindo licença. Para ver o manual que vem junto, use o <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">Claude Code</a> v2.1.331 ou mais novo. O <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a> também consegue baixar e rodar o demo.</p></div></div>
+<div class="step"><div class="b">1</div><div><h3>Abra um agente de IA no seu computador</h3><p>Agente é a IA que, além de conversar, mexe em arquivos e roda programas, sempre pedindo licença. É preciso ter o Claude Code instalado (<a href="https://code.claude.com/docs" target="_blank" rel="noopener">instalação oficial</a>); quem só usa o Claude no navegador pode ler este guia e ver os conectores em claude.ai. Para ver o manual que vem junto, use o <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">Claude Code</a> v2.1.331 ou mais novo. O <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a> também consegue baixar e rodar o demo.</p></div></div>
 <div class="step"><div class="b">2</div><div><h3>Cole o pedido</h3><p>A IA lê o kit, explica as novidades em linguagem simples e diz quais conectores seus ganham com elas.</p>
 <div class="pedido"><button class="copiar" type="button">Copiar</button><p>Leia o repositório https://github.com/inematds/mcp2-na-pratica (o README, o COMO-LIGAR-NO-CLAUDE.md e a pasta exemplos). Me explique em linguagem simples as três novidades do MCP que ele mostra (o manual que vem junto, o trabalho em segundo plano e a pergunta antes de agir) e o que ainda não foi lançado. Depois olhe os conectores MCP que eu já uso e me diga quais ganham algo com essas novidades. Não instale nem mude nada antes do meu sim. Com o meu sim: baixe o kit numa pasta separada, crie o ambiente, rode os testes e o demo, ligue o servidor “loja” no Claude Code no escopo local, me mostre onde ver /mcp e /skills e, no fim, me diga como tirar.</p></div></div></div>
 <div class="step"><div class="b">3</div><div><h3>Diga sim ao que fizer sentido</h3><p>Veja o demo rodar os três passos. Se quiser, abra o Claude Code, digite <code>/skills</code> e procure <em>loja:promocao</em>. Quando terminar, peça para a IA tirar o servidor da loja.</p></div></div>
@@ -320,9 +318,9 @@
 <div class="card"><h3>Ligar no Claude Code</h3>
 <pre><span class="k">claude mcp add</span> loja -- "$PWD/.venv/bin/python" "$PWD/servidor.py"
 <span class="k">claude mcp list</span>   <span class="c"># loja: … - ✔ Connected</span></pre>
-<p style="margin-top:10px">Dentro do <code>claude</code>: <code>/mcp</code> → <code>loja</code> e <code>/skills</code> → <code>loja:promocao</code>. Com <code>--scope project</code> ele fica “Pending approval” até você abrir o <code>claude</code> na pasta; o escopo padrão (local) conecta direto. Para tirar: <code>claude mcp remove loja</code>.</p></div>
+<p style="margin-top:10px">Dentro do <code>claude</code>: <code>/mcp</code> → <code>loja</code> e <code>/skills</code> → <code>loja:promocao</code>. Com <code>--scope project</code> ele fica “Pending approval” até você abrir o <code>claude</code> na pasta; o escopo padrão (local, que vale só para você e só naquela pasta) conecta direto. Para tirar: <code>claude mcp remove loja</code>.</p></div>
 </div>
-<p class="fonte">Limites honestos: as tarefas ficam só na memória do servidor, o <code>ttlMs</code> é informado mas não apaga nada sozinho, e <code>tasks/update</code> só confirma o recebimento. O kit fala a versão 2026-07-28 da especificação, a “sem estado”: pedido e resposta simples, que deixa o servidor rodar até em serverless. Detalhes em <a href="https://github.com/inematds/mcp2-na-pratica#instalação-técnica" target="_blank" rel="noopener">README</a> e <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/COMO-LIGAR-NO-CLAUDE.md" target="_blank" rel="noopener">COMO-LIGAR-NO-CLAUDE.md</a>.</p>
+<p class="fonte">Limites honestos: as tarefas ficam só na memória do servidor, o <code>ttlMs</code> é informado mas não apaga nada sozinho, e <code>tasks/update</code> só confirma o recebimento. O kit fala a versão 2026-07-28 da especificação, a “sem estado”: pedido e resposta simples, que deixa o servidor rodar até em serverless (servidor que só liga quando chega um pedido). Detalhes em <a href="https://github.com/inematds/mcp2-na-pratica#instalação-técnica" target="_blank" rel="noopener">README</a> e <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/COMO-LIGAR-NO-CLAUDE.md" target="_blank" rel="noopener">COMO-LIGAR-NO-CLAUDE.md</a>.</p>
 </div></section>
 
 <section id="prova"><div class="wrap">
@@ -346,7 +344,7 @@
 <div class="card"><h3>Preciso programar?</h3><p>Para ver funcionando, não: você cola o pedido do “Como começar” e a sua IA faz o resto. Para construir o seu próprio servidor, sim, e o kit em Python é o ponto de partida.</p></div>
 <div class="card"><h3>Custa alguma coisa?</h3><p>O kit é grátis e aberto (licença MIT). As novidades no Claude estão ligadas nos planos Pro, Max e Ultra, que são pagos.</p></div>
 <div class="card"><h3>“MCP 2.0” é o nome oficial?</h3><p>Não. É o apelido que circula para o pacote de 24/11/2026. O padrão continua sendo o MCP, que fez 2 anos em novembro de 2026.</p></div>
-<div class="card"><h3>Funciona com outras IAs?</h3><p>O MCP é aberto e foi adotado por OpenAI, Google e Microsoft. Cada aplicativo de IA precisa aceitar as peças novas; o kit foi testado no Claude Code. O demo roda sozinho no terminal, com qualquer agente.</p></div>
+<div class="card"><h3>Funciona com outras IAs?</h3><p>O MCP é aberto: ChatGPT, Claude, Cursor, Gemini, Microsoft Copilot e Visual Studio Code têm suporte a ele (blog do MCP, dezembro de 2025). Cada aplicativo de IA precisa aceitar as peças novas; o kit foi testado no Claude Code. O demo roda sozinho no terminal, com qualquer agente.</p></div>
 <div class="card"><h3>Mexe na minha loja de verdade?</h3><p>Não. A loja é fictícia e o servidor trabalha numa cópia dos 300 produtos.</p></div>
 <div class="card"><h3>Posso mandar arquivo para a ferramenta?</h3><p>Ainda não. O envio de arquivos (File Uploads) foi anunciado como “em breve”, sem data.</p></div>
 </div>

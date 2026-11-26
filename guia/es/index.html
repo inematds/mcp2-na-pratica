@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MCP 2 en la práctica — tu agente sigue el manual, trabaja solo y pregunta antes</title>
-<meta name="description" content="Kit gratis y abierto: las novedades de MCP del 24/11/2026 (el manual de la herramienta viene incluido, trabajo largo en segundo plano y pregunta antes de actuar) funcionando en una tiendita en el Black Friday.">
+<meta name="description" content="Kit gratis y abierto: las novedades de MCP del 24/11/2026 (el manual de la herramienta viene incluido, el trabajo largo corre en segundo plano y pregunta antes de actuar) funcionando en una tiendita en Black Friday.">
 <link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/mcp2-na-pratica/guia/">
 <link rel="alternate" hreflang="en" href="https://inematds.github.io/mcp2-na-pratica/guia/en/">
 <link rel="alternate" hreflang="es" href="https://inematds.github.io/mcp2-na-pratica/guia/es/">
@@ -151,7 +151,7 @@
 <a class="sec" href="#explicado">Qué ganas</a>
 <a class="sec opt" href="#base">De dónde viene</a>
 <a class="sec" href="#como">Cómo funciona</a>
-<a class="sec opt" href="#falta">Aún no sale</a>
+<a class="sec opt" href="#falta">Aún no salió</a>
 <a class="sec" href="#comecar">Cómo empezar</a>
 <a class="sec opt" href="#construir">Para quien construye</a>
 <a class="sec" href="#prova">La prueba</a>
@@ -167,9 +167,9 @@
 <div class="h-top"><span class="chip">Kit gratis · basado en el anuncio oficial de Anthropic y en el blog de MCP · 24/11/2026</span>
 <h1>Ahora tu agente sigue el manual de la herramienta, hace solo el trabajo largo y te llama solo en el momento que importa. <span class="amb">MCP 2 en la práctica</span> te muestra cómo.</h1></div>
 <figure class="f2"><img src="../assets/banner-es.jpg" alt="MCP 2 en la práctica: tu agente sigue el manual, trabaja solo y pregunta antes"></figure>
-<div class="h-bot"><p class="lead">Hoy, para que la IA haga cambios en tu tienda o en tu sistema, explicas las reglas de nuevo en cada conversación, te quedas mirando la pantalla mientras avanza el trabajo largo y cruzas los dedos para que no publique ni borre nada sin preguntar. El 24/11/2026, MCP, el “enchufe” que conecta la IA con los programas, recibió las piezas que resuelven esto. Este kit muestra las tres funcionando en una tiendita en el Black Friday.</p>
+<div class="h-bot"><p class="lead">Hoy, para que la IA haga cambios en tu tienda o en tu sistema, le explicas las reglas otra vez en cada conversación, te quedas mirando la pantalla mientras avanza el trabajo largo y cruzas los dedos para que no publique ni borre nada sin preguntar. El 24/11/2026, MCP, el “enchufe” que conecta la IA con los programas, recibió las piezas que resuelven esto. Este kit muestra las tres funcionando en una tiendita en Black Friday.</p>
 <div class="cta">
-<a class="btn" href="#explicado">Lo que ganas</a>
+<a class="btn" href="#explicado">Qué ganas</a>
 <a class="btn ghost" href="#comecar">Cómo empezar</a>
 </div></div>
 <figure class="f1"><img src="../assets/hero.jpg" alt="Un robot trabaja solo en una central oscura, frente a una red de conexiones de luz"></figure>
@@ -179,20 +179,20 @@
 <main>
 <section class="resumo" id="resumo"><div class="wrap">
 <span class="chip">En una frase</span>
-<p><strong>Quieres dejar que la IA trabaje en tus programas sin explicar todo de nuevo, sin quedarte esperando y sin miedo a que haga algo que no tiene vuelta atrás.</strong> MCP 2 en la práctica es un kit gratuito y abierto que muestra esto en una tiendita de mentira con 300 productos. MCP (Model Context Protocol) es el estándar abierto que conecta la IA con el resto del software; el 24/11/2026 sumó el manual incluido, el trabajo en segundo plano y la pregunta antes de actuar. Sirve para quienes usan agentes como Claude y para quienes construyen conectores. “MCP 2.0” es solo el apodo que circula: todo lo que ves aquí viene del anuncio de Anthropic y del blog oficial de MCP.</p>
+<p><strong>Quieres dejar que la IA trabaje en tus programas sin explicarle todo otra vez, sin quedarte esperando y sin miedo a que haga algo que no tiene vuelta atrás.</strong> MCP 2 en la práctica es un kit gratuito y abierto que muestra esto en una tiendita ficticia con 300 productos. MCP (Model Context Protocol) es el estándar abierto que conecta la IA con el resto del software; el 24/11/2026 sumó el manual incluido, el trabajo en segundo plano y la pregunta antes de actuar. Sirve para quien usa agentes como Claude y para quien construye conectores (las piezas que conectan la IA con un programa). “MCP 2.0” es solo el apodo que circula: todo aquí viene del anuncio de Anthropic y del blog oficial de MCP.</p>
 </div></section>
 
 <section id="explicado"><div class="wrap">
 <span class="chip">Qué ganas</span>
-<h2>De la IA que vigilas <span class="amb">a la IA que te llama en el momento justo</span></h2>
+<h2>De la IA que tienes que vigilar <span class="amb">a la IA que te llama en el momento justo</span></h2>
 <p class="sub">Tres cambios, cada uno probado en un paso del kit (mira <a href="#como">Cómo funciona</a>).</p>
 <div class="grid g2">
-<div class="card antes"><span class="tag">Antes</span><h3>Tú eres el manual, el reloj y el freno</h3><ul><li>Pegas las reglas de la tienda en el chat cada vez (“margen mínimo, nunca por debajo del costo…”).</li><li>Pides actualizar 300 precios y la conversación se queda detenida hasta terminar.</li><li>La IA publica o borra y te enteras después.</li></ul></div>
-<div class="card depois"><span class="tag">Después</span><h3>La herramienta trae el manual y pide permiso</h3><ul><li>El manual de la tienda viene con el conector y solo entra cuando hace falta (paso 1).</li><li>El trabajo largo se convierte en una tarea en segundo plano; tú sigues conversando (paso 2).</li><li>Antes de publicar o borrar, la herramienta se detiene y te pregunta (paso 3).</li></ul></div>
+<div class="card antes"><span class="tag">Antes</span><h3>Tú eres el manual, el reloj y el freno</h3><ul><li>Pegas las reglas de la tienda en el chat cada vez (“margen mínimo, nunca por debajo del costo…”).</li><li>Pides actualizar 300 precios y la conversación queda detenida hasta que termine.</li><li>La IA publica o borra y tú te enteras después.</li></ul></div>
+<div class="card depois"><span class="tag">Después</span><h3>La herramienta trae el manual y pide permiso</h3><ul><li>El manual de la tienda viene incluido con el conector y solo entra cuando hace falta (paso 1).</li><li>El trabajo largo se vuelve una tarea en segundo plano; tú sigues conversando (paso 2).</li><li>Antes de publicar o borrar, la herramienta se detiene y te pregunta (paso 3).</li></ul></div>
 </div>
 <div class="stats">
-<div class="stat"><b>~30 tokens</b><span>el espacio que ocupa el manual de la tienda en Claude Code hasta que se usa (medido en <code>/skills</code>).</span></div>
-<div class="stat"><b>299 de 300</b><span>precios nuevos calculados en segundo plano en el demo, con 43 frenados en el margen mínimo de 15%.</span></div>
+<div class="stat"><b>~30 tokens</b><span>el espacio que ocupa el manual de la tienda en Claude Code hasta que se usa (un token es el pedacito de texto con el que la IA mide lo que lee; medido en <code>/skills</code>).</span></div>
+<div class="stat"><b>299 de 300</b><span>precios nuevos calculados en segundo plano en el demo, con 43 frenados en el margen mínimo de 15%. El restante quedó igual: con ese margen, no había un descuento real que dar.</span></div>
 <div class="stat"><b>2 seguros</b><span>“sí o no” para publicar y “escribe el nombre exacto” para borrar. Si la respuesta es incorrecta, no pasa nada.</span></div>
 </div>
 </div></section>
@@ -200,13 +200,14 @@
 <section id="base"><div class="wrap">
 <span class="chip">De dónde viene</span>
 <h2>Fuentes oficiales, <span class="amb">no rumores</span></h2>
-<p class="sub">El kit solo usa lo que publicaron Anthropic y el proyecto MCP. Donde algo aún no ha salido, la página lo dice.</p>
-<div class="grid g3">
-<div class="card"><h3>📣 Anuncio de Anthropic (24/11/2026)</h3><p>Presenta las cuatro novedades: el manual incluido (Skills over MCP), el trabajo en segundo plano (Tasks), la pregunta antes de actuar (Elicitation) y el envío de archivos (File Uploads, aún sin lanzar). Dice que ya hay más de 10.000 conectores para Claude y más de 700 millones de descargas de SDK al mes.</p><p><a href="https://claude.com/resources/articles/skills-over-mcp-tasks-and-more" target="_blank" rel="noopener">Leer el anuncio</a></p></div>
-<div class="card"><h3>🎂 Blog de MCP: “MCP cumple 2 años”</h3><p>Antes, cada empresa construía un puente aparte para cada IA; con MCP, un conector sirve para toda IA que hable el estándar. OpenAI, Google y Microsoft lo adoptaron, y MCP está en la Agentic AI Foundation, bajo la Linux Foundation: ninguna empresa es su dueña.</p><p><a href="https://blog.modelcontextprotocol.io/posts/mcp-turns-two" target="_blank" rel="noopener">Leer el blog</a></p></div>
-<div class="card"><h3>📘 Documentación oficial</h3><p>La página de MCP en Claude Code explica cómo ver los manuales que vienen de los conectores. La especificación de MCP describe cada pieza para quienes construyen (skills, tasks y elicitation).</p><p><a href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener">MCP en Claude Code</a> · <a href="https://modelcontextprotocol.io/extensions/skills/overview" target="_blank" rel="noopener">Skills</a> · <a href="https://modelcontextprotocol.io/extensions/tasks/overview" target="_blank" rel="noopener">Tasks</a> · <a href="https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation" target="_blank" rel="noopener">Elicitation</a></p></div>
+<p class="sub">El kit solo usa lo que publicaron Anthropic y el proyecto MCP. Cuando algo aún no salió, la página lo dice. Por qué importa un estándar: sin él, cada conexión entre una IA y un programa se hace a medida; con MCP, un conector (la pieza que conecta la IA con un programa, como la tienda) sirve para cualquier IA que hable el estándar.</p>
+<div class="grid g2">
+<div class="card"><h3>📣 Anuncio de Anthropic (24/11/2026)</h3><p>Presenta las cuatro novedades: el manual incluido (Skills over MCP), el trabajo en segundo plano (Tasks), la pregunta antes de actuar (Elicitation) y el envío de archivos (File Uploads, aún no lanzado). Dice que ya hay más de 10.000 conectores para Claude y más de 700 millones de descargas al mes de los kits de programación de MCP (los SDKs, que los programadores usan para crear conectores).</p><p><a href="https://claude.com/resources/articles/skills-over-mcp-tasks-and-more" target="_blank" rel="noopener">Leer el anuncio</a></p></div>
+<div class="card"><h3>🎂 Blog de MCP: “MCP cumple 2 años”</h3><p>La publicación oficial que marca los dos años del estándar, cumplidos en noviembre de 2026.</p><p><a href="https://blog.modelcontextprotocol.io/posts/mcp-turns-two" target="_blank" rel="noopener">Leer la publicación</a></p></div>
+<div class="card"><h3>🤝 Blog de MCP: MCP entra en la Agentic AI Foundation (09/12/2025)</h3><p>Dice que ChatGPT, Claude, Cursor, Gemini, Microsoft Copilot y Visual Studio Code son compatibles con MCP. La fundación, bajo la Linux Foundation, fue cofundada por Anthropic, Block y OpenAI, con apoyo de Google, Microsoft, AWS, Cloudflare y Bloomberg: ninguna empresa es dueña del estándar.</p><p><a href="https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/" target="_blank" rel="noopener">Leer la publicación</a></p></div>
+<div class="card"><h3>📘 Documentación oficial</h3><p>La página de MCP en Claude Code explica cómo ver los manuales que vienen de los conectores. La especificación de MCP describe cada pieza para quien construye (skills, tasks y elicitation).</p><p><a href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener">MCP en Claude Code</a> · <a href="https://modelcontextprotocol.io/extensions/skills/overview" target="_blank" rel="noopener">Skills</a> · <a href="https://modelcontextprotocol.io/extensions/tasks/overview" target="_blank" rel="noopener">Tasks</a> · <a href="https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation" target="_blank" rel="noopener">Elicitation</a></p></div>
 </div>
-<blockquote style="margin-top:22px">En palabras del anuncio: Claude pasa a trabajar con un servidor como trabaja con otro agente: aprende de él, le delega tareas e intercambia información y archivos en el camino.</blockquote>
+<blockquote style="margin-top:22px">En palabras del anuncio: Claude pasa a trabajar con un servidor como trabaja con otro agente, aprendiendo de él, delegándole tareas e intercambiando información y archivos en el camino.</blockquote>
 </div></section>
 
 <section id="quem"><div class="wrap">
@@ -214,42 +215,39 @@
 <h2>¿Usas agentes <span class="amb">o construyes conectores?</span></h2>
 <p class="sub">Elige tu puerta. Las dos usan la misma tiendita.</p>
 <div class="grid g2">
-<div class="card"><img class="quem-img" loading="lazy" src="../assets/quem-usa.jpg" alt="La dueña de una tienda mira el celular con calma mientras el trabajo avanza solo en el monitor"><h3>🧭 Quien usa agentes</h3><p><strong>Ganas:</strong> Claude ya llega sabiendo las reglas de la herramienta, porque la empresa que hizo el conector escribe el manual y, cuando lo mejora, lo recibes automáticamente. El trabajo largo no traba la conversación, y nada que no tenga vuelta atrás ocurre sin tu sí.</p><p><strong>Cómo verlo en Claude Code:</strong> escribe <code>/mcp</code> para ver los conectores activos y <code>/skills</code> para ver los manuales que llegaron con ellos (el nombre aparece como <em>conector:manual</em>, por ejemplo <em>loja:promocao</em>). Activado por defecto en los planes Pro, Max y Ultra.</p><p><a href="#comecar">Cómo empezar →</a></p></div>
-<div class="card"><img class="quem-img" loading="lazy" src="../assets/quem-constroi.jpg" alt="Un desarrollador señala un diagrama de cajas conectadas en la pantalla"><h3>🛠️ Quien construye un servidor MCP</h3><p><strong>Ganas:</strong> un servidor pequeño y abierto, en Python, con las tres piezas funcionando, pruebas que corren contra el servidor real y los nombres oficiales de cada pieza. Los límites están escritos, para que no los descubras en producción.</p><p><strong>Qué incluye:</strong> cómo el servidor lista y entrega el manual, cómo devuelve un ticket para el trabajo largo y cómo pregunta en el chat o envía a la persona a un sitio web.</p><p><a href="#construir">Ir a la parte para quien construye →</a></p></div>
+<div class="card"><img class="quem-img" loading="lazy" src="../assets/quem-usa.jpg" alt="La persona dueña de una tienda mira el celular con calma mientras el trabajo avanza solo en el monitor"><h3>🧭 Quien usa agentes</h3><p><strong>Ganas:</strong> Claude ya llega sabiendo las reglas de la herramienta, porque la empresa que hizo el conector escribe el manual y, cuando lo mejora, lo recibes automáticamente. El trabajo largo no frena la conversación, y nada irreversible pasa sin tu sí.</p><p><strong>Cómo verlo en Claude Code:</strong> escribe <code>/mcp</code> para ver los conectores activos y <code>/skills</code> para ver los manuales que vinieron de ellos (el nombre aparece como <em>conector:manual</em>, por ejemplo <em>loja:promocao</em>). Activado por defecto en los planes Pro, Max y Ultra; en Team, después de que el administrador lo active; en Enterprise, pronto.</p><p><a href="#comecar">Cómo empezar →</a></p></div>
+<div class="card"><img class="quem-img" loading="lazy" src="../assets/quem-constroi.jpg" alt="Una persona desarrolladora señala un diagrama de cajas conectadas en la pantalla"><h3>🛠️ Quien construye un servidor MCP</h3><p><strong>Ganas:</strong> un servidor pequeño y abierto, en Python, con las tres piezas funcionando, pruebas que corren contra el servidor real y los nombres oficiales de cada pieza. Los límites están escritos, para que no los descubras en producción.</p><p><strong>Qué hay ahí:</strong> cómo el servidor lista y entrega el manual, cómo devuelve un ticket para el trabajo largo y cómo pregunta en el chat o envía a la persona a un sitio web.</p><p><a href="#construir">Ir a la parte para quien construye →</a></p></div>
 </div>
 </div></section>
 
 <section id="dia"><div class="wrap">
-<span class="chip">En tu día</span>
+<span class="chip">En tu día a día</span>
 <h2>Cómo cambia esto <span class="amb">tu día</span></h2>
 <div class="grid g3">
-<div class="card"><h3>🏷️ La promoción de Black Friday</h3><p><strong>Hoy:</strong> le recuerdas a la IA el margen mínimo, el redondeo y el “nunca por debajo del costo” en cada conversación.</p><p><strong>Con el kit:</strong> el manual de la tienda trae las tres reglas y la IA lo abre solo cuando va a tocar precios.</p></div>
-<div class="card"><h3>⏳ Actualizar 300 precios</h3><p><strong>Hoy:</strong> la conversación se queda detenida hasta la última etiqueta.</p><p><strong>Con el kit:</strong> el servidor responde al instante con un ticket, hace el trabajo por detrás y avisa cuando termina, con la cantidad de productos frenados en el margen.</p></div>
-<div class="card"><h3>🛑 Publicar o borrar</h3><p><strong>Hoy:</strong> confías en que la IA no va a apretar el botón equivocado.</p><p><strong>Con el kit:</strong> “Publicar 299 preços novos agora?” (¿Publicar 299 precios nuevos ahora?) espera tu sí. Para borrar, tienes que escribir el nombre exacto del producto.</p></div>
+<div class="card"><h3>🏷️ La promoción de Black Friday</h3><p><strong>Hoy:</strong> le recuerdas a la IA el margen mínimo, el redondeo y el “nunca por debajo del costo” en cada conversación.</p><p><strong>Con el kit:</strong> el manual de la tienda trae las tres reglas y la IA lo abre solo cuando va a cambiar precios.</p></div>
+<div class="card"><h3>⏳ Actualizar 300 precios</h3><p><strong>Hoy:</strong> la conversación queda detenida hasta la última etiqueta.</p><p><strong>Con el kit:</strong> el servidor responde al instante con un ticket, hace el trabajo por detrás y avisa cuando termina, con cuántos productos quedaron frenados en el margen.</p></div>
+<div class="card"><h3>🛑 Publicar o borrar</h3><p><strong>Hoy:</strong> confías en que la IA no va a apretar el botón equivocado.</p><p><strong>Con el kit:</strong> “Publicar 299 preços novos agora?” (¿publicar 299 precios nuevos ahora?) espera tu sí. Para borrar, tienes que escribir el nombre exacto del producto.</p></div>
 </div>
-<div class="card" style="margin-top:16px"><h3>🌍 En herramientas reales (ejemplos del anuncio)</h3><ul><li><strong>Manual incluido:</strong> Shopify (armar y actualizar la tienda de punta a punta), HubSpot (configurar un cliente nuevo), Atlassian (contexto de la empresa).</li><li><strong>Segundo plano:</strong> ZoomInfo, donde la investigación de cuentas y contactos que requería varios pedidos se vuelve un solo trabajo.</li><li><strong>Pregunta antes:</strong> Supabase muestra el costo antes de crear un proyecto pago, Railway pregunta antes de eliminar un servicio y GitHub exige escribir el nombre del repositorio antes de que un agente lo borre.</li></ul></div>
+<div class="card" style="margin-top:16px"><h3>🌍 En herramientas reales (ejemplos del anuncio)</h3><ul><li><strong>Manual incluido:</strong> Shopify (armar y actualizar la tienda de punta a punta), HubSpot (configurar un cliente nuevo), Atlassian (contexto de la empresa).</li><li><strong>Segundo plano:</strong> ZoomInfo, donde la investigación de cuentas y contactos que requería varios pedidos se vuelve un solo trabajo.</li><li><strong>Pregunta antes:</strong> Supabase muestra el costo antes de crear un proyecto de pago, Railway pregunta antes de eliminar un servicio y GitHub exige escribir el nombre del repositorio antes de que un agente lo borre.</li></ul></div>
 </div></section>
 
 <section id="video"><div class="wrap">
 <span class="chip">Video</span>
 <h2>Entiéndelo en pocos minutos</h2>
 <!-- VIDEO: entra o explicavideo do projeto quando publicado -->
-<div class="video-ph">
-<figure><img loading="lazy" src="../assets/passo2-task.jpg" alt="Pantalla del demo: la tarea de 300 precios avanzando en segundo plano"></figure>
-<div><h3>Video muy pronto</h3><p class="mut">El video explicativo aparecerá aquí en cuanto se publique. Mientras tanto, las tres pantallas del demo están en <a href="#como">Cómo funciona</a>.</p></div>
-</div>
+<p class="mut" style="margin-top:.8em">Video muy pronto. Mientras tanto, mira <a href="#como">Cómo funciona</a>.</p>
 </div></section>
 
 <section id="como"><div class="wrap">
-<span class="chip">Cómo funciona, sin jerga</span>
-<h2>Tres piezas, <span class="amb">tres pasos del demo</span></h2>
-<figure class="banner"><img loading="lazy" src="../assets/banner-grade-es.jpg" alt="Las partes de la guía: el manual viene incluido, trabajo en segundo plano, pregunta antes de actuar, cómo verlo en Claude, lo que aún no sale, kit gratis"></figure>
+<span class="chip">Cómo funciona, sin tecnicismos</span>
+<h2>Tres piezas, <span class="amb">tres pasos del demo</span></h2><p class="aviso">El demo y sus pantallas están en portugués; el texto junto a cada pantalla explica lo que muestra.</p>
+<figure class="banner"><img loading="lazy" src="../assets/banner-grade-es.jpg" alt="Las partes de la guía: el manual viene incluido, trabajo en segundo plano, pregunta antes de actuar, cómo verlo en Claude, lo que aún no salió, kit gratis"></figure>
 
 <div class="peca">
-<div><span class="n">Paso 1 · Skills over MCP</span><h3>El manual viene con la herramienta</h3>
+<div><span class="n">Paso 1 · Skills over MCP</span><h3>El manual viene incluido con la herramienta</h3>
 <p><span class="status beta">Beta pública</span></p>
 <p>Además de los botones que la IA puede apretar, el conector entrega el manual de cómo usarlos, escrito por la propia empresa de la herramienta. La IA solo abre el manual cuando lo necesita, así que casi no ocupa espacio en la conversación.</p>
-<p>En el kit, el manual de la tienda dice: margen mínimo de 15% sobre el costo, nunca por debajo del costo y precios terminados en ,90. El demo verifica que el manual llegó completo.</p>
+<p>En el kit, el manual de la tienda dice: margen mínimo de 15% sobre el costo, nunca por debajo del costo y precios terminados en ,90. El demo verifica que el manual haya llegado completo.</p>
 <div class="analog"><b>Como en la vida diaria:</b> es el electrodoméstico que ya trae el manual en la caja, y el fabricante cambia el manual automáticamente cuando lo mejora.</div></div>
 <figure><img loading="lazy" src="../assets/passo1-skill.jpg" alt="Pantalla del demo: el servidor lista el manual promocao y muestra las tres reglas"><figcaption>Salida real del demo, paso 1 (en portugués).</figcaption></figure>
 </div>
@@ -257,9 +255,9 @@
 <div class="peca">
 <div><span class="n">Paso 2 · Tasks</span><h3>El trabajo largo pasa a segundo plano</h3>
 <p><span class="status ga">Disponible</span></p>
-<p>En vez de trabar la conversación, la herramienta responde al instante “recibido, estoy trabajando” y sigue sola. La IA revisa cada cierto tiempo y te avisa cuando termina.</p>
-<p>En el kit, un descuento de 20% en 300 productos se convierte en una tarea: el avance aparece de 50 en 50 hasta “listo”, con 299 precios nuevos en el borrador y 43 frenados en el margen.</p>
-<div class="analog"><b>Como en la vida diaria:</b> es dejar la ropa en la lavandería con un ticket. Te vas y vuelves para preguntar si ya está lista.</div></div>
+<p>En vez de frenar la conversación, la herramienta responde al instante “recibido, estoy trabajando” y sigue sola. La IA revisa cada cierto tiempo y te avisa cuando termina.</p>
+<p>En el kit, un descuento de 20% en 300 productos se vuelve una tarea: el avance aparece de 50 en 50 hasta “pronto” (listo), con 299 precios nuevos en el borrador y 43 frenados en el margen. Un producto quedó con el precio anterior, porque con el margen mínimo no había un descuento real que dar.</p>
+<div class="analog"><b>Como en la vida diaria:</b> es dejar la ropa en la lavandería con un ticket. Te vas y vuelves a preguntar si ya está lista.</div></div>
 <figure><img loading="lazy" src="../assets/passo2-task.jpg" alt="Pantalla del demo: barra de progreso de la tarea de 300 precios"><figcaption>Salida real del demo, paso 2 (en portugués).</figcaption></figure>
 </div>
 
@@ -267,34 +265,34 @@
 <div><span class="n">Paso 3 · Elicitation</span><h3>La herramienta pregunta antes de actuar</h3>
 <p><span class="status ga">Disponible</span></p>
 <p>En medio del trabajo, la herramienta se detiene y te pregunta. Puede ser una pregunta en el mismo chat (sí o no, escribe el nombre) o un enlace al sitio de la empresa, para contraseñas o pagos: así el dato sensible no pasa por el chat.</p>
-<p>En el kit: “Publicar 299 preços novos agora?” (¿Publicar 299 precios nuevos ahora?). Con “no”, no se publica nada; con “sí”, los precios van a la tienda. Para borrar, no basta con escribir “Caneca” (taza): tiene que ser “Caneca Azul P” (taza azul P).</p>
+<p>En el kit: “Publicar 299 preços novos agora?” (¿publicar 299 precios nuevos ahora?). Con “no”, no se publica nada; con “sí”, los precios van a la tienda. Para borrar, escribir solo “Caneca” (taza) no basta: tiene que ser “Caneca Azul P” (taza azul S).</p>
 <div class="analog"><b>Como en la vida diaria:</b> es el banco que te pide confirmar el monto antes de transferir.</div></div>
-<figure><img loading="lazy" src="../assets/passo3-pergunta.jpg" alt="Pantalla del demo: preguntas para publicar y para borrar con sus respuestas"><figcaption>Salida real del demo, paso 3 (en portugués).</figcaption></figure>
+<figure><img loading="lazy" src="../assets/passo3-pergunta.jpg" alt="Pantalla del demo: preguntas de publicar y de borrar con las respuestas"><figcaption>Salida real del demo, paso 3 (en portugués).</figcaption></figure>
 </div>
 
-<div class="card" style="margin-top:10px"><h3>Lo que el kit no promete</h3><ul><li>La tienda es de mentira: 300 productos ficticios, y el servidor trabaja sobre una copia. No se conecta a tu tienda real.</li><li>Las tareas se guardan solo en la memoria del servidor: si se reinicia, desaparecen.</li><li>En Claude Code, el kit probó la conexión y que el manual aparece; la tarea y la pregunta se probaron con el demo y las pruebas (mira <a href="#prova">La prueba</a>).</li></ul></div>
+<div class="card" style="margin-top:10px"><h3>Lo que el kit no promete</h3><ul><li>La tienda es ficticia: 300 productos inventados, y el servidor trabaja sobre una copia. No se conecta con tu tienda real.</li><li>Las tareas quedan solo en la memoria del servidor: si se reinicia, desaparecen.</li><li>En Claude Code, el kit probó la conexión y que el manual aparece; la tarea y la pregunta se probaron con el demo y las pruebas (mira <a href="#prova">La prueba</a>).</li></ul></div>
 </div></section>
 
 <section id="falta"><div class="wrap">
 <span class="chip">Sin exagerar</span>
-<h2>Lo que <span class="amb">aún no sale</span></h2>
+<h2>Lo que <span class="amb">aún no salió</span></h2>
 <div class="grid g3">
-<div class="card"><span class="status nao">Aún sin lanzar</span><h3>📎 Envío de archivos (File Uploads)</h3><p>Enviar un PDF, una hoja de cálculo o una imagen directo a la herramienta sin llenar la conversación. El anuncio dice “próximamente”, sin fecha. El kit solo lo menciona.</p></div>
-<div class="card"><span class="status beta">Beta pública</span><h3>📘 El manual incluido</h3><p>Puede cambiar. Necesita Claude Code v2.1.331 o más reciente y no funciona en el modo sin pantalla (<code>claude -p</code>). En el plan Team, solo después de que el administrador lo active.</p></div>
-<div class="card"><span class="status ga">Disponible con límites</span><h3>⏳ Segundo plano y ❓ pregunta antes</h3><p>Ya están en los planes Pro, Max y Ultra. Para Team y Enterprise, el segundo plano todavía está en camino.</p></div>
+<div class="card"><span class="status nao">Aún no lanzado</span><h3>📎 Envío de archivos (File Uploads)</h3><p>Enviar un PDF, una hoja de cálculo o una imagen directo a la herramienta sin llenar la conversación. El anuncio dice “pronto”, sin fecha. El kit solo lo menciona.</p></div>
+<div class="card"><span class="status beta">Beta pública</span><h3>📘 El manual incluido</h3><p>Puede cambiar. Necesita Claude Code v2.1.331 o más nuevo y no funciona en el modo sin pantalla (<code>claude -p</code>). Activado por defecto en los planes Pro, Max y Ultra; en Team, solo después de que el administrador lo active; en Enterprise, “pronto”.</p></div>
+<div class="card"><span class="status ga">Disponible con límites</span><h3>⏳ Segundo plano y ❓ pregunta antes</h3><p>Los dos ya funcionan en los planes Pro, Max y Ultra. En Team y Enterprise, ambos todavía se están habilitando de a poco.</p></div>
 </div>
-<p class="fonte">Y sobre el nombre: “MCP 2.0” no es oficial. Es el apodo que quienes siguen el tema le dan al salto del 24/11/2026; el estándar se sigue llamando MCP.</p>
+<p class="fonte">Y el nombre: “MCP 2.0” no es oficial. Es el apodo que le dan quienes siguen el tema al salto del 24/11/2026; el estándar se sigue llamando MCP.</p>
 </div></section>
 
 <section id="comecar"><div class="wrap">
 <span class="chip">Cómo empezar</span>
 <h2>No instalas nada <span class="amb">a mano</span></h2>
-<div class="step"><div class="b">1</div><div><h3>Abre un agente de IA en tu computadora</h3><p>Un agente es una IA que, además de conversar, trabaja con archivos y ejecuta programas, siempre pidiendo permiso. Para ver el manual incluido, usa <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">Claude Code</a> v2.1.331 o más reciente. <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a> también puede descargar y ejecutar el demo.</p></div></div>
-<div class="step"><div class="b">2</div><div><h3>Pega el pedido</h3><p>La IA lee el kit, explica las novedades en lenguaje simple y te dice cuáles de tus conectores se benefician con ellas.</p>
-<div class="pedido"><button class="copiar" type="button">Copiar</button><p>Lee el repositorio https://github.com/inematds/mcp2-na-pratica (el README, el COMO-LIGAR-NO-CLAUDE.md y la carpeta exemplos). Explícame en lenguaje simple las tres novedades de MCP que muestra (el manual incluido, el trabajo en segundo plano y la pregunta antes de actuar) y lo que aún no se ha lanzado. Después revisa los conectores MCP que ya uso y dime cuáles ganan algo con estas novedades. No instales ni cambies nada antes de mi sí. Con mi sí: descarga el kit en una carpeta aparte, crea el entorno, ejecuta las pruebas y el demo, conecta el servidor “loja” en Claude Code en el ámbito local, muéstrame dónde ver /mcp y /skills y, al final, dime cómo quitarlo.</p></div></div></div>
-<div class="step"><div class="b">3</div><div><h3>Di que sí a lo que tenga sentido</h3><p>Mira el demo ejecutar los tres pasos. Si quieres, abre Claude Code, escribe <code>/skills</code> y busca <em>loja:promocao</em>. Cuando termines, pídele a la IA que quite el servidor de la tienda.</p></div></div>
+<div class="step"><div class="b">1</div><div><h3>Abre un agente de IA en tu computadora</h3><p>Un agente es una IA que, además de conversar, trabaja con archivos y ejecuta programas, siempre pidiendo permiso. Necesitas tener Claude Code instalado (<a href="https://code.claude.com/docs" target="_blank" rel="noopener">instalación oficial</a>); si solo usas Claude en el navegador, puedes leer esta guía y ver los conectores en claude.ai. Para ver el manual incluido, usa <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">Claude Code</a> v2.1.331 o más nuevo. <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a> también puede descargar y ejecutar el demo.</p></div></div>
+<div class="step"><div class="b">2</div><div><h3>Pega el pedido</h3><p>La IA lee el kit, explica las novedades en lenguaje simple y te dice cuáles de tus conectores ganan algo con ellas.</p>
+<div class="pedido"><button class="copiar" type="button">Copiar</button><p>Lee el repositorio https://github.com/inematds/mcp2-na-pratica (el README, el README.es.md y la carpeta exemplos). Explícame en lenguaje simple las tres novedades de MCP que muestra (el manual incluido, el trabajo en segundo plano y la pregunta antes de actuar) y lo que aún no se ha lanzado. Después revisa los conectores MCP que ya uso y dime cuáles ganan algo con estas novedades. No instales ni cambies nada antes de mi sí. Con mi sí: descarga el kit en una carpeta separada, crea el entorno, ejecuta las pruebas y el demo, conecta el servidor “loja” en Claude Code con alcance local, muéstrame dónde ver /mcp y /skills y, al final, dime cómo quitarlo.</p></div></div></div>
+<div class="step"><div class="b">3</div><div><h3>Di sí a lo que tenga sentido</h3><p>Mira cómo el demo ejecuta los tres pasos. Si quieres, abre Claude Code, escribe <code>/skills</code> y busca <em>loja:promocao</em>. Cuando termines, pídele a la IA que quite el servidor de la tienda.</p></div></div>
 <div class="grid g2" style="margin-top:10px">
-<div class="card"><h3>🌐 ¿Solo quieres usarlo, sin instalar nada?</h3><p>No hay versión en línea del kit. Las novedades ya llegan a través de los conectores oficiales en Claude, en los planes Pro, Max y Ultra (verificado en el anuncio del 24/11/2026). El kit sirve para que veas las tres funcionando por dentro.</p></div>
+<div class="card"><h3>🌐 ¿Solo quieres usarlo, sin instalar nada?</h3><p>No hay versión en línea del kit. Las novedades en sí ya llegan a través de los conectores oficiales en Claude, en los planes Pro, Max y Ultra (verificado en el anuncio del 24/11/2026). El kit sirve para que veas las tres funcionando por dentro.</p></div>
 <div class="card"><h3>⬇️ ¿Dónde se descarga?</h3><p>No hay instalador: es una carpeta con un programa pequeño en Python, que tu IA prepara. Descarga el <a href="https://github.com/inematds/mcp2-na-pratica/archive/refs/heads/main.zip">ZIP del kit</a> o mira el <a href="https://github.com/inematds/mcp2-na-pratica" target="_blank" rel="noopener">repositorio</a>.</p></div>
 </div>
 <div class="card" style="margin-top:16px"><h3>🧑‍💻 ¿Tienes perfil técnico?</h3><p>Los requisitos, los archivos, lo que el SDK ya hace y lo que el kit escribió a mano están en el README.</p><p><a class="btn" href="https://github.com/inematds/mcp2-na-pratica/blob/main/README.es.md#instalación-técnica" target="_blank" rel="noopener">Ver la parte técnica</a></p></div>
@@ -303,12 +301,12 @@
 <section id="construir" class="tec"><div class="wrap">
 <span class="chip">Para quien construye servidores</span>
 <h2>Las tres piezas <span class="amb">por su nombre oficial</span></h2>
-<p class="sub">Esta es la única parte técnica de la guía. Cada término va con la frase común al lado; el resto está en el README.</p>
+<p class="sub">Esta es la única parte técnica de la guía. Cada término viene con la frase común al lado; el resto está en el README.</p>
 <div class="grid g2">
 <div class="card"><h3>📘 Manual incluido: <code>skills/list</code> y <code>skills/get</code></h3><p>“El servidor dice qué manuales tiene y entrega el que le pidan.” Es la extensión <code>io.modelcontextprotocol/skills</code>; los archivos del manual salen por <code>resources/read</code>. En el kit, el manual <code>promocao</code> viene con una lista de archivos con tamaño y SHA-256 (una huella digital del archivo), y el cliente la verifica. En Claude Code el nombre aparece como <code>&lt;servidor&gt;:&lt;skill&gt;</code>.</p></div>
-<div class="card"><h3>⏳ Segundo plano: <code>taskId</code> y <code>tasks/get</code></h3><p>“El servidor devuelve un ticket al instante y el cliente pregunta cómo va.” Los estados son <code>working</code>, <code>completed</code>, <code>failed</code>, <code>cancelled</code> e <code>input_required</code>. Un cliente que no declara la extensión recibe el resultado a la manera antigua (espera y devuelve).</p></div>
+<div class="card"><h3>⏳ Segundo plano: <code>taskId</code> y <code>tasks/get</code></h3><p>“El servidor devuelve un ticket al instante y el cliente pregunta cómo va.” Los estados son <code>working</code>, <code>completed</code>, <code>failed</code>, <code>cancelled</code> y <code>input_required</code>. Un cliente que no declara la extensión recibe el resultado a la antigua (espera y devuelve).</p></div>
 <div class="card"><h3>❓ Pregunta antes: elicitation <code>form</code> × <code>url</code></h3><p>“Form” es la pregunta en el chat: sí o no, escribe el nombre. “Url” envía a la persona al sitio de la empresa (contraseña, pago), y el dato no pasa por el chat. El kit usa form; url solo se menciona, porque la tiendita no pide datos sensibles.</p></div>
-<div class="card"><h3>🏪 El servidor del kit</h3><p><code>servidor.py</code> es un servidor MCP “loja” (tienda) que se comunica por la entrada y salida de la terminal (stdio): el manual <code>promocao</code>, la tool <code>atualizar_precos</code> (se convierte en tarea), <code>publicar_precos</code> (pregunta sí o no) y <code>apagar_produto</code> (pide el nombre exacto). El SDK de Python <code>mcp</code> 2.3.0 no trae listas las extensiones de skills y tasks: el kit las escribe a mano.</p></div>
+<div class="card"><h3>🏪 El servidor del kit</h3><p><code>servidor.py</code> es un servidor MCP “loja” (tienda) que se comunica por la entrada y salida de la terminal (stdio): el manual <code>promocao</code>, la tool <code>atualizar_precos</code> (se vuelve tarea), <code>publicar_precos</code> (pregunta sí o no) y <code>apagar_produto</code> (pide el nombre exacto). El SDK de Python <code>mcp</code> 2.3.0 no trae listas las extensiones de skills y tasks: el kit las escribe a mano.</p></div>
 </div>
 <div class="grid g2" style="margin-top:16px">
 <div class="card"><h3>Ejecutar en 3 comandos (Python 3.10+)</h3>
@@ -320,9 +318,9 @@
 <div class="card"><h3>Conectar en Claude Code</h3>
 <pre><span class="k">claude mcp add</span> loja -- "$PWD/.venv/bin/python" "$PWD/servidor.py"
 <span class="k">claude mcp list</span>   <span class="c"># loja: … - ✔ Connected</span></pre>
-<p style="margin-top:10px">Dentro de <code>claude</code>: <code>/mcp</code> → <code>loja</code> y <code>/skills</code> → <code>loja:promocao</code>. Con <code>--scope project</code> queda en “Pending approval” hasta que abras <code>claude</code> en la carpeta; el ámbito predeterminado (local) conecta directo. Para quitarlo: <code>claude mcp remove loja</code>.</p></div>
+<p style="margin-top:10px">Dentro de <code>claude</code>: <code>/mcp</code> → <code>loja</code> y <code>/skills</code> → <code>loja:promocao</code>. Con <code>--scope project</code> queda en “Pending approval” (pendiente de aprobación) hasta que abras <code>claude</code> en la carpeta; el alcance por defecto (local, que vale solo para ti y solo en esa carpeta) conecta directo. Para quitarlo: <code>claude mcp remove loja</code>.</p></div>
 </div>
-<p class="fonte">Límites, con honestidad: las tareas se guardan solo en la memoria del servidor, <code>ttlMs</code> se informa pero no borra nada automáticamente, y <code>tasks/update</code> solo confirma la recepción. El kit habla la versión 2026-07-28 de la especificación, la “sin estado”: pedido y respuesta simples, lo que permite que el servidor corra incluso en serverless. Detalles en <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/README.es.md#instalación-técnica" target="_blank" rel="noopener">README</a> y <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/COMO-LIGAR-NO-CLAUDE.md" target="_blank" rel="noopener">COMO-LIGAR-NO-CLAUDE.md</a> (en portugués).</p>
+<p class="fonte">Límites, con honestidad: las tareas quedan solo en la memoria del servidor, <code>ttlMs</code> se informa pero no borra nada por sí solo, y <code>tasks/update</code> solo confirma la recepción. El kit habla la versión 2026-07-28 de la especificación, la “sin estado”: pedido y respuesta simples, que permite que el servidor corra incluso en serverless (un servidor que solo se enciende cuando llega un pedido). Detalles en <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/README.es.md#instalación-técnica" target="_blank" rel="noopener">README</a> y <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/README.es.md#en-claude-code" target="_blank" rel="noopener">README (español): Claude Code</a>.</p>
 </div></section>
 
 <section id="prova"><div class="wrap">
@@ -330,27 +328,27 @@
 <h2>Ejecutado de verdad, <span class="amb">el 26/11/2026</span></h2>
 <div class="prova">
 <ol class="tl">
-<li><b>Demo:</b> el manual llegó y se verificó (el tamaño y la huella digital coinciden); la tarea de 300 productos terminó con 299 precios nuevos y 43 frenados en el margen; con “no”, no se publicó nada; con “sí”, 299 precios fueron a la tienda; borrar con “Caneca” fue rechazado y con “Caneca Azul P” funcionó.</li>
+<li><b>Demo:</b> el manual llegó y fue verificado (el tamaño y la huella digital coinciden); la tarea de 300 productos terminó con 299 precios nuevos y 43 frenados en el margen; con “no”, no se publicó nada; con “sí”, 299 precios fueron a la tienda; borrar con “Caneca” fue rechazado y con “Caneca Azul P” funcionó.</li>
 <li><b>Pruebas:</b> 17 pruebas corren contra el servidor real y todas pasaron.</li>
-<li><b>Claude Code v2.1.332 (Linux):</b> el servidor “loja” se conectó con la versión 2026-07-28, mostró “3 tools · 2 resources · 1 skill”, y <code>/skills</code> listó <em>loja:promocao</em> con cerca de 30 tokens, con el aviso “Skills from MCP servers are in beta”.</li>
+<li><b>Claude Code v2.1.332 (Linux):</b> el servidor “loja” se conectó con la versión 2026-07-28, mostró “3 tools · 2 resources · 1 skill”, y <code>/skills</code> listó <em>loja:promocao</em> con cerca de 30 tokens, con el aviso “Skills from MCP servers are in beta” (las skills de servidores MCP están en beta).</li>
 </ol>
-<blockquote>Lo que la prueba no muestra: en Claude Code no le pedimos al modelo que ejecutara las herramientas, así que allí no vimos la tarea en segundo plano ni la pregunta. Esas dos se probaron con el demo y las pruebas.</blockquote>
+<blockquote>Lo que la prueba no muestra: en Claude Code no le pedimos al modelo que ejecutara las herramientas, así que ahí no vimos la tarea en segundo plano ni la pregunta. Esas dos están probadas con el demo y las pruebas.</blockquote>
 <p class="fonte">Salidas completas en el repositorio: <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/exemplos/saida-demo.txt" target="_blank" rel="noopener">saida-demo.txt</a> (en portugués) y <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/exemplos/prova-claude-code.txt" target="_blank" rel="noopener">prova-claude-code.txt</a> (en portugués).</p>
 </div>
 </div></section>
 
 <section id="faq"><div class="wrap">
 <span class="chip">Preguntas</span>
-<h2>Antes de que <span class="amb">preguntes</span></h2>
+<h2>Antes de <span class="amb">que preguntes</span></h2>
 <div class="grid g2">
 <div class="card"><h3>¿Necesito programar?</h3><p>Para verlo funcionar, no: pegas el pedido de “Cómo empezar” y tu IA hace el resto. Para construir tu propio servidor, sí, y el kit en Python es el punto de partida.</p></div>
-<div class="card"><h3>¿Cuesta algo?</h3><p>El kit es gratis y abierto (licencia MIT). Las novedades en Claude están activadas en los planes Pro, Max y Ultra, que son pagos.</p></div>
+<div class="card"><h3>¿Cuesta algo?</h3><p>El kit es gratis y abierto (licencia MIT). Las novedades en Claude están activadas en los planes Pro, Max y Ultra, que son de pago.</p></div>
 <div class="card"><h3>¿“MCP 2.0” es el nombre oficial?</h3><p>No. Es el apodo que circula para el paquete del 24/11/2026. El estándar sigue siendo MCP, que cumplió 2 años en noviembre de 2026.</p></div>
-<div class="card"><h3>¿Funciona con otras IA?</h3><p>MCP es abierto y fue adoptado por OpenAI, Google y Microsoft. Cada aplicación de IA necesita admitir las piezas nuevas; el kit se probó en Claude Code. El demo corre solo en la terminal, con cualquier agente.</p></div>
-<div class="card"><h3>¿Modifica mi tienda real?</h3><p>No. La tienda es ficticia y el servidor trabaja sobre una copia de los 300 productos.</p></div>
-<div class="card"><h3>¿Puedo enviar archivos a la herramienta?</h3><p>Todavía no. El envío de archivos (File Uploads) se anunció como “próximamente”, sin fecha.</p></div>
+<div class="card"><h3>¿Funciona con otras IA?</h3><p>MCP es abierto: ChatGPT, Claude, Cursor, Gemini, Microsoft Copilot y Visual Studio Code son compatibles con él (blog de MCP, diciembre de 2025). Cada aplicación de IA tiene que aceptar las piezas nuevas; el kit se probó en Claude Code. El demo corre solo en la terminal, con cualquier agente.</p></div>
+<div class="card"><h3>¿Cambia algo en mi tienda real?</h3><p>No. La tienda es ficticia y el servidor trabaja sobre una copia de los 300 productos.</p></div>
+<div class="card"><h3>¿Puedo enviar archivos a la herramienta?</h3><p>Todavía no. El envío de archivos (File Uploads) se anunció como “pronto”, sin fecha.</p></div>
 </div>
-<p class="sub" style="margin-top:28px">Y tú, ¿qué herramienta te gustaría que se detuviera y te preguntara antes de actuar? Ven a contarlo y llévate este y otros kits gratis en <a href="https://inema.club" target="_blank" rel="noopener">inema.club</a>, directo en internet.</p>
+<p class="sub" style="margin-top:28px">Y tú, ¿qué herramienta te gustaría que se detuviera y te preguntara antes de actuar? Ven a contarlo y a llevarte este y otros kits gratis en <a href="https://inema.club" target="_blank" rel="noopener">inema.club</a>, directo en internet.</p>
 </div></section>
 </main>
 
