@@ -124,6 +124,8 @@ Verificado leyendo el código del SDK instalado:
 | Tasks (`io.modelcontextprotocol/tasks`) | **No** viene incluida (el SDK solo tiene los tipos antiguos de 2025-11-25). | Escrita en `servidor.py` (`TasksExtension`): `CreateTaskResult`, `tasks/get`, `tasks/update`, `tasks/cancel`. Un cliente sin la extensión recibe el resultado a la manera antigua, como exige la spec. |
 | File Uploads | No (todavía no lanzado). | Solo mencionado. |
 
+Límites honestos del kit: las tasks viven solo en la memoria del servidor (desaparecen si se reinicia), el `ttlMs` se informa pero no borra nada solo, y `tasks/update` solo confirma la recepción, porque `atualizar_precos` no pide nada a mitad del camino.
+
 ## En Claude Code
 
 Mira [COMO-LIGAR-NO-CLAUDE.md](COMO-LIGAR-NO-CLAUDE.md). Probamos en Claude Code 2.1.332: el servidor se conecta por el protocolo 2026-07-28 y `/skills` lista `loja:promocao` (prueba en [`exemplos/prova-claude-code.txt`](exemplos/prova-claude-code.txt)).

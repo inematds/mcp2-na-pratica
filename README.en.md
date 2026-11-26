@@ -124,6 +124,8 @@ Checked by reading the installed SDK code:
 | Tasks (`io.modelcontextprotocol/tasks`) | **Not** included (the SDK only has the old 2025-11-25 types). | Written in `servidor.py` (`TasksExtension`): `CreateTaskResult`, `tasks/get`, `tasks/update`, `tasks/cancel`. A client without the extension gets the result the old way, as the spec requires. |
 | File Uploads | No (not released yet). | Only mentioned. |
 
+Honest limits of the kit: tasks live only in the server's memory (they vanish if it restarts), `ttlMs` is reported but deletes nothing by itself, and `tasks/update` only acknowledges, because `atualizar_precos` asks nothing midway.
+
 ## In Claude Code
 
 See [COMO-LIGAR-NO-CLAUDE.md](COMO-LIGAR-NO-CLAUDE.md). We tested on Claude Code 2.1.332: the server connects over protocol 2026-07-28 and `/skills` lists `loja:promocao` (proof in [`exemplos/prova-claude-code.txt`](exemplos/prova-claude-code.txt)).

@@ -77,6 +77,9 @@ class Respostas:
             valor = resposta["content"][campo]
         else:
             valor = await asyncio.to_thread(self._perguntar, esquema)
+            if valor is None:
+                linha(f"  Resposta: {VERMELHO('cancelar')} (sem entrada no teclado)")
+                return ElicitResult(action="cancel")
         if isinstance(valor, bool):
             linha(f"  Resposta: {VERDE('SIM') if valor else VERMELHO('NÃO')}")
         else:
@@ -85,9 +88,12 @@ class Respostas:
 
     @staticmethod
     def _perguntar(esquema: dict[str, Any]) -> Any:
-        if esquema.get("type") == "boolean":
-            return input("  Sua resposta [s/n]: ").strip().lower().startswith("s")
-        return input("  Digite: ")
+        try:
+            if esquema.get("type") == "boolean":
+                return input("  Sua resposta [s/n]: ").strip().lower().startswith("s")
+            return input("  Digite: ")
+        except EOFError:
+            return None
 
 
 # --- os três passos -----------------------------------------------------------
