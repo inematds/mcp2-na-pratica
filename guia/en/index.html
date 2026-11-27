@@ -1,368 +1,787 @@
 <!DOCTYPE html>
+<!--
+  Guia (PT) do kit "MCP 2 na prática" — padrão de guia v2 (referência: espera-sem-voce). Versões: en/ e es/. Números: seção #prova (26/11/2026).
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MCP 2 in practice — your agent follows the manual, works on its own and asks first</title>
-<meta name="description" content="Free and open kit: the MCP news from 24/11/2026 (the tool's manual comes with it, long jobs run in the background and it asks before acting) working in a small store on Black Friday.">
-<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/mcp2-na-pratica/guia/">
-<link rel="alternate" hreflang="en" href="https://inematds.github.io/mcp2-na-pratica/guia/en/">
-<link rel="alternate" hreflang="es" href="https://inematds.github.io/mcp2-na-pratica/guia/es/">
+<title>MCP 2 in practice: the AI already knows the rules, works on its own and asks before deleting</title>
+<meta name="description" content="A free INEMA kit that shows the three new pieces of MCP in a pretend little store: the manual that comes along, background work and the question before acting.">
+<meta property="og:title" content="MCP 2 in practice">
+<meta property="og:description" content="The AI already knows the rules. Works on its own. Asks before deleting. Free kit at inema.club, right on the web.">
+<meta property="og:image" content="https://inematds.github.io/mcp2-na-pratica/guia/assets/banner-en.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
-    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#FACC15; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
-    --fill:#FACC15; --tint:rgba(250,204,21,.12); --ok:#7CE0C6; --bad:#F0918A;
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730; --dash:#4b4b5a;
+    --txt:#e9e9ee; --mut:#9a9aa6;
+    --fill:#FACC15; --tinta:#1a1206;      /* amarelo como preenchimento + letra sobre ele */
+    --amb-t:#FACC15;                      /* amarelo como letra: só no escuro */
+    --link:#FACC15; --foco:#FACC15;
+    --dica:#16161e; --dica-b:#FACC15;
+    --sky:#38bdf8; --pro:#cbd5e1;
     color-scheme:dark;
   }
   body.light{
-    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
-    --txt:#1a1a22; --mut:#5b5b68; --amb:#a16207; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
-    --fill:#FACC15; --tint:#FEF9C3; --ok:#0E6B55; --bad:#A83426;
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea; --dash:#b4b7c4;
+    --txt:#1a1a22; --mut:#5b5b68;
+    --amb-t:#1a1a22; --link:#854d0e; --foco:#1a1a22;
+    --dica:#FEF9C3; --dica-b:#EAB308;
+    --sky:#0369a1; --pro:#b45309;
     color-scheme:light;
   }
-  body.light .hero .glow{opacity:.5}
-  body.light nav{background:rgba(246,247,249,.85)}
-  body.light .amb{color:var(--txt);background:linear-gradient(transparent 55%,#FACC15 55%)}
-  body.light pre{background:#0e0e14;color:#d6d6e0}
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
-  a{color:var(--amb);text-decoration:none}
-  body.light main a:not(.btn),body.light footer a{color:#854d0e;text-decoration:underline;text-decoration-color:#FACC15;text-decoration-thickness:3px}
-  code,pre{font-family:"JetBrains Mono",monospace}
-  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
-  .mut{color:var(--mut)} .amb{color:var(--amb)}
-  .chip{display:inline-block;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
-  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
-  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
-  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb);white-space:nowrap}
-  nav .brand .emoji{font-size:1.25rem}
-  nav .sep{color:var(--mut);opacity:.45}
-  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .inema:hover,nav .pro:hover{filter:brightness(1.15)}
-  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
-  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
-  nav .links a.sec{color:var(--mut);white-space:nowrap} nav .links a.sec:hover{color:var(--txt)}
-  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
-  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:var(--tint)}
-  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
-  .tgl:hover{border-color:var(--amb)}
-  .btn{display:inline-block;background:var(--fill);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
-  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
-  @media(max-width:1500px){nav .links a.opt{display:none}}
-  @media(max-width:960px){nav .links a.sec{display:none}}
-  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
-  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(250,204,21,.18),transparent 70%);pointer-events:none}
-  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;grid-template-areas:"top f2" "bot f1";column-gap:40px;row-gap:28px;align-items:center;padding:74px 22px}
-  .h-top{grid-area:top}.h-bot{grid-area:bot}.f1{grid-area:f1}.f2{grid-area:f2}
-  .hero h1{font-size:clamp(1.9rem,4.2vw,3rem);font-weight:800;letter-spacing:-.025em;margin-top:.35em}
-  .hero p.lead{font-size:1.12rem;color:var(--mut);margin:0 0 1.6em;max-width:50ch}
-  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
-  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
-  .hero figure img{width:100%;height:auto;display:block}
-  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;grid-template-areas:"top" "f2" "bot" "f1";padding:48px 22px}}
-  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
-  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
-  section{padding:62px 0;border-bottom:1px solid var(--line)}
-  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
-  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:66ch}
-  .grid{display:grid;gap:16px}
-  .g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
-  @media(max-width:820px){.g3{grid-template-columns:1fr 1fr}}
-  @media(max-width:540px){.g2,.g3{grid-template-columns:1fr}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
-  .card h3{font-size:1.05rem;margin-bottom:.4em}
-  .card p{color:var(--mut);font-size:.95rem;margin:0}
-  .card p+p{margin-top:.6em}
-  .card ul{margin:8px 0 0;padding-left:20px;color:var(--mut);font-size:.95rem}.card li{margin:5px 0}
-  .card .tag{display:inline-block;font:600 .75rem Sora;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:.5em}
-  .card.antes{border-left:3px solid var(--bad)} .card.depois{border-left:3px solid var(--ok)}
-  .quem-img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;margin:0 0 14px;display:block;border:1px solid var(--line)}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
-  @media(max-width:720px){.stats{grid-template-columns:1fr}}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
-  .stat b{display:block;font:800 clamp(1.7rem,3.6vw,2.4rem)/1.05 Sora,sans-serif;letter-spacing:-.02em;color:var(--amb)}
-  body.light .stat b{color:var(--txt)}
-  .stat span{display:block;color:var(--mut);font-size:.93rem;margin-top:.5em}
-  .fonte{font-size:.86rem;color:var(--mut);margin-top:14px;max-width:80ch}
-  .status{display:inline-block;font:600 .75rem Sora;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:.2em .7em;margin:0 0 .6em}
-  .status.ga{border-color:var(--ok);color:var(--ok)} .status.beta{border-color:var(--amb);color:var(--amb)} .status.nao{border-color:var(--bad);color:var(--bad)}
-  .tl{list-style:none;margin:0;padding:0;counter-reset:t}
-  .tl li{position:relative;padding:0 0 18px 48px;counter-increment:t}
-  .tl li::before{content:counter(t);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:10px;background:var(--fill);color:#1a1206;font:800 .95rem/32px Sora,sans-serif;text-align:center}
-  .tl li::after{content:"";position:absolute;left:15px;top:36px;bottom:4px;width:2px;background:var(--line)}
-  .tl li:last-child::after{display:none}
-  .tl b{font-family:Sora}
-  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:28px}
-  .step>div{min-width:0}
-  .step .b{width:46px;height:46px;border-radius:12px;background:var(--fill);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
-  .step h3{font-size:1.12rem;margin-bottom:.3em}
-  .step p{color:var(--mut);margin:.2em 0 .5em}
-  .pedido{position:relative;background:var(--card);border:1px solid var(--amb);border-radius:12px;padding:16px 18px;margin-top:10px}
-  .pedido p{margin:0;color:var(--txt);font-size:.95rem;padding-right:84px;overflow-wrap:anywhere}
-  .copiar{position:absolute;top:10px;right:10px;background:var(--fill);color:#1a1206;border:0;border-radius:8px;padding:.35em .8em;font:600 .82rem Sora;cursor:pointer}
-  @media(max-width:520px){.pedido p{padding-right:0;padding-top:30px}}
-  .prova{background:var(--card);border:1px solid var(--amb);border-radius:16px;padding:26px 26px 22px;margin-top:6px}
-  body.light .prova{border-color:#EAB308}
-  blockquote{margin:6px 0 0;padding:14px 18px;border-left:3px solid var(--fill);background:var(--bg2);border-radius:0 10px 10px 0;font-size:1.02rem}
-  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
-  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:4px}
-  .banner{margin:0 0 30px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
-  .banner img{width:100%;display:block}
-  .peca{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:34px;align-items:start;padding:34px 0;border-top:1px solid var(--line)}
-  .peca:first-of-type{border-top:none;padding-top:8px}
-  @media(max-width:820px){.peca{grid-template-columns:1fr}}
-  .peca h3{font-size:1.4rem;margin:.2em 0 .45em}
-  .peca p{margin:.4em 0;max-width:62ch}
-  .peca .n{font:800 .8rem Sora;letter-spacing:.14em;text-transform:uppercase;color:var(--amb)}
-  .peca .analog{margin-top:.9em;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--fill);border-radius:10px;padding:12px 16px;font-size:.95rem;color:var(--mut)}
-  .peca .analog b{color:var(--txt)}
-  .peca figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
-  .peca figure img{width:100%;height:auto;display:block}
-  .peca figcaption{padding:10px 14px;font-size:.86rem;color:var(--mut);background:var(--card)}
-  .video-ph{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:center}
-  @media(max-width:780px){.video-ph{grid-template-columns:1fr}}
-  .video-ph figure{margin:0;border-radius:14px;overflow:hidden;border:1px dashed var(--amb)}
-  .video-ph img{width:100%;display:block;opacity:.85}
-  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow-x:auto;font-size:.84rem;line-height:1.6;color:#d6d6e0;margin:10px 0 0;max-width:100%}
-  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)}
-  .tec{background:var(--bg2)}
-  .tec code{font-size:.88em;background:var(--tint);padding:.05em .35em;border-radius:5px;color:var(--txt)}
-  .aviso{border:1px dashed var(--amb);border-radius:12px;padding:12px 16px;color:var(--mut);font-size:.92rem;margin:0 0 22px}
+  html{-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+  body{margin:0;background:var(--bg);color:var(--txt);font:400 17px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:Sora,system-ui,sans-serif;margin:0;line-height:1.12;letter-spacing:-.02em}
+  p{margin:0}
+  a{color:var(--link);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+  body.light a{text-decoration-color:#FACC15;text-decoration-thickness:3px}
+  :focus-visible{outline:2px solid var(--foco);outline-offset:3px;border-radius:4px}
+  svg{flex:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .col{max-width:760px}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* barra do topo: só a marca e o idioma */
+  .topo{border-bottom:1px solid var(--line)}
+  .topo .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
+  .topo a{text-decoration:none;font:600 .875rem Sora,sans-serif}
+  .marca{display:inline-flex;align-items:center;gap:7px}
+  .marca .inema{color:var(--sky)} .marca .pro{color:var(--pro)} .marca .sep{color:var(--mut);opacity:.6}
+  .lang{display:inline-flex;gap:2px}
+  .lang a{color:var(--mut);padding:.35em .55em;border-radius:6px}
+  .lang a.on{color:var(--txt);background:var(--bg2)}
+
+  /* TOPO: o teste dos 5 segundos acontece aqui */
+  .hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;padding-top:40px;padding-bottom:56px}
+  .hero h1{letter-spacing:-.03em}
+  .nome{display:inline-block;font:800 .9375rem/1.2 Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--amb-t);margin-bottom:14px}
+  body.light .nome{background:linear-gradient(transparent 55%,#FACC15 55%);padding:0 .25em}
+  .manchete{display:block;font-size:clamp(2.3rem,5.2vw,3.6rem);font-weight:800;line-height:1.04}
+  .manchete .l{display:block;text-wrap:balance}
+  .manchete em{font-style:normal;color:var(--amb-t)}
+  body.light .manchete em{background:linear-gradient(transparent 62%,#FACC15 62%)}
+  .lead{font-size:clamp(1.09rem,1.5vw,1.22rem);line-height:1.55;margin-top:18px;max-width:33em}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:50px;padding:.7em 1.3em;border-radius:10px;border:1px solid var(--fill);background:var(--fill);color:var(--tinta);font:800 1rem Sora,sans-serif;text-decoration:none;cursor:pointer}
+  body.light a.btn{text-decoration:none}
+  .btn svg{width:18px;height:18px}
+  .btn.ghost{background:transparent;color:var(--txt);border-color:var(--line);font-weight:600}
+  .btn:hover{filter:brightness(1.07)} .btn.ghost:hover{border-color:var(--mut);filter:none}
+  .fatos{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:8px;font-size:.97rem;color:var(--txt)}
+  .fatos li{display:flex;gap:10px;align-items:flex-start}
+  .fatos svg{width:18px;height:18px;margin-top:.22em;color:var(--txt)}
+
+  /* caixa de imagem que ainda não existe */
+  .ph{margin:0;border:1.5px dashed var(--dash);border-radius:16px;background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(127,127,150,.07) 14px 28px),var(--bg2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:18px;color:var(--mut)}
+  .ph svg{width:26px;height:26px}
+  .ph b{font:600 .8125rem/1.35 Sora,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--txt)}
+  .ph span{font-size:.9rem;line-height:1.4;max-width:26em}
+  .antesdepois{padding:0;aspect-ratio:4/3;position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:0;overflow:hidden}
+  .antesdepois .lado{display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:16px;text-align:left}
+  .antesdepois .lado + .lado{border-left:1.5px dashed var(--dash);background:rgba(250,204,21,.06)}
+  .antesdepois .rot{font:800 .8125rem Sora,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--txt)}
+  .antesdepois .lado span{font-size:.9rem;max-width:none}
+  .antesdepois .selo{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:max-content;max-width:86%;display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--dash);border-radius:12px;padding:12px 16px}
+
+  /* seções */
+  section{padding:68px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:800;text-wrap:balance}
+  .sub{color:var(--mut);margin-top:12px;max-width:38em}
+
+  /* passos: todos com a mesma forma */
+  .passos{margin-top:34px;display:grid;gap:16px}
+  .passo{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
+  .passo > *{min-width:0}
+  .passo header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .n{flex:none;width:46px;height:46px;border-radius:12px;background:var(--fill);color:var(--tinta);font:800 1.4rem/46px Sora,sans-serif;text-align:center}
+  .passo h3{font-size:clamp(1.2rem,2.2vw,1.45rem);font-weight:800}
+  .quem{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:start;padding:11px 0;border-top:1px solid var(--line)}
+  .tag{display:inline-block;justify-self:start;margin-top:.15em;font:600 .75rem/1 Sora,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:.5em .65em;border-radius:6px;border:1px solid var(--dash);color:var(--txt);white-space:nowrap}
+  .tag.vigia{background:var(--fill);border-color:var(--fill);color:var(--tinta)}   /* o programa do kit */
+  .tag.ia{background:var(--txt);border-color:var(--txt);color:var(--bg)}            /* a IA: outra peça, outra cor */
+  .porque{border-top:1px solid var(--line);padding-top:12px;color:var(--mut);font-size:.97rem}
+  .porque span{font:600 .75rem Sora,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--txt);margin-right:.6em}
+  .ph-passo{aspect-ratio:4/3}
+  .dica{grid-column:1/-1;background:var(--dica);border:1px solid var(--line);border-left:4px solid var(--dica-b);border-radius:10px;padding:14px 18px}
+  .dica b{font-family:Sora,sans-serif;font-weight:600}
+
+  /* vídeos: dois curtos, em pé */
+  .videos{display:grid;grid-template-columns:repeat(2,minmax(0,230px));gap:16px;margin-top:26px}
+  .ph-short{aspect-ratio:9/16;padding:14px}
+
+  /* precisa / não faz */
+  .duas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+  .bloco{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;min-width:0}
+  .bloco h3{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+  .lista{list-style:none;margin:0;padding:0}
+  .lista li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+  .lista li:first-child{border-top:none}
+  .lista svg{width:18px;height:18px;margin-top:.28em;color:var(--mut)}
+  .lista.sim svg{color:var(--txt)}
+  .lista strong{font-weight:600;display:block}
+  .lista span{color:var(--mut);font-size:.97rem}
+
+  /* começar */
+  .tres{list-style:none;counter-reset:c;margin:28px 0 0;padding:0;display:grid;gap:12px}
+  .tres li{counter-increment:c;display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;align-items:start}
+  .tres li::before{content:counter(c);width:34px;height:34px;border-radius:10px;border:1px solid var(--dash);font:800 1rem/32px Sora,sans-serif;text-align:center}
+  .tres p{padding-top:.2em}
+  .pedido{margin-top:26px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
+  .pedido-barra{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:12px 14px 12px 18px;border-bottom:1px solid var(--line)}
+  .pedido-barra p{font-size:.95rem;color:var(--mut)}
+  .pedido-barra .btn{min-height:44px;padding:.5em 1.05em}
+  .pedido pre{margin:0;padding:18px;font:400 .9rem/1.65 ui-monospace,"SF Mono",Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--txt)}
+  .depois{margin-top:18px;color:var(--mut);font-size:.97rem;display:grid;gap:6px}
+
+  /* perguntas */
+  .faq{margin-top:26px;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:17px 2px;font:600 1.05rem/1.35 Sora,sans-serif}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";flex:none;font:400 1.5rem/1 Inter,sans-serif;color:var(--mut)}
+  .faq details[open] summary::after{content:"\2212"}
+  .faq details p{padding:0 2px 18px;color:var(--mut);max-width:42em}
+
+  /* fecho */
+  .fecho{text-align:center}
+  .fecho h2{max-width:20em;margin:0 auto}
+  .fecho p{margin:16px auto 0;max-width:30em;font-size:1.1rem}
+  .fecho .cta{justify-content:center}
+
+  footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--mut);font-size:.9rem}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between}
+  footer nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+  footer a{color:var(--mut)}
+  footer a.inema{color:var(--sky)}
+  .tema{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:10px;min-height:40px;padding:.4em .9em;font:600 .875rem Sora,sans-serif;cursor:pointer}
+
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;gap:34px;padding-top:34px;padding-bottom:48px}
+    .antesdepois{aspect-ratio:16/10}
+    .passo{grid-template-columns:1fr;gap:18px}
+    .ph-passo{aspect-ratio:16/9}
+    .duas{grid-template-columns:1fr}
+    section{padding:52px 0}
+  }
+  @media (max-width:480px){
+    .wrap{padding:0 16px}
+    .nome{margin-bottom:12px;font-size:.875rem}
+    .antesdepois{aspect-ratio:4/3} .antesdepois .selo{top:30%}
+    .lead{margin-top:16px}
+    .cta{margin-top:20px} .cta .btn{flex:1 1 auto}
+    .fatos{margin-top:20px}
+    .passo,.bloco{padding:18px}
+    .quem{grid-template-columns:1fr;gap:7px}
+    .tag{margin-top:0}
+    .n{width:40px;height:40px;line-height:40px;font-size:1.2rem}
+    .videos{grid-template-columns:1fr 1fr;gap:12px}
+    .ph-short{padding:10px}
+    .pedido-barra .btn{width:100%}
+  }
+  /* ===== v2 completo: o que voltou ===== */
+  :root{--azul:#3B9EFF}
+  body.light{--azul:#0b63c4}
+  .topo .wrap{flex-wrap:wrap}
+  .menu{display:flex;gap:4px 18px;flex-wrap:wrap}
+  .menu a{color:var(--mut);font-weight:600}
+  .menu a:hover{color:var(--txt)}
+  /* nome forte: VIGIA grande em azul (regra V11 do banner) + o nome do kit */
+  .marcao{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin-bottom:16px}
+  .marcao .vigia{font:800 clamp(2rem,4.4vw,2.9rem)/1 Sora,sans-serif;letter-spacing:-.01em;text-transform:uppercase;color:var(--azul)}
+  .marcao .esp{font:800 clamp(1.1rem,2vw,1.35rem)/1.1 Sora,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--amb-t)}
+  body.light .marcao .esp{background:linear-gradient(transparent 55%,#FACC15 55%);padding:0 .2em}
+  .manchete{font-size:clamp(2.1rem,4.6vw,3.2rem)}
+  .banner{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  .banner img,.largo img,.pub img{display:block;width:100%;height:auto}
+  .largo{margin:28px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+  /* públicos */
+  .publicos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+  .pub{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .pub h3{font-size:1.15rem;font-weight:800;margin:16px 18px 8px}
+  .pub p{margin:0 18px;color:var(--mut);font-size:.97rem}
+  .pub .usa{margin:auto 18px 18px;padding-top:12px;color:var(--txt);font-size:.9rem}
+  .pub .usa b{color:var(--amb-t)}
+  /* passos sem imagem: uma coluna */
+  .passos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .passo{grid-template-columns:1fr;display:block}
+  .analogia{margin-top:22px;background:var(--dica);border:1px solid var(--line);border-left:4px solid var(--dica-b);border-radius:10px;padding:14px 18px;max-width:52em}
+  .analogia b{font-family:Sora,sans-serif;font-weight:600}
+  /* três jeitos */
+  .jeitos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+  .jeito{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
+  .jeito:first-child{border-color:var(--fill)}
+  .jeito .num{font:600 .75rem Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+  .jeito h3{font-size:1.35rem;font-weight:800}
+  .jeito .bom{font-weight:600}
+  .jeito p{font-size:.97rem}
+  .jeito .origem{margin-top:auto;color:var(--mut);font-size:.88rem}
+  .chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+  .chips li{font:600 .78rem Inter,sans-serif;padding:.35em .6em;border-radius:6px;border:1px solid var(--dash);color:var(--txt)}
+  .tabela-wrap{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:14px}
+  .tabela{border-collapse:collapse;width:100%;min-width:620px;font-size:.95rem}
+  .tabela th,.tabela td{padding:12px 14px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+  .tabela thead th{border-top:none;font:800 .95rem Sora,sans-serif;background:var(--bg2)}
+  .tabela tbody th{font-weight:600;color:var(--mut);white-space:nowrap}
+  /* silêncio / bilhete */
+  .bloco p + p{margin-top:12px}
+  .medido{border-left:3px solid var(--fill);padding-left:12px;font-weight:500}
+  .mut{color:var(--mut);font-size:.97rem}
+  .partes{margin:12px 0 0;padding-left:1.3em;display:grid;gap:8px}
+  .bloco .lista{margin:8px 0 12px}
+  /* vídeos */
+  .videos{grid-template-columns:repeat(2,minmax(0,260px))}
+  .short{margin:0}
+  .short a{position:relative;display:block;aspect-ratio:9/16;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--bg2)}
+  .short img{width:100%;height:100%;object-fit:cover;display:block}
+  .short .play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--fill);color:var(--tinta);display:grid;place-items:center;font-size:1.4rem}
+  .short figcaption{margin-top:10px;font:600 .95rem Sora,sans-serif}
+  /* prova */
+  .numeros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:26px}
+  .numero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px}
+  .numero b{font:800 2.2rem/1 Sora,sans-serif;color:var(--amb-t)}
+  .numero span{color:var(--mut);font-size:.93rem}
+  #prova .sub{margin-top:20px;max-width:52em;font-size:.93rem}
+  @media (max-width:900px){
+    .publicos,.jeitos{grid-template-columns:1fr}
+    .passos{grid-template-columns:1fr}
+    .numeros{grid-template-columns:1fr 1fr}
+    .menu{display:none}
+  }
+  @media (max-width:480px){
+    .numeros{grid-template-columns:1fr}
+    .videos{grid-template-columns:1fr 1fr}
+  }
+  .largo.m{max-width:760px}
+  /* topo: a imagem da direita ocupa a altura do texto, sem flutuar */
+  .hero .wrap{align-items:stretch}
+  .hero-img{display:flex}
+  .hero-img img{width:100%;height:100%;object-fit:cover}
+  .largo.topo-sec{margin:0 0 40px}
+  @media (max-width:900px){ .hero-img img{height:auto;aspect-ratio:3/2} }
+  .diag{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:14px 10px 6px;position:relative}
+  .diag svg{width:100%;height:auto;display:block}
+  .diag .ctl{display:flex;justify-content:space-between;align-items:center;padding:4px 8px 8px;font:600 .78rem Sora;color:var(--mut)}
+  .diag .ctl button{background:transparent;border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:.25em .7em;font:600 .78rem Sora;cursor:pointer}
+  .diag .ctl button:focus-visible{outline:2px solid var(--amb);outline-offset:2px}
+  .nd rect{fill:var(--nd);stroke:var(--line);stroke-width:1.5;transition:fill .35s,stroke .35s}
+  .nd.on rect{fill:var(--ndon);stroke:var(--amb)}
+  .nd.wait rect{stroke:var(--amb);stroke-dasharray:6 5}
+  .nd .t{font:700 15px Sora,sans-serif;fill:var(--txt)}
+  .nd .s{font:400 12.5px Inter,sans-serif;fill:var(--mut)}
+  .lnk{stroke:var(--mut);stroke-width:2;opacity:.45;stroke-dasharray:3 5}
+  .lb{font:600 11.5px Sora,sans-serif;fill:var(--mut)}
+  .ping{font:700 12px Sora,sans-serif;fill:var(--amb)}
+  body.light .ping{fill:#854d0e}
+  .tok{fill:var(--amb)} body.light .tok{fill:#EAB308}
+  .ring{fill:none;stroke:var(--amb);stroke-width:2;opacity:0}
+  .falha{font:600 11.5px Sora,sans-serif;fill:var(--bad)}  /* v2.2: duas imagens à direita no topo (banner ao lado do título, hero ao lado do botão) */
+  :root{--amb:#FACC15;--bad:#F0918A;--nd:#1b1b24;--ndon:#2a2410}
+  body.light{--amb:#a16207;--bad:#A83426;--nd:#ffffff;--ndon:#FEF9C3}
+  .hero .wrap{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-areas:"top f2" "bot f1";column-gap:44px;row-gap:26px;align-items:center}
+  .h-top{grid-area:top}.h-bot{grid-area:bot}
+  .hero .f1,.hero .f2{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  .hero .f2{grid-area:f2}.hero .f1{grid-area:f1}
+  .hero .f1 img,.hero .f2 img{display:block;width:100%;height:auto}
+  .hero .f1 img{aspect-ratio:16/9;object-fit:cover}
+  .h-bot .lead{margin-top:0}
+  /* fluxo do vigia ao lado dos 4 passos */
+  .fluxo{display:grid;grid-template-columns:340px minmax(0,1fr);gap:24px;margin-top:30px;align-items:start}
+  .fluxo-diag{position:sticky;top:16px}
+  .fluxo .passos{margin-top:0;grid-template-columns:1fr}
+  .legenda{color:var(--mut);font-size:.85rem;margin-top:8px;text-align:center}
+  .jeito .diag{margin-bottom:6px}
+  .ver-fluxo{font:600 .85rem Sora,sans-serif;text-decoration:none}
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;grid-template-areas:"top" "bot" "f2" "f1"}
+    .fluxo{grid-template-columns:1fr}
+    .fluxo-diag{position:static;max-width:380px;margin:0 auto;width:100%}
+  }
+  /* v2.3 */
+  .hero .wrap{align-items:start}
+  .h-top .lead{margin-top:18px}
+  .h-bot{align-self:start}
+  .hero .f1{align-self:start}
+  .hero .f2{align-self:center}
+  .fluxo-baixo{max-width:420px;margin:26px auto 0}
+  .passos{grid-template-columns:1fr !important;max-width:860px}
+  .kicker{font:800 .8rem Sora,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--amb-t);margin-bottom:10px}
+  .kicker-s{font:700 .78rem Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:10px;text-align:center}
+  .diags3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+  .questao{margin-top:36px;padding-top:28px;border-top:1px dashed var(--line)}
+  .questao:first-of-type{border-top:none;padding-top:0}
+  .q-tit{display:flex;align-items:center;gap:14px;font-size:clamp(1.3rem,2.6vw,1.7rem);font-weight:800}
+  .q-tit span{flex:none;width:42px;height:42px;border-radius:12px;background:var(--fill);color:var(--tinta);display:grid;place-items:center;font-size:1.2rem}
+  .questao .sub{margin-top:12px}
+  @media (max-width:900px){
+    .diags3{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  }
+  /* v2.4: respiro */
+  .risco{border:0;border-top:1px solid var(--line);margin:44px 0 40px}
+  .largo.topo-sec{margin:0}
+  #jeitos .jeitos{gap:24px;margin-top:32px}
+  #jeitos .tabela-wrap{margin-top:48px}
+  #jeitos .kicker-s{margin-top:56px !important;margin-bottom:16px}
+  #jeitos .diags3{gap:24px}
+  @media (max-width:640px){
+    .tabela-wrap{position:relative;background:linear-gradient(to left,rgba(250,204,21,.18),transparent 28px) right/28px 100% no-repeat}
+    .tabela-wrap::before{content:"\2194";position:sticky;left:0;display:block;text-align:right;padding:6px 10px 0;color:var(--amb-t);font:700 1rem Sora,sans-serif}
+  }
+  /* v2.5 */
+  .kicker{font:800 clamp(1.35rem,2.6vw,1.75rem)/1.1 Sora,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--amb-t);margin-bottom:14px;padding-bottom:12px;border-bottom:3px solid var(--fill);display:inline-block}
+  .frase{font-size:clamp(1.1rem,1.6vw,1.25rem);line-height:1.6}
+  .tres-j{margin:16px 0;padding-left:1.2em;display:grid;gap:8px;font-size:1.05rem}
+  .tres-j b{color:var(--amb-t)}
+  .jeitos-l{display:grid;gap:40px;margin-top:32px}
+  .jeito-l{display:grid;grid-template-columns:340px minmax(0,1fr);gap:32px;align-items:start;padding-bottom:40px;border-bottom:1px solid var(--line)}
+  .jl-txt{display:flex;flex-direction:column;gap:12px}
+  .jl-txt .num{font:600 .8rem Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+  .jl-txt h3{font-size:1.5rem;font-weight:800}
+  .jl-txt .bom{font-weight:600}
+  .jl-txt .origem{color:var(--mut);font-size:.9rem}
+  .jl-txt .analogia{margin-top:4px}
+  .cartoes3{display:grid;grid-template-columns:1fr;gap:12px;margin-top:22px}
+  .cartoes3 h3{font-size:1.05rem;margin-bottom:6px}
+  @media (max-width:900px){.jeito-l{grid-template-columns:1fr}.jl-diag{max-width:380px;width:100%;margin:0 auto}}
+  /* MCP 2 */
+  .marcao .vigia{color:var(--amb-t)}
+  .marcao .esp{color:var(--txt)}
+  .publicos.dois{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tela{margin:6px 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tela img{display:block;width:100%;height:auto}
+  .tela figcaption{font-size:.82rem;color:var(--mut);padding:6px 10px}
+  .tres-b{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+  .selo-st{font:700 .72rem Sora,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--amb-t);margin-bottom:6px}
+  .fontes{margin-top:14px}
+  @media (max-width:900px){.publicos.dois,.tres-b{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<nav><div class="wrap">
-<a class="brand" href="#top"><span class="emoji">🔌</span> MCP 2 in practice</a>
-<span class="sep">|</span>
-<span class="clubpro">
-<a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
-<span class="sep">-</span>
-<a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
-</span>
-<div class="links">
-<a class="sec" href="#explicado">The payoff</a>
-<a class="sec opt" href="#base">Sources</a>
-<a class="sec" href="#como">How it works</a>
-<a class="sec opt" href="#falta">Not out yet</a>
-<a class="sec" href="#comecar">Get started</a>
-<a class="sec opt" href="#construir">For builders</a>
-<a class="sec" href="#prova">The proof</a>
-<span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
-<button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
-<a class="btn" href="https://github.com/inematds/mcp2-na-pratica" target="_blank" rel="noopener">GitHub</a>
-</div>
-</div></nav>
 
-<header class="hero" id="top">
-<div class="glow"></div>
-<div class="wrap">
-<div class="h-top"><span class="chip">Free kit · based on Anthropic's official announcement and the MCP blog · 24/11/2026</span>
-<h1>Your agent now follows the tool's manual, does the long work on its own and only calls you when it matters. <span class="amb">MCP 2 in practice</span> shows you how.</h1></div>
-<figure class="f2"><img src="../assets/banner-en.jpg" alt="MCP 2 in practice: your agent follows the manual, works on its own and asks first"></figure>
-<div class="h-bot"><p class="lead">Today, for AI to work on your store or your system, you explain the rules again in every conversation, watch the screen while the long job runs and hope it won't publish or delete anything without asking. On 24/11/2026, MCP, the “plug” that connects AI to programs, got the pieces that fix this. This kit shows all three working in a small store on Black Friday.</p>
-<div class="cta">
-<a class="btn" href="#explicado">What you get</a>
-<a class="btn ghost" href="#comecar">Get started</a>
+<div class="topo"><div class="wrap">
+  <span class="marca">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep" aria-hidden="true">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <nav class="menu" aria-label="Sections">
+    <a href="#pecas">3 pieces</a><a href="#importantes">Key questions</a><a href="#comecar">Hands-on</a><a href="#video">Video</a><a href="#prova">Measured</a>
+  </nav>
+  <span class="lang" aria-label="Language">
+    <a href="../">PT</a>
+    <a class="on" href="./" aria-current="true">EN</a>
+    <a href="../es/">ES</a>
+  </span>
 </div></div>
-<figure class="f1"><img src="../assets/hero.jpg" alt="A robot works on its own in a dark control room, facing a network of light connections"></figure>
-</div>
-</header>
+
+<!-- ========== TOPO ========== -->
+<header class="hero" id="top"><div class="wrap">
+  <div class="h-top">
+    <h1>
+      <span class="marcao"><span class="vigia">MCP 2</span> <span class="esp">in practice</span></span><span class="vh">: </span>
+      <span class="manchete"><span class="l">The AI already knows the rules.</span> <span class="l">Works on its own.</span> <span class="l"><em>Asks before deleting.</em></span></span>
+    </h1>
+    <p class="lead">Today you explain the rules to the AI in every conversation, sit waiting for long jobs and hope it doesn't delete anything. On Nov 24, 2026, MCP, the standard that connects AI to software, got three new pieces that fix this. This kit shows all three working in a pretend little store.</p>
+  </div>
+  <figure class="f2"><img src="../assets/banner-en.jpg" alt="MCP 2 in practice: your agent follows the manual, works on its own and asks first" width="1400" height="788"></figure>
+  <div class="h-bot">
+    <div class="cta">
+      <a class="btn" href="#comecar">Copy the request and start
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+      <a class="btn ghost" href="#pecas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>See the 3 pieces</a>
+    </div>
+    <ul class="fatos">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Free and open kit. No coding: you paste a request.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>You need Claude Code or Codex on your computer. Your real store stays out of it.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Actually run on Nov 26, 2026: 17 tests passed and Claude Code showed the store manual.</span></li>
+    </ul>
+  </div>
+  <figure class="f1"><img src="../assets/hero.jpg" alt="Robot in front of a data network, working on its own" width="1100" height="734"></figure>
+</div></header>
 
 <main>
-<section class="resumo" id="resumo"><div class="wrap">
-<span class="chip">In one sentence</span>
-<p><strong>You want to let AI work in your programs without explaining everything again, without waiting around and without fearing it will do something that can't be undone.</strong> MCP 2 in practice is a free, open kit that shows this in a pretend store with 300 products. MCP (Model Context Protocol) is the open standard that connects AI to the rest of your software; on 24/11/2026 it got the manual that comes with the tool, background work and the question before acting. It's for people who use agents like Claude and for people who build connectors (the pieces that connect AI to a program). “MCP 2.0” is just the nickname going around: everything here comes from Anthropic's announcement and the official MCP blog.</p>
-</div></section>
 
-<section id="explicado"><div class="wrap">
-<span class="chip">The payoff</span>
-<h2>From AI you babysit <span class="amb">to AI that calls you at the right time</span></h2>
-<p class="sub">Three changes, each one proven in a step of the kit (see <a href="#como">How it works</a>).</p>
-<div class="grid g2">
-<div class="card antes"><span class="tag">Before</span><h3>You are the manual, the clock and the brake</h3><ul><li>You paste the store rules into the chat every time (“minimum margin, never below cost…”).</li><li>You ask it to update 300 prices and the conversation stalls until it's done.</li><li>The AI publishes or deletes and you only find out afterwards.</li></ul></div>
-<div class="card depois"><span class="tag">After</span><h3>The tool brings the manual and asks permission</h3><ul><li>The store manual comes with the connector and only loads when needed (step 1).</li><li>The long job becomes a background task; you keep chatting (step 2).</li><li>Before publishing or deleting, the tool stops and asks you (step 3).</li></ul></div>
-</div>
-<div class="stats">
-<div class="stat"><b>~30 tokens</b><span>the space the store manual takes up in Claude Code until it's used (a token is the small chunk of text AI uses to measure what it reads; measured in <code>/skills</code>).</span></div>
-<div class="stat"><b>299 of 300</b><span>new prices calculated in the background in the demo, with 43 held at the 15% minimum margin. The remaining one stayed the same: with that margin, there was no real discount to give.</span></div>
-<div class="stat"><b>2 locks</b><span>“yes or no” to publish and “type the exact name” to delete. Wrong answer, nothing happens.</span></div>
-</div>
-</div></section>
+<!-- ========== EM UMA FRASE ========== -->
+<section id="resumo"><div class="wrap"><div class="col">
+  <p class="kicker">In one sentence</p>
+  <p class="frase"><strong>You want to let the AI work in your software without explaining everything again, without waiting around and without fearing it will do something that can't be undone.</strong> MCP is the open standard that connects AI to the rest of your software, and on Nov 24, 2026 it got three new pieces. This free kit shows each one in a pretend little store with 300 products:</p>
+  <ul class="tres-j">
+    <li><b>the manual that comes along</b>: the tool brings its usage rules, and the AI opens them only when needed;</li>
+    <li><b>background work</b>: a long job becomes a task and the conversation doesn't freeze;</li>
+    <li><b>the question before acting</b>: before publishing or deleting, the tool stops and asks you.</li>
+  </ul>
+  <p class="mut">"MCP 2.0" is just a nickname going around: everything here comes from Anthropic's announcement and the official MCP blog.</p>
+</div></div></section>
 
-<section id="base"><div class="wrap">
-<span class="chip">Sources</span>
-<h2>Official sources, <span class="amb">not rumors</span></h2>
-<p class="sub">The kit only uses what Anthropic and the MCP project have published. Where something isn't out yet, this page says so. Why a standard matters: without one, every link between an AI and a program is custom-built; with MCP, one connector (the piece that links AI to a program, such as the store) works for any AI that speaks the standard.</p>
-<div class="grid g2">
-<div class="card"><h3>📣 Anthropic's announcement (24/11/2026)</h3><p>It presents four new features: the manual that comes with the tool (Skills over MCP), background work (Tasks), the question before acting (Elicitation) and file uploads (File Uploads, not released yet). It says there are now more than 10,000 connectors for Claude and more than 700 million monthly downloads of the MCP programming kits (the SDKs, which programmers use to create connectors).</p><p><a href="https://claude.com/resources/articles/skills-over-mcp-tasks-and-more" target="_blank" rel="noopener">Read the announcement</a></p></div>
-<div class="card"><h3>🎂 MCP blog: “MCP turns 2”</h3><p>The official post marking the standard's second anniversary, reached in November 2026.</p><p><a href="https://blog.modelcontextprotocol.io/posts/mcp-turns-two" target="_blank" rel="noopener">Read the post</a></p></div>
-<div class="card"><h3>🤝 MCP blog: MCP joins the Agentic AI Foundation (09/12/2025)</h3><p>It says ChatGPT, Claude, Cursor, Gemini, Microsoft Copilot and Visual Studio Code support MCP. The foundation, under the Linux Foundation, was co-founded by Anthropic, Block and OpenAI, with support from Google, Microsoft, AWS, Cloudflare and Bloomberg: no single company owns the standard.</p><p><a href="https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/" target="_blank" rel="noopener">Read the post</a></p></div>
-<div class="card"><h3>📘 Official documentation</h3><p>The MCP page for Claude Code explains how to see the manuals that come from connectors. The MCP specification describes each piece for builders (skills, tasks and elicitation).</p><p><a href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener">MCP in Claude Code</a> · <a href="https://modelcontextprotocol.io/extensions/skills/overview" target="_blank" rel="noopener">Skills</a> · <a href="https://modelcontextprotocol.io/extensions/tasks/overview" target="_blank" rel="noopener">Tasks</a> · <a href="https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation" target="_blank" rel="noopener">Elicitation</a></p></div>
-</div>
-<blockquote style="margin-top:22px">As the announcement puts it: Claude can now work with a server the way it works with another agent, learning from it, delegating to it and exchanging information and files along the way.</blockquote>
-</div></section>
-
+<!-- ========== PARA QUEM ========== -->
 <section id="quem"><div class="wrap">
-<span class="chip">Two ways in</span>
-<h2>Do you use agents <span class="amb">or build connectors?</span></h2>
-<p class="sub">Pick your door. Both use the same small store.</p>
-<div class="grid g2">
-<div class="card"><img class="quem-img" loading="lazy" src="../assets/quem-usa.jpg" alt="A store owner calmly checks a phone while the work runs on its own on the monitor"><h3>🧭 You use agents</h3><p><strong>What you get:</strong> Claude arrives already knowing the tool's rules, because the company that made the connector writes the manual, and when it improves, you get the update automatically. Long jobs don't freeze the conversation, and nothing irreversible happens without your yes.</p><p><strong>How to see it in Claude Code:</strong> type <code>/mcp</code> to see the connected connectors and <code>/skills</code> to see the manuals that came from them (the name shows up as <em>connector:manual</em>, for example <em>loja:promocao</em>). On by default on the Pro, Max and Ultra plans; on Team, after the admin turns it on; on Enterprise, coming soon.</p><p><a href="#comecar">Get started →</a></p></div>
-<div class="card"><img class="quem-img" loading="lazy" src="../assets/quem-constroi.jpg" alt="A developer points at a diagram of connected boxes on the screen"><h3>🛠️ You build MCP servers</h3><p><strong>What you get:</strong> a small, open server in Python with all three pieces working, tests that run against the real server and the official name of each piece. The limits are written down, so you don't discover them in production.</p><p><strong>What's inside:</strong> how the server lists and delivers the manual, how it returns a ticket for long jobs and how it asks in the chat or sends the person to a website.</p><p><a href="#construir">Go to the builder section →</a></p></div>
-</div>
+  <p class="kicker">Who it's for</p>
+  <h2>Do you use agents or build connectors?</h2>
+  <div class="publicos dois">
+    <article class="pub"><img src="../assets/quem-usa.jpg" alt="Person using an AI agent on a computer" loading="lazy" width="760" height="506">
+      <h3>You use agents like Claude</h3>
+      <p>Claude shows up already knowing the tool's rules, because whoever made the connector writes the manual (and you get improvements automatically). Long jobs don't freeze the conversation, and nothing irreversible happens without your yes.</p>
+      <p class="usa">See it in Claude Code: <b>/mcp</b> and <b>/skills</b></p></article>
+    <article class="pub"><img src="../assets/quem-constroi.jpg" alt="Person coding a connector" loading="lazy" width="760" height="506">
+      <h3>You build connectors (MCP servers)</h3>
+      <p>A small, open server in Python, with all three pieces working, tests against the real server and the official name of each piece. The limits are written down, so you don't discover them in production.</p>
+      <p class="usa">The technical details are in the <b>README</b></p></article>
+  </div>
 </div></section>
 
-<section id="dia"><div class="wrap">
-<span class="chip">In your day</span>
-<h2>How this changes <span class="amb">your day</span></h2>
-<div class="grid g3">
-<div class="card"><h3>🏷️ The Black Friday sale</h3><p><strong>Today:</strong> you remind the AI about the minimum margin, the rounding and “never below cost” in every conversation.</p><p><strong>With the kit:</strong> the store manual carries all three rules, and the AI opens it only when it's about to change prices.</p></div>
-<div class="card"><h3>⏳ Updating 300 prices</h3><p><strong>Today:</strong> the conversation stalls until the last price tag.</p><p><strong>With the kit:</strong> the server replies right away with a ticket, does the work behind the scenes and tells you when it's done, including how many products were held at the margin.</p></div>
-<div class="card"><h3>🛑 Publishing or deleting</h3><p><strong>Today:</strong> you trust the AI not to press the wrong button.</p><p><strong>With the kit:</strong> “Publicar 299 preços novos agora?” (Publish 299 new prices now?) waits for your yes. To delete, you have to type the product's exact name.</p></div>
-</div>
-<div class="card" style="margin-top:16px"><h3>🌍 In real tools (examples from the announcement)</h3><ul><li><strong>Manual included:</strong> Shopify (build and update a store end to end), HubSpot (set up a new customer), Atlassian (company context).</li><li><strong>Background:</strong> ZoomInfo, where account and contact research that took several requests becomes a single job.</li><li><strong>Asks first:</strong> Supabase shows the cost before creating a paid project, Railway asks before removing a service and GitHub requires typing the repository name before an agent deletes it.</li></ul></div>
+<!-- ========== COMO FUNCIONA ========== -->
+<section id="passos"><div class="wrap">
+  <figure class="largo topo-sec"><img src="../assets/banner-grade-en.jpg" alt="The three pieces: the manual included, the background work and the question first" loading="lazy" width="1400" height="788"></figure>
+  <hr class="risco">
+  <p class="kicker">How it works</p>
+  <h2>The little store's Black Friday sale, in 4 steps</h2>
+  <p class="sub">This is what the kit's demo does. You ask in step 1, check in step 3 and answer in step 4.</p>
+  <div class="passos">
+    <article class="passo">
+      <header><span class="n">1</span><h3>You ask for the sale</h3></header>
+      <div class="quem"><span class="tag">You</span><p>Ask for "20% off all products".</p></div>
+      <div class="quem"><span class="tag ia">The AI</span><p>Opens the manual that came with the store: 15% minimum margin, never below cost, prices ending in .90.</p></div>
+      <p class="porque"><span>Why</span>You don't need to repeat the rules: they come with the tool.</p>
+    </article>
+    <article class="passo">
+      <header><span class="n">2</span><h3>The store works in the background</h3></header>
+      <div class="quem"><span class="tag vigia">The store</span><p>Replies right away with a ticket and calculates the 300 prices behind the scenes, showing progress.</p></div>
+      <div class="quem"><span class="tag">You</span><p>Keep chatting. The conversation doesn't stall.</p></div>
+      <p class="porque"><span>Why</span>A long job doesn't need to keep you glued to the screen.</p>
+    </article>
+    <article class="passo">
+      <header><span class="n">3</span><h3>The draft is ready</h3></header>
+      <div class="quem"><span class="tag ia">The AI</span><p>Reports: 299 new prices in the draft; of these, 43 stopped at the minimum margin.</p></div>
+      <div class="quem"><span class="tag">You</span><p>Check the result before anything goes to the store.</p></div>
+      <p class="porque"><span>Why</span>The manual's rules held back the discount where it would cause a loss.</p>
+    </article>
+    <article class="passo">
+      <header><span class="n">4</span><h3>The store asks before publishing</h3></header>
+      <div class="quem"><span class="tag vigia">The store</span><p>"Publish 299 new prices now?" With "no", nothing changes. To delete a product, it asks for the exact name.</p></div>
+      <div class="quem"><span class="tag">You</span><p>Answer yes or no.</p></div>
+      <p class="porque"><span>Why</span>What can't be undone only happens with your yes.</p>
+    </article>
+  </div>
 </div></section>
 
+<!-- ========== AS 3 PEÇAS ========== -->
+<section id="pecas"><div class="wrap">
+  <p class="kicker">The 3 pieces</p>
+  <h2>Three new MCP pieces. Each one solves a fear.</h2>
+  <p class="sub">Each piece has its own animated flow, an everyday example and the real screen from the demo.</p>
+  <div class="jeitos-l">
+    <article class="jeito-l">
+      <div class="jl-diag">
+<div class="diag" data-diag>
+<div class="ctl"><span data-rot>Manual included</span><button type="button" data-btn>Pause</button></div>
+<svg viewBox="0 0 360 450" role="img" aria-label="Diagram of the included manual: you ask, the AI sees only the manual's name, opens the manual when it's about to change prices and calculates with the rules">
+<line class="lnk" x1="30" y1="76" x2="30" y2="374"/>
+<text class="lb" x="46" y="104">the manual takes ~30 tokens until used</text>
+<text class="lb" x="46" y="210">opens only when changing prices</text>
+<text class="lb" x="46" y="322">rules applied without you repeating them</text>
+<g class="nd" data-dwell="900" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · You ask for the sale</text><text class="s" x="16" y="43">"20% off everything"</text></g>
+<g class="nd wait" data-dwell="2400" data-checks="só o nome: loja:promocao|é sobre preço? sim|abrir o manual ✓" data-pref="a IA:" transform="translate(30,124)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · The AI sees the store manual</text><text class="s" x="16" y="43">it came with the connector</text></g>
+<g class="nd" data-dwell="1400" transform="translate(30,240)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Reads the rules</text><text class="s" x="16" y="43">15% margin, never below cost, .90</text></g>
+<g class="nd" data-dwell="1400" transform="translate(30,346)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Price calculated right</text><text class="s" x="16" y="43">without you explaining again</text></g>
+<text class="ping" x="180" y="436" text-anchor="middle" data-ping></text>
+<circle class="ring" r="20"/><circle class="tok" r="9"/>
+</svg>
+</div>
+      </div>
+      <div class="jl-txt">
+      <p class="num">Piece 1</p>
+      <h3>The manual that comes along</h3>
+      <p class="bom">So you don't repeat the rules in every conversation.</p>
+      <p>Besides the buttons the AI can press, the connector delivers the manual on how to use them, written by the tool's own company. The AI opens the manual only when needed, so it takes up almost no room in the conversation. In the kit, the demo checks that the manual arrived complete.</p>
+      <p class="analogia"><b>Like in everyday life:</b> an appliance that comes with the manual in the box, and the maker swaps the manual for you when it gets better.</p>
+      <ul class="chips"><li>Public beta</li><li>Claude Code v2.1.331 or newer</li><li>~30 tokens until used</li></ul>
+      <p class="origem">Official name: <b>Skills over MCP</b> (the server lists and delivers the manuals). In real tools: Shopify, HubSpot, Atlassian.</p>
+      <figure class="tela"><img src="../assets/passo1-skill.jpg" alt="Real demo output, step 1: the store manual loaded and checked" loading="lazy"><figcaption>Real demo output, step 1.</figcaption></figure>
+      </div>
+    </article>
+    <article class="jeito-l">
+      <div class="jl-diag">
+<div class="diag" data-diag>
+<div class="ctl"><span data-rot>Background</span><button type="button" data-btn>Pause</button></div>
+<svg viewBox="0 0 360 450" role="img" aria-label="Diagram of background work: the request becomes a task with a ticket, the work moves along behind the scenes and a notice arrives with the result">
+<line class="lnk" x1="30" y1="76" x2="30" y2="374"/>
+<text class="lb" x="46" y="104">instant reply: a ticket</text>
+<text class="lb" x="46" y="210">you keep chatting</text>
+<text class="lb" x="46" y="322">the AI checks and tells you</text>
+<g class="nd" data-dwell="900" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Request: 300 prices</text><text class="s" x="16" y="43">20% off everything</text></g>
+<g class="nd wait" data-dwell="3600" data-checks="50 de 300|150 de 300|250 de 300|pronto ✓" data-pref="andamento:" transform="translate(30,124)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · The store works behind the scenes</text><text class="s" x="16" y="43">the task has a ticket</text></g>
+<g class="nd" data-dwell="1300" transform="translate(30,240)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Task completed</text><text class="s" x="16" y="43">299 new prices in the draft</text></g>
+<g class="nd" data-dwell="1400" transform="translate(30,346)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · Notice with the result</text><text class="s" x="16" y="43">43 held at the minimum margin</text></g>
+<text class="ping" x="180" y="436" text-anchor="middle" data-ping></text>
+<circle class="ring" r="20"/><circle class="tok" r="9"/>
+</svg>
+</div>
+      </div>
+      <div class="jl-txt">
+      <p class="num">Piece 2</p>
+      <h3>Background work</h3>
+      <p class="bom">So a long job doesn't freeze the conversation.</p>
+      <p>Instead of leaving you waiting, the tool replies right away "got it, I'm working" and carries on by itself. The AI checks from time to time and tells you when it's done. In the kit, progress shows up 50 at a time until "done". One product kept its old price: with the minimum margin, there was no real discount to give.</p>
+      <p class="analogia"><b>Like in everyday life:</b> dropping your clothes at the cleaners and getting a ticket. You leave and come back to ask if they're ready.</p>
+      <ul class="chips"><li>Available</li><li>Pro, Max and Ultra</li><li>Team and Enterprise: rolling out gradually</li></ul>
+      <p class="origem">Official name: <b>Tasks</b> (the server returns a ticket and the client asks how it's going). In a real tool: ZoomInfo.</p>
+      <figure class="tela"><img src="../assets/passo2-task.jpg" alt="Real demo output, step 2: the 300-product task with its progress" loading="lazy"><figcaption>Real demo output, step 2.</figcaption></figure>
+      </div>
+    </article>
+    <article class="jeito-l">
+      <div class="jl-diag">
+<div class="diag" data-diag>
+<div class="ctl"><span data-rot>Asks first</span><button type="button" data-btn>Pause</button></div>
+<svg viewBox="0 0 360 450" role="img" aria-label="Diagram of the question before acting: the draft is ready, the store asks if it can publish, publishes only with a yes and asks for the exact name to delete">
+<line class="lnk" x1="30" y1="76" x2="30" y2="374"/>
+<text class="lb" x="46" y="104">nothing goes to the store yet</text>
+<text class="falha" x="46" y="210">with "no", nothing changes</text>
+<text class="lb" x="46" y="322">deleting takes more care</text>
+<g class="nd" data-dwell="900" transform="translate(30,20)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">1 · Draft ready</text><text class="s" x="16" y="43">299 new prices</text></g>
+<g class="nd wait" data-dwell="2600" data-checks="esperando você|esperando você|sim ✓" data-pref="publicar 299 preços?" transform="translate(30,124)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">2 · The store asks</text><text class="s" x="16" y="43">"Publish 299 new prices now?"</text></g>
+<g class="nd" data-dwell="1200" transform="translate(30,240)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">3 · Published with your yes</text><text class="s" x="16" y="43">the prices go to the store</text></g>
+<g class="nd wait" data-dwell="2400" data-checks="Caneca ✗ recusado|Caneca Azul P ✓" data-pref="nome exato:" transform="translate(30,346)"><rect width="300" height="56" rx="12"/><text class="t" x="16" y="24">4 · To delete, the exact name</text><text class="s" x="16" y="43">"Caneca" is not enough</text></g>
+<text class="ping" x="180" y="436" text-anchor="middle" data-ping></text>
+<circle class="ring" r="20"/><circle class="tok" r="9"/>
+</svg>
+</div>
+      </div>
+      <div class="jl-txt">
+      <p class="num">Piece 3</p>
+      <h3>The question before acting</h3>
+      <p class="bom">So nothing irreversible happens without your yes.</p>
+      <p>In the middle of the job, the tool stops and asks you. It can be a question right in the chat (yes or no, type the name) or a link to the company's website, for a password or payment: that way sensitive data doesn't go through the chat. In the kit, to delete, typing just "Caneca" is not enough: it has to be "Caneca Azul P".</p>
+      <p class="analogia"><b>Like in everyday life:</b> the bank that asks you to confirm the amount before a transfer.</p>
+      <ul class="chips"><li>Available</li><li>Pro, Max and Ultra</li><li>2 safety locks in the kit</li></ul>
+      <p class="origem">Official name: <b>Elicitation</b> (question in the chat or link to the website). In real tools: Supabase shows the cost before creating a paid project, Railway asks before removing a service and GitHub requires you to type the repository name before deleting it.</p>
+      <figure class="tela"><img src="../assets/passo3-pergunta.jpg" alt="Real demo output, step 3: the question before publishing and the exact name to delete" loading="lazy"><figcaption>Real demo output, step 3.</figcaption></figure>
+      </div>
+    </article>
+  </div>
+
+  <div class="tabela-wrap">
+  <table class="tabela">
+    <thead><tr><th></th><th>Manual included</th><th>Background</th><th>Asks first</th></tr></thead>
+    <tbody>
+      <tr><th>Solves</th><td>repeating the rules in every conversation</td><td>the conversation stuck waiting</td><td>the AI doing something irreversible</td></tr>
+      <tr><th>Status</th><td>public beta</td><td>available</td><td>available</td></tr>
+      <tr><th>In the kit</th><td>store manual checked</td><td>300 products, progress 50 at a time</td><td>yes/no to publish; exact name to delete</td></tr>
+      <tr><th>Official name</th><td>Skills over MCP</td><td>Tasks</td><td>Elicitation</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div></section>
+
+<!-- ========== QUESTÕES IMPORTANTES ========== -->
+<section id="importantes"><div class="wrap">
+  <p class="kicker">Key questions</p>
+  <h2>Three questions before you trust it</h2>
+  <div class="questao" id="falta">
+  <h3 class="q-tit"><span>1</span>What isn't out yet?</h3>
+  <p class="sub">The kit says clearly what is beta, what already works and what is only announced.</p>
+  <div class="tres-b">
+    <div class="bloco"><p class="selo-st">Not released yet</p><h3>File uploads</h3><p class="mut">Sending a PDF, spreadsheet or image straight to the tool without filling up the conversation. The announcement says "coming soon", with no date. The kit only mentions it. (Official name: File Uploads.)</p></div>
+    <div class="bloco"><p class="selo-st">Public beta</p><h3>The manual that comes along</h3><p class="mut">It may change. It needs Claude Code v2.1.331 or newer and doesn't work in screenless mode (claude -p). On by default in the Pro, Max and Ultra plans; in Team, after the administrator turns it on; in Enterprise, "coming soon".</p></div>
+    <div class="bloco"><p class="selo-st">Available with limits</p><h3>Background work and asking first</h3><p class="mut">Both already work in the Pro, Max and Ultra plans. For Team and Enterprise, they are still being rolled out gradually.</p></div>
+  </div>
+  <p class="analogia"><b>And the name:</b> "MCP 2.0" is not official. It's what people following along call the Nov 24, 2026 leap; the standard is still called MCP.</p>
+  </div>
+
+  <div class="questao" id="base">
+  <h3 class="q-tit"><span>2</span>Where does this come from? Official sources, not rumors</h3>
+  <p class="sub">The kit only uses what was published by Anthropic and the MCP project. Why a standard matters: without it, every link between an AI and a program is custom-made; with MCP, one connector works for any AI that speaks the standard.</p>
+  <div class="duas">
+    <div class="bloco"><h3>Anthropic announcement (Nov 24, 2026)</h3><p class="mut">Introduces the four new features: the included manual, background work, asking first and file uploads (not released yet). It says there are already more than 10,000 connectors for Claude and more than 700 million monthly downloads of the MCP programming kits.</p></div>
+    <div class="bloco"><h3>Official MCP blog</h3><p class="mut">The "MCP turns 2" post (November 2026) and the one about joining the Agentic AI Foundation (Dec 9, 2025): ChatGPT, Claude, Cursor, Gemini, Microsoft Copilot and Visual Studio Code support MCP, and no company owns the standard.</p></div>
+  </div>
+  <p class="mut fontes">Links: <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/README.en.md" target="_blank" rel="noopener">the sources, one by one, are in the README</a>.</p>
+  </div>
+
+  <div class="questao" id="real">
+  <h3 class="q-tit"><span>3</span>Does it touch my real store?</h3>
+  <p class="sub">No. The store is made up: 300 pretend products, and the server works on a copy of them. It doesn't connect to any real store. The kit is there so you can see the three pieces working from the inside; the new features themselves arrive through the official connectors of the tools you already use.</p>
+  </div>
+</div></section>
+
+<!-- ========== ANTES DE INSTALAR ========== -->
+<section id="precisa"><div class="wrap">
+  <p class="kicker">Before installing</p>
+  <h2>What you need, and what the kit doesn't promise</h2>
+  <div class="duas">
+    <div class="bloco">
+      <h3>You need</h3>
+      <ul class="lista sim">
+        <li><div><strong>Claude Code or Codex on your computer.</strong><span>If you only use Claude in the browser, you can read the guide and see the connectors on claude.ai.</span></div></li>
+        <li><div><strong>Claude Code v2.1.331 or newer,</strong><span>to see the manual that comes along (in /skills).</span></div></li>
+        <li><div><strong>Python 3.10 or newer.</strong><span>Your AI checks and sets it up; you don't install anything by hand.</span></div></li>
+      </ul>
+    </div>
+    <div class="bloco">
+      <h3>The kit doesn't promise</h3>
+      <ul class="lista">
+        <li><div><strong>To touch a real store.</strong><span>The 300 products are made up and live in a copy.</span></div></li>
+        <li><div><strong>To save the tasks.</strong><span>They stay only in the server's memory: if it restarts, they're gone.</span></div></li>
+        <li><div><strong>To show everything inside Claude Code.</strong><span>There the kit proved the connection and the manual; the background work and the question were proven by the demo and the tests.</span></div></li>
+        <li><div><strong>To upload files.</strong><span>That piece hasn't been released yet.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ========== NA PRÁTICA ========== -->
+<section id="comecar"><div class="wrap"><div class="col">
+  <p class="kicker">Hands-on</p>
+  <h2>To get started, paste this request into your AI</h2>
+  <ol class="tres">
+    <li><p>Open <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">Claude Code</a> or <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a> on your computer. They are AIs that work with files and run programs, always asking permission.</p></li>
+    <li><p>Paste the request. The AI reads the kit, explains what's new in plain language and tells you which of your connectors benefit from it.</p></li>
+    <li><p>Say yes only to what makes sense. Watch the demo run the three steps; at the end, ask the AI to remove the store server.</p></li>
+  </ol>
+  <div class="pedido">
+    <div class="pedido-barra">
+      <p>The text is for the AI. You don't need to understand it, just copy it.</p>
+      <button class="btn" id="copiar" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="copiarTxt">Copy the request</span></button>
+    </div>
+<pre id="pedidoTxt">Read the repository https://github.com/inematds/mcp2-na-pratica (the README, COMO-LIGAR-NO-CLAUDE.md and the exemplos folder). Explain to me in plain language the three new MCP features it shows (the manual that comes along, background work and the question before acting) and what hasn't been released yet. Then look at the MCP connectors I already use and tell me which ones gain something from these new features. Don't install or change anything before my yes. With my yes: download the kit into a separate folder, create the environment, run the tests and the demo, connect the "loja" server to Claude Code in the local scope, show me where to see /mcp and /skills and, at the end, tell me how to remove it.</pre>
+  </div>
+  <span class="vh" id="aviso" role="status" aria-live="polite"></span>
+  <div class="cartoes3">
+    <div class="bloco"><h3>Just want to use it, without installing anything?</h3><p class="mut">There is no online version of the kit. The new features themselves already arrive through the official connectors in Claude, on the Pro, Max and Ultra plans. The kit is for seeing all three working from the inside.</p></div>
+    <div class="bloco"><h3>Where to download?</h3><p class="mut">There's no installer: it's a folder with a small Python program, which your AI sets up. <a href="https://github.com/inematds/mcp2-na-pratica/archive/refs/heads/main.zip">Download the kit ZIP</a> or see the <a href="https://github.com/inematds/mcp2-na-pratica" target="_blank" rel="noopener">repository</a>.</p></div>
+    <div class="bloco"><h3>Are you technical or building connectors?</h3><p class="mut">The official names (skills/list, taskId, elicitation), the commands to run it and connect it to Claude Code, what the SDK does and the limits are in the <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/README.en.md" target="_blank" rel="noopener">README</a> and in <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/COMO-LIGAR-NO-CLAUDE.md" target="_blank" rel="noopener">COMO-LIGAR-NO-CLAUDE.md</a>.</p></div>
+  </div>
+</div></div></section>
+
+<!-- ========== VÍDEO ========== -->
 <section id="video"><div class="wrap">
-<span class="chip">Video</span>
-<h2>Understand it in a few minutes</h2>
-<!-- VIDEO: entra o explicavideo do projeto quando publicado -->
-<p class="mut" style="margin-top:.8em">Video coming soon. Meanwhile, see <a href="#como">How it works</a>.</p>
+  <p class="kicker">Video</p>
+  <h2>Understand it in a few minutes</h2>
+  <!-- VIDEO: entra o explicavideo do projeto quando publicado -->
+  <p class="sub">The kit video is on the way. In the meantime, the animated flows of the <a href="#pecas">3 pieces</a> show what happens at each step.</p>
 </div></section>
 
-<section id="como"><div class="wrap">
-<span class="chip">How it works, no jargon</span>
-<h2>Three pieces, <span class="amb">three demo steps</span></h2>
-<p class="aviso">The demo and its screens are in Portuguese; the text next to each screen explains what it shows.</p>
-<figure class="banner"><img loading="lazy" src="../assets/banner-grade-en.jpg" alt="The parts of the guide: the manual comes with the tool, background work, asking before acting, how to see it in Claude, what isn't out yet, free kit"></figure>
-
-<div class="peca">
-<div><span class="n">Step 1 · Skills over MCP</span><h3>The manual comes with the tool</h3>
-<p><span class="status beta">Public beta</span></p>
-<p>Besides the buttons the AI can press, the connector delivers the manual on how to use them, written by the company behind the tool. The AI only opens the manual when it needs it, so it takes up almost no space in the conversation.</p>
-<p>In the kit, the store manual says: minimum margin of 15% over cost, never below cost and prices ending in ,90. The demo checks that the manual arrived complete.</p>
-<div class="analog"><b>In everyday life:</b> it's the appliance that comes with the manual in the box, and the maker swaps in a better manual on its own.</div></div>
-<figure><img loading="lazy" src="../assets/passo1-skill.jpg" alt="Demo screen: the server lists the promocao manual and shows the three rules"><figcaption>Real demo output, step 1. (in Portuguese)</figcaption></figure>
-</div>
-
-<div class="peca">
-<div><span class="n">Step 2 · Tasks</span><h3>Long work goes to the background</h3>
-<p><span class="status ga">Available</span></p>
-<p>Instead of freezing the conversation, the tool replies right away with “got it, I'm working on it” and carries on by itself. The AI checks in from time to time and tells you when it's finished.</p>
-<p>In the kit, a 20% discount on 300 products becomes a task: progress shows up every 50 items until “done”, with 299 new prices in the draft and 43 held at the margin. One product kept its old price, because with the minimum margin there was no real discount to give.</p>
-<div class="analog"><b>In everyday life:</b> it's dropping your clothes at the laundry and getting a ticket. You leave and come back to ask if they're ready.</div></div>
-<figure><img loading="lazy" src="../assets/passo2-task.jpg" alt="Demo screen: progress bar for the 300-price task"><figcaption>Real demo output, step 2. (in Portuguese)</figcaption></figure>
-</div>
-
-<div class="peca">
-<div><span class="n">Step 3 · Elicitation</span><h3>The tool asks before acting</h3>
-<p><span class="status ga">Available</span></p>
-<p>In the middle of the job, the tool stops and asks you. It can be a question right in the chat (yes or no, type the name) or a link to the company's website, for passwords or payments: that way sensitive data doesn't go through the chat.</p>
-<p>In the kit: “Publicar 299 preços novos agora?” (Publish 299 new prices now?). With “no”, nothing is published; with “yes”, the prices go to the store. To delete, typing just “Caneca” (Mug) isn't enough: it has to be “Caneca Azul P” (Blue Mug S).</p>
-<div class="analog"><b>In everyday life:</b> it's the bank asking you to confirm the amount before sending a transfer.</div></div>
-<figure><img loading="lazy" src="../assets/passo3-pergunta.jpg" alt="Demo screen: publish and delete questions with their answers"><figcaption>Real demo output, step 3. (in Portuguese)</figcaption></figure>
-</div>
-
-<div class="card" style="margin-top:10px"><h3>What the kit doesn't promise</h3><ul><li>The store is pretend: 300 made-up products, and the server works on a copy. It doesn't connect to your real store.</li><li>Tasks live only in the server's memory: if it restarts, they're gone.</li><li>In Claude Code, the kit proved the connection and the manual showing up; the task and the question were proven by the demo and the tests (see <a href="#prova">The proof</a>).</li></ul></div>
-</div></section>
-
-<section id="falta"><div class="wrap">
-<span class="chip">No hype</span>
-<h2>What <span class="amb">isn't out yet</span></h2>
-<div class="grid g3">
-<div class="card"><span class="status nao">Not released yet</span><h3>📎 File Uploads</h3><p>Sending a PDF, spreadsheet or image straight to the tool without filling up the conversation. The announcement says “coming soon”, with no date. The kit only mentions it.</p></div>
-<div class="card"><span class="status beta">Public beta</span><h3>📘 The manual that comes with the tool</h3><p>It may change. It needs Claude Code v2.1.331 or newer and doesn't work in headless mode (<code>claude -p</code>). On by default on the Pro, Max and Ultra plans; on Team, only after the admin turns it on; on Enterprise, “coming soon”.</p></div>
-<div class="card"><span class="status ga">Available with limits</span><h3>⏳ Background work and ❓ asking first</h3><p>Both already work on the Pro, Max and Ultra plans. For Team and Enterprise, both are still rolling out gradually.</p></div>
-</div>
-<p class="fonte">About the name: “MCP 2.0” isn't official. It's the nickname people following the news use for the 24/11/2026 leap; the standard is still called MCP.</p>
-</div></section>
-
-<section id="comecar"><div class="wrap">
-<span class="chip">Get started</span>
-<h2>You don't install anything <span class="amb">by hand</span></h2>
-<div class="step"><div class="b">1</div><div><h3>Open an AI agent on your computer</h3><p>An agent is an AI that, besides chatting, works with files and runs programs, always asking permission. You need Claude Code installed (<a href="https://code.claude.com/docs" target="_blank" rel="noopener">official setup</a>); if you only use Claude in the browser, you can read this guide and see your connectors on claude.ai. To see the manual that comes with the tool, use <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">Claude Code</a> v2.1.331 or newer. <a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex</a> can also download and run the demo.</p></div></div>
-<div class="step"><div class="b">2</div><div><h3>Paste the request</h3><p>The AI reads the kit, explains the new features in plain language and tells you which of your connectors benefit from them.</p>
-<div class="pedido"><button class="copiar" type="button">Copy</button><p>Read the repository https://github.com/inematds/mcp2-na-pratica (the README, the README.en.md and the exemplos folder). Explain to me in plain language the three new MCP features it shows (the manual that comes with the tool, background work and asking before acting) and what hasn't been released yet. Then look at the MCP connectors I already use and tell me which ones gain something from these features. Don't install or change anything before I say yes. Once I say yes: download the kit into a separate folder, create the environment, run the tests and the demo, connect the “loja” server to Claude Code in the local scope, show me where to see /mcp and /skills and, at the end, tell me how to remove it.</p></div></div></div>
-<div class="step"><div class="b">3</div><div><h3>Say yes to what makes sense</h3><p>Watch the demo run the three steps. If you like, open Claude Code, type <code>/skills</code> and look for <em>loja:promocao</em>. When you're done, ask the AI to remove the store server.</p></div></div>
-<div class="grid g2" style="margin-top:10px">
-<div class="card"><h3>🌐 Just want to use it, without installing anything?</h3><p>There's no online version of the kit. The new features already reach you through the official connectors in Claude, on the Pro, Max and Ultra plans (checked against the 24/11/2026 announcement). The kit is there so you can see all three working from the inside.</p></div>
-<div class="card"><h3>⬇️ Where to download?</h3><p>There's no installer: it's a folder with a small Python program that your AI sets up. Download the <a href="https://github.com/inematds/mcp2-na-pratica/archive/refs/heads/main.zip">kit ZIP</a> or visit the <a href="https://github.com/inematds/mcp2-na-pratica" target="_blank" rel="noopener">repository</a>.</p></div>
-</div>
-<div class="card" style="margin-top:16px"><h3>🧑‍💻 Are you technical?</h3><p>Prerequisites, files, what the SDK already does and what the kit wrote by hand are all in the README.</p><p><a class="btn" href="https://github.com/inematds/mcp2-na-pratica/blob/main/README.en.md#technical-install" target="_blank" rel="noopener">See the technical part</a></p></div>
-</div></section>
-
-<section id="construir" class="tec"><div class="wrap">
-<span class="chip">For server builders</span>
-<h2>The three pieces <span class="amb">by their official names</span></h2>
-<p class="sub">This is the only technical part of the guide. Each term comes with a plain sentence next to it; the rest is in the README.</p>
-<div class="grid g2">
-<div class="card"><h3>📘 Manual included: <code>skills/list</code> and <code>skills/get</code></h3><p>“The server says which manuals it has and delivers the one you ask for.” It's the <code>io.modelcontextprotocol/skills</code> extension; the manual files are served through <code>resources/read</code>. In the kit, the <code>promocao</code> manual comes with a list of files with size and SHA-256 (a digital fingerprint of the file), and the client checks them. In Claude Code the name shows up as <code>&lt;servidor&gt;:&lt;skill&gt;</code>.</p></div>
-<div class="card"><h3>⏳ Background: <code>taskId</code> and <code>tasks/get</code></h3><p>“The server hands back a ticket right away and the client asks how it's going.” The states are <code>working</code>, <code>completed</code>, <code>failed</code>, <code>cancelled</code> and <code>input_required</code>. A client that doesn't declare the extension gets the result the old way (it waits and returns).</p></div>
-<div class="card"><h3>❓ Asking first: elicitation <code>form</code> × <code>url</code></h3><p>“Form” is the question in the chat: yes or no, type the name. “Url” sends the person to the company's website (password, payment), and the data doesn't go through the chat. The kit uses form; url is only mentioned, because the small store asks for no sensitive data.</p></div>
-<div class="card"><h3>🏪 The kit's server</h3><p><code>servidor.py</code> is a “loja” (store) MCP server that talks through the terminal's input and output (stdio): the <code>promocao</code> manual, the <code>atualizar_precos</code> tool (becomes a task), <code>publicar_precos</code> (asks yes or no) and <code>apagar_produto</code> (asks for the exact name). The <code>mcp</code> 2.3.0 Python SDK doesn't ship ready-made skills and tasks extensions: the kit writes them by hand.</p></div>
-</div>
-<div class="grid g2" style="margin-top:16px">
-<div class="card"><h3>Run it in 3 commands (Python 3.10+)</h3>
-<pre><span class="k">git clone</span> https://github.com/inematds/mcp2-na-pratica
-<span class="k">cd</span> mcp2-na-pratica
-<span class="k">python3 -m venv</span> .venv <span class="c">&amp;&amp;</span> .venv/bin/pip install -r requirements.txt
-<span class="k">.venv/bin/python</span> demo.py --auto</pre>
-<p style="margin-top:10px">Without <code>--auto</code>, the demo asks you the questions. Tests: <code>.venv/bin/python -m pytest -q</code>.</p></div>
-<div class="card"><h3>Connect it to Claude Code</h3>
-<pre><span class="k">claude mcp add</span> loja -- "$PWD/.venv/bin/python" "$PWD/servidor.py"
-<span class="k">claude mcp list</span>   <span class="c"># loja: … - ✔ Connected</span></pre>
-<p style="margin-top:10px">Inside <code>claude</code>: <code>/mcp</code> → <code>loja</code> and <code>/skills</code> → <code>loja:promocao</code>. With <code>--scope project</code> it stays “Pending approval” until you open <code>claude</code> in the folder; the default scope (local, which applies only to you and only in that folder) connects directly. To remove it: <code>claude mcp remove loja</code>.</p></div>
-</div>
-<p class="fonte">Honest limits: tasks live only in the server's memory, <code>ttlMs</code> is reported but doesn't delete anything on its own, and <code>tasks/update</code> only acknowledges receipt. The kit speaks version 2026-07-28 of the specification, the “stateless” one: simple request and response, which lets the server run even on serverless (a server that only starts when a request arrives). Details in the <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/README.en.md#technical-install" target="_blank" rel="noopener">README</a> and <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/README.en.md#in-claude-code" target="_blank" rel="noopener">README (English): Claude Code</a>.</p>
-</div></section>
-
+<!-- ========== MEDIDO ========== -->
 <section id="prova"><div class="wrap">
-<span class="chip">The proof</span>
-<h2>Actually run, <span class="amb">on 26/11/2026</span></h2>
-<div class="prova">
-<ol class="tl">
-<li><b>Demo:</b> the manual arrived and was checked (size and fingerprint match); the 300-product task finished with 299 new prices and 43 held at the margin; with “no”, nothing was published; with “yes”, 299 prices went to the store; deleting with “Caneca” was refused and with “Caneca Azul P” it worked.</li>
-<li><b>Tests:</b> 17 tests run against the real server and all of them passed.</li>
-<li><b>Claude Code v2.1.332 (Linux):</b> the “loja” server connected using version 2026-07-28, showed “3 tools · 2 resources · 1 skill”, and <code>/skills</code> listed <em>loja:promocao</em> at about 30 tokens, with the notice “Skills from MCP servers are in beta”.</li>
-</ol>
-<blockquote>What the proof doesn't show: in Claude Code we didn't ask the model to run the tools, so we didn't see the background task or the question there. Those two are proven by the demo and the tests.</blockquote>
-<p class="fonte">Full outputs in the repository: <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/exemplos/saida-demo.txt" target="_blank" rel="noopener">saida-demo.txt</a> (in Portuguese) and <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/exemplos/prova-claude-code.txt" target="_blank" rel="noopener">prova-claude-code.txt</a> (in Portuguese).</p>
-</div>
+  <p class="kicker">Measured</p>
+  <h2>Actually run, on Nov 26, 2026</h2>
+  <div class="numeros">
+    <div class="numero"><b>~30</b><span>tokens: the room the store manual takes up in Claude Code until it's used (measured in /skills).</span></div>
+    <div class="numero"><b>299</b><span>of 300 new prices calculated in the background in the demo, with 43 held at the 15% minimum margin.</span></div>
+    <div class="numero"><b>2</b><span>safety locks: "yes or no" to publish and "type the exact name" to delete. Wrong answer, nothing happens.</span></div>
+    <div class="numero"><b>17</b><span>tests run against the real server, and all of them passed.</span></div>
+  </div>
+  <p class="sub">In Claude Code v2.1.332 (Linux), the "loja" server connected, showed "3 tools · 2 resources · 1 skill", and /skills listed loja:promocao. What this proof doesn't show: we didn't ask the model to run the tools there, so the background work and the question were proven by the demo and the tests. Full outputs in the repository: <a href="https://github.com/inematds/mcp2-na-pratica/blob/main/exemplos/saida-demo.txt" target="_blank" rel="noopener">saida-demo.txt</a>.</p>
 </div></section>
 
-<section id="faq"><div class="wrap">
-<span class="chip">Questions</span>
-<h2>Before <span class="amb">you ask</span></h2>
-<div class="grid g2">
-<div class="card"><h3>Do I need to code?</h3><p>To see it working, no: you paste the request from “Get started” and your AI does the rest. To build your own server, yes, and the Python kit is your starting point.</p></div>
-<div class="card"><h3>Does it cost anything?</h3><p>The kit is free and open (MIT license). The new features in Claude are on in the Pro, Max and Ultra plans, which are paid.</p></div>
-<div class="card"><h3>Is “MCP 2.0” the official name?</h3><p>No. It's the nickname going around for the 24/11/2026 package. The standard is still MCP, which turned 2 in November 2026.</p></div>
-<div class="card"><h3>Does it work with other AIs?</h3><p>MCP is open: ChatGPT, Claude, Cursor, Gemini, Microsoft Copilot and Visual Studio Code support it (MCP blog, December 2025). Each AI app needs to support the new pieces; the kit was tested in Claude Code. The demo runs on its own in the terminal, with any agent.</p></div>
-<div class="card"><h3>Does it touch my real store?</h3><p>No. The store is made up and the server works on a copy of the 300 products.</p></div>
-<div class="card"><h3>Can I send a file to the tool?</h3><p>Not yet. File Uploads was announced as “coming soon”, with no date.</p></div>
-</div>
-<p class="sub" style="margin-top:28px">And you, which tool would you like to stop and ask you before acting? Come tell us and get this and other free kits at <a href="https://inema.club" target="_blank" rel="noopener">inema.club</a>, right on the web.</p>
+<!-- ========== PERGUNTAS ========== -->
+<section id="perguntas"><div class="wrap"><div class="col">
+  <p class="kicker">Questions</p>
+  <h2>Questions before you start</h2>
+  <div class="faq">
+    <details><summary>Do I need to code?</summary><p>To see it working, no: you paste the request and your AI does the rest. To build your own connector, yes, and the Python kit is the starting point.</p></details>
+    <details><summary>Does it cost anything?</summary><p>The kit is free and open (MIT license). The new features in Claude are turned on in the Pro, Max and Ultra plans, which are paid.</p></details>
+    <details><summary>Does it work with other AIs?</summary><p>MCP is open: ChatGPT, Claude, Cursor, Gemini, Microsoft Copilot and Visual Studio Code support it. Each AI app needs to accept the new pieces; the kit was tested in Claude Code. The demo runs by itself in the terminal, with any agent.</p></details>
+    <details><summary>What is a connector?</summary><p>It's the piece that links the AI to a program (the store, the database, the company's tool). In MCP it's called a server. With the standard, one connector works for any AI that speaks MCP.</p></details>
+    <details><summary>Can I send a file to the tool?</summary><p>Not yet. File uploads were announced as "coming soon", with no date.</p></details>
+  </div>
+</div></div></section>
+
+<!-- ========== FECHO ========== -->
+<section class="fecho"><div class="wrap">
+  <h2>And you: which tool would you like to stop and ask you before acting?</h2>
+  <p>Come tell us and get this and other free kits at <a href="https://inema.club" target="_blank" rel="noopener">inema.club</a>, right on the web.</p>
+  <div class="cta"><a class="btn" href="#comecar">Go to the request</a></div>
 </div></section>
+
 </main>
 
 <footer><div class="wrap">
-<span class="pill">free</span><span class="pill">open source (MIT)</span><span class="pill">Python</span><span class="pill">MCP 2026-07-28</span>
-<p><a href="https://github.com/inematds/mcp2-na-pratica" target="_blank" rel="noopener">github.com/inematds/mcp2-na-pratica</a> · <a href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a></p>
+  <nav aria-label="Footer">
+    <span>MCP 2 in practice · an INEMA kit</span>
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <a href="https://github.com/inematds/mcp2-na-pratica" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <button class="tema" id="tema" type="button">Light theme</button>
 </div></footer>
 <script>
-(function(){var b=document.body,t=document.getElementById('themeToggle');
-try{if(localStorage.getItem('mcp2-na-pratica-theme')==='light'){b.classList.add('light');t.textContent='☀️'}}catch(e){}
-t.onclick=function(){b.classList.toggle('light');var l=b.classList.contains('light');t.textContent=l?'☀️':'🌙';try{localStorage.setItem('mcp2-na-pratica-theme',l?'light':'dark')}catch(e){}};
-document.querySelectorAll('.copiar').forEach(function(bt){var orig=bt.textContent;bt.onclick=function(){var p=bt.parentNode.querySelector('p');var txt=p.textContent;
-(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){bt.textContent='✓'},function(){var r=document.createRange();r.selectNodeContents(p);var s=getSelection();s.removeAllRanges();s.addRange(r);bt.textContent='Ctrl+C'});setTimeout(function(){bt.textContent=orig},2500)}});})();
+(function(){
+  /* tema: sai do topo e vai para o rodapé */
+  var K='mcp2-na-pratica-theme', b=document.body, t=document.getElementById('tema');
+  function rot(){ t.textContent = b.classList.contains('light') ? 'Dark theme' : 'Light theme'; }
+  try{ if(localStorage.getItem(K)==='light') b.classList.add('light'); }catch(e){}
+  rot();
+  t.addEventListener('click',function(){
+    var l=b.classList.toggle('light'); rot();
+    try{ localStorage.setItem(K, l?'light':'dark'); }catch(e){}
+  });
+
+  /* copiar o pedido: cópia direta primeiro (funciona com a página aberta como arquivo), depois a área de transferência */
+  var bt=document.getElementById('copiar'), lb=document.getElementById('copiarTxt'),
+      tx=document.getElementById('pedidoTxt'), av=document.getElementById('aviso'), orig=lb.textContent, timer;
+  function ok(){ lb.textContent='Copied'; av.textContent='Request copied.'; clearTimeout(timer);
+    timer=setTimeout(function(){ lb.textContent=orig; av.textContent=''; },2500); }
+  function falhou(){ lb.textContent='Select the text and copy it'; var r=document.createRange(); r.selectNodeContents(tx);
+    var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+  function direto(){
+    var a=document.createElement('textarea'); a.value=tx.textContent; a.setAttribute('readonly','');
+    a.style.position='fixed'; a.style.opacity='0'; document.body.appendChild(a); a.select();
+    var feito=false; try{ feito=document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(a); return feito;
+  }
+  bt.addEventListener('click',function(){
+    if(direto()){ ok(); return; }
+    var resolvido=false;
+    function fim(f){ return function(){ if(!resolvido){ resolvido=true; f(); } }; }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      try{ navigator.clipboard.writeText(tx.textContent).then(fim(ok), fim(falhou)); }catch(e){ fim(falhou)(); }
+      setTimeout(fim(falhou),1500);   /* se o navegador não responder, deixa o texto selecionado */
+    }else{ falhou(); }
+  });
+})();
+</script>
+<script>
+/* Diagramas: um único loop rAF, pausado fora da tela; movimento reduzido = estado final parado. */
+(function(){
+  var reduz=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MOVE=650, PAUSA_FIM=1600;
+  var LBL={pausar:'Pause',repetir:'Replay'};
+  var diags=[].slice.call(document.querySelectorAll('[data-diag]')).map(function(el){
+    var svg=el.querySelector('svg'),nds=[].slice.call(svg.querySelectorAll('.nd')),tok=svg.querySelector('.tok'),ring=svg.querySelector('.ring'),ping=svg.querySelector('[data-ping]'),btn=el.querySelector('[data-btn]');
+    var pts=nds.map(function(n){var m=/translate\(([\d.]+),([\d.]+)\)/.exec(n.getAttribute('transform'));return{x:+m[1],y:+m[2]+28,dw:+(n.getAttribute('data-dwell')||900),ck:(n.getAttribute('data-checks')||'').split('|').filter(Boolean),pref:n.getAttribute('data-pref')||''}});
+    var tl=[],acc=0;pts.forEach(function(p,i){if(i>0){tl.push({k:'m',a:i-1,b:i,t0:acc,t1:acc+MOVE});acc+=MOVE}tl.push({k:'d',i:i,t0:acc,t1:acc+p.dw});acc+=p.dw});
+    var d={el:el,nds:nds,tok:tok,ring:ring,ping:ping,btn:btn,pts:pts,tl:tl,total:acc+PAUSA_FIM,t:0,vis:false,play:!reduz,fim:false};
+    btn.onclick=function(){if(d.fim||reduz){d.t=0;d.fim=false;d.play=true}else d.play=!d.play;btn.textContent=d.play?LBL.pausar:LBL.repetir;if(reduz&&d.play)reduzFinal(d,true);kick()};
+    if(reduz){btn.textContent=LBL.repetir;reduzFinal(d)}else desenha(d,0);
+    return d});
+  function reduzFinal(d,toca){if(toca){d.play=true;return}var p=d.pts[d.pts.length-1];d.nds.forEach(function(n){n.classList.add('on')});d.tok.setAttribute('cx',p.x);d.tok.setAttribute('cy',p.y);d.ping.textContent='';d.play=false}
+  function ease(x){return x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2}
+  function desenha(d,t){
+    var seg=null;for(var i=0;i<d.tl.length;i++){if(t>=d.tl[i].t0&&t<d.tl[i].t1){seg=d.tl[i];break}}
+    var x,y,ativo,txt='',anel=0;
+    if(!seg){var p=d.pts[d.pts.length-1];x=p.x;y=p.y;ativo=d.pts.length-1}
+    else if(seg.k==='m'){var a=d.pts[seg.a],b=d.pts[seg.b],f=ease((t-seg.t0)/(seg.t1-seg.t0));x=a.x;y=a.y+(b.y-a.y)*f;ativo=seg.a}
+    else{var q=d.pts[seg.i];x=q.x;y=q.y;ativo=seg.i;if(q.ck.length){var fr=(t-seg.t0)/(seg.t1-seg.t0),k=Math.min(q.ck.length-1,Math.floor(fr*q.ck.length));txt=q.pref+' '+q.ck[k];anel=(fr*q.ck.length)%1}}
+    d.nds.forEach(function(n,j){n.classList.toggle('on',j<=ativo)});
+    d.tok.setAttribute('cx',x);d.tok.setAttribute('cy',y);
+    d.ring.setAttribute('cx',x);d.ring.setAttribute('cy',y);d.ring.setAttribute('r',10+anel*22);d.ring.style.opacity=anel?(1-anel)*.8:0;
+    d.ping.textContent=txt;
+  }
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){diags.forEach(function(d){if(d.el===e.target)d.vis=e.isIntersecting})});kick()},{threshold:.15}):null;
+  diags.forEach(function(d){if(io)io.observe(d.el);else d.vis=true});
+  var rodando=false,ult=0;
+  function kick(){if(!rodando&&diags.some(function(d){return d.vis&&d.play})){rodando=true;ult=performance.now();requestAnimationFrame(loop)}}
+  function loop(now){var dt=Math.min(64,now-ult);ult=now;var algum=false;
+    diags.forEach(function(d){if(!d.vis||!d.play)return;algum=true;d.t+=dt;if(d.t>=d.total){d.t=0}desenha(d,d.t)});
+    if(algum)requestAnimationFrame(loop);else rodando=false}
+  kick();
+})();
 </script>
 </body>
 </html>
