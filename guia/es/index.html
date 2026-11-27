@@ -242,6 +242,9 @@
   .short .play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--fill);color:var(--tinta);display:grid;place-items:center;font-size:1.4rem}
   .short figcaption{margin-top:10px;font:600 .95rem Sora,sans-serif}
   /* prova */
+  .antes-agora{margin-top:22px}
+  .numeros + .mut{margin-top:18px}
+  .antes-agora + .mut{margin-top:12px}
   .numeros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:26px}
   .numero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px}
   .numero b{font:800 2.2rem/1 Sora,sans-serif;color:var(--amb-t)}
@@ -416,6 +419,25 @@
     <li><b>el trabajo en segundo plano</b>: el trabajo largo se convierte en una tarea y la conversación no se traba;</li>
     <li><b>la pregunta antes de actuar</b>: antes de publicar o borrar, la herramienta se detiene y te pregunta.</li>
   </ul>
+   <div class="tabela-wrap antes-agora">
+  <table class="tabela">
+    <thead><tr><td aria-hidden="true"></td><th>Antes</th><th>Ahora</th></tr></thead>
+    <tbody>
+      <tr><th>Reglas de uso</th><td>tú mismo tenías que escribir y mantener las reglas de uso de cada herramienta</td><td>la herramienta trae su propio manual (beta)</td></tr>
+      <tr><th>Espacio en la conversación</th><td>las reglas que pegabas ocupaban espacio todo el tiempo</td><td>el manual solo se abre cuando hace falta</td></tr>
+      <tr><th>Trabajo largo</th><td>la conversación se quedaba detenida esperando a la herramienta</td><td>el trabajo corre en segundo plano y la conversación sigue</td></tr>
+      <tr><th>Aprobación</th><td>el permiso era genérico ("¿puedo usar esta herramienta?"), sin decir qué iba a pasar</td><td>en medio del trabajo, la propia herramienta se detiene y pregunta con el detalle (ej.: el costo, el nombre de lo que va a borrar)</td></tr>
+      <tr><th>Enviar archivos</th><td>el archivo iba a la conversación y llenaba el espacio</td><td>anunciado, todavía no ha salido</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mut">Hoy: el segundo plano y la pregunta antes de actuar ya están disponibles en los planes Pro, Max y Ultra (Team y Enterprise en camino); el manual está en beta, activo en Pro, Max y Ultra, y en Team cuando el admin lo activa; Enterprise próximamente.</p>
+  <div class="numeros">
+    <div class="numero"><b>300</b><span>productos en la tiendita ficticia de la demo</span></div>
+    <div class="numero"><b>299</b><span>precios nuevos calculados en segundo plano, en borrador (1 ya estaba en el límite y no cambió)</span></div>
+    <div class="numero"><b>43</b><span>de ellos tuvieron menos del 20% de descuento para no bajar del margen mínimo del 15%</span></div>
+    <div class="numero"><b>17/17</b><span>pruebas superadas con el servidor del kit funcionando de verdad</span></div>
+  </div>
   <p class="mut">"MCP 2.0" es solo el apodo que circula: todo lo que hay aquí viene del anuncio de Anthropic y del blog oficial de MCP.</p>
 </div></div></section>
 
@@ -573,6 +595,26 @@
       <tr><th>Estado</th><td>beta pública</td><td>disponible</td><td>disponible</td></tr>
       <tr><th>En el kit</th><td>manual de la tienda verificado</td><td>300 productos, avance de 50 en 50</td><td>sí/no para publicar; nombre exacto para borrar</td></tr>
       <tr><th>Nombre oficial</th><td>Skills over MCP</td><td>Tasks</td><td>Elicitation</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div></section>
+
+<!-- ========== DÓNDE USARLO ========== -->
+<section id="onde"><div class="wrap">
+  <p class="kicker">Dónde usarlo</p>
+  <h2>La tiendita es solo el ejemplo. El mismo molde sirve para otras áreas.</h2>
+  <p class="mut">Ideas de uso con las mismas tres piezas. El kit trae solo la tienda; el resto lo armas sobre esa base.</p>
+  <div class="tabela-wrap">
+  <table class="tabela">
+    <thead><tr><th>Área</th><th>El manual (lo escribes tú)</th><th>En segundo plano</th><th>Pregunta antes de</th></tr></thead>
+    <tbody>
+      <tr><th>Contabilidad</th><td>las reglas de cierre del despacho contable</td><td>revisar las facturas del mes</td><td>enviar la declaración</td></tr>
+      <tr><th>Marketing</th><td>el tono y las reglas de la marca</td><td>armar las piezas de la campaña</td><td>publicar</td></tr>
+      <tr><th>Tienda e inventario (ERP)</th><td>el margen mínimo y los redondeos</td><td>actualizar precios e inventario</td><td>cancelar un pedido</td></tr>
+      <tr><th>Programación</th><td>la forma correcta de publicar el sistema</td><td>ejecutar el build y las pruebas</td><td>ponerlo en producción</td></tr>
+      <tr><th>Atención al cliente</th><td>la política de cambios y reembolsos</td><td>leer la cola de solicitudes de los clientes</td><td>devolver dinero</td></tr>
+      <tr><th>Investigación</th><td>qué fuentes son válidas</td><td>recopilar y reunir los datos</td><td>gastar créditos de pago</td></tr>
     </tbody>
   </table>
   </div>

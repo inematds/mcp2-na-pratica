@@ -242,6 +242,9 @@
   .short .play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--fill);color:var(--tinta);display:grid;place-items:center;font-size:1.4rem}
   .short figcaption{margin-top:10px;font:600 .95rem Sora,sans-serif}
   /* prova */
+  .antes-agora{margin-top:22px}
+  .numeros + .mut{margin-top:18px}
+  .antes-agora + .mut{margin-top:12px}
   .numeros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:26px}
   .numero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px}
   .numero b{font:800 2.2rem/1 Sora,sans-serif;color:var(--amb-t)}
@@ -416,6 +419,25 @@
     <li><b>background work</b>: a long job becomes a task and the conversation doesn't freeze;</li>
     <li><b>the question before acting</b>: before publishing or deleting, the tool stops and asks you.</li>
   </ul>
+   <div class="tabela-wrap antes-agora">
+  <table class="tabela">
+    <thead><tr><td aria-hidden="true"></td><th>Before</th><th>Now</th></tr></thead>
+    <tbody>
+      <tr><th>Usage rules</th><td>you had to write and maintain each tool's usage rules yourself</td><td>the tool brings its own manual (beta)</td></tr>
+      <tr><th>Room in the conversation</th><td>the rules you pasted in took up space the whole time</td><td>the manual only opens when needed</td></tr>
+      <tr><th>Long-running work</th><td>the conversation sat waiting for the tool</td><td>the work runs in the background and the conversation carries on</td></tr>
+      <tr><th>Approval</th><td>permission was generic ("can I use this tool?"), without saying what would happen</td><td>mid-task, the tool itself stops and asks with the details (e.g. the cost, the name of what it will delete)</td></tr>
+      <tr><th>Sending files</th><td>the file went into the conversation and filled up the space</td><td>announced, not released yet</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mut">Today: background work and asking before acting are available on the Pro, Max and Ultra plans (Team and Enterprise coming); the manual is in beta, on in Pro, Max and Ultra, and in Team once the admin turns it on; Enterprise coming soon.</p>
+  <div class="numeros">
+    <div class="numero"><b>300</b><span>products in the demo's pretend store</span></div>
+    <div class="numero"><b>299</b><span>new prices worked out in the background, as a draft (1 was already at the limit and stayed the same)</span></div>
+    <div class="numero"><b>43</b><span>of them got less than 20% off to stay above the 15% minimum margin</span></div>
+    <div class="numero"><b>17/17</b><span>tests passed with the kit's server actually running</span></div>
+  </div>
   <p class="mut">"MCP 2.0" is just a nickname going around: everything here comes from Anthropic's announcement and the official MCP blog.</p>
 </div></div></section>
 
@@ -573,6 +595,26 @@
       <tr><th>Status</th><td>public beta</td><td>available</td><td>available</td></tr>
       <tr><th>In the kit</th><td>store manual checked</td><td>300 products, progress 50 at a time</td><td>yes/no to publish; exact name to delete</td></tr>
       <tr><th>Official name</th><td>Skills over MCP</td><td>Tasks</td><td>Elicitation</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div></section>
+
+<!-- ========== WHERE TO USE ========== -->
+<section id="onde"><div class="wrap">
+  <p class="kicker">Where to use it</p>
+  <h2>The little shop is just the example. The same template works for other areas.</h2>
+  <p class="mut">Usage ideas with the same three pieces. The kit only includes the shop; you build the rest on top of it.</p>
+  <div class="tabela-wrap">
+  <table class="tabela">
+    <thead><tr><th>Area</th><th>The manual (you write it)</th><th>In the background</th><th>Asks before</th></tr></thead>
+    <tbody>
+      <tr><th>Accounting</th><td>the firm's closing rules</td><td>checking the month's invoices</td><td>filing the tax return</td></tr>
+      <tr><th>Marketing</th><td>the brand's tone and rules</td><td>putting together the campaign assets</td><td>publishing</td></tr>
+      <tr><th>Store and inventory (ERP)</th><td>the minimum margin and rounding rules</td><td>updating prices and stock</td><td>canceling an order</td></tr>
+      <tr><th>Programming</th><td>the right way to release the system</td><td>running build and tests</td><td>going live</td></tr>
+      <tr><th>Customer support</th><td>the exchange and refund policy</td><td>reading the queue of customer requests</td><td>refunding money</td></tr>
+      <tr><th>Research</th><td>which sources count</td><td>collecting and combining the data</td><td>spending paid credits</td></tr>
     </tbody>
   </table>
   </div>

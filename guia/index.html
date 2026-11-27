@@ -242,6 +242,9 @@
   .short .play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--fill);color:var(--tinta);display:grid;place-items:center;font-size:1.4rem}
   .short figcaption{margin-top:10px;font:600 .95rem Sora,sans-serif}
   /* prova */
+  .antes-agora{margin-top:22px}
+  .numeros + .mut{margin-top:18px}
+  .antes-agora + .mut{margin-top:12px}
   .numeros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:26px}
   .numero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px}
   .numero b{font:800 2.2rem/1 Sora,sans-serif;color:var(--amb-t)}
@@ -416,6 +419,25 @@
     <li><b>o trabalho em segundo plano</b>: o trabalho longo vira uma tarefa e a conversa não trava;</li>
     <li><b>a pergunta antes de agir</b>: antes de publicar ou apagar, a ferramenta para e pergunta a você.</li>
   </ul>
+    <div class="tabela-wrap antes-agora">
+  <table class="tabela">
+    <thead><tr><td aria-hidden="true"></td><th>Antes</th><th>Agora</th></tr></thead>
+    <tbody>
+      <tr><th>Regras de uso</th><td>você mesmo tinha que escrever e manter as regras de uso de cada ferramenta</td><td>a ferramenta traz o próprio manual (beta)</td></tr>
+      <tr><th>Espaço na conversa</th><td>as regras que você colava ocupavam espaço o tempo todo</td><td>o manual só abre quando é preciso</td></tr>
+      <tr><th>Trabalho longo</th><td>a conversa ficava parada esperando a ferramenta</td><td>o trabalho roda em segundo plano e a conversa segue</td></tr>
+      <tr><th>Aprovação</th><td>a permissão era genérica ("pode usar esta ferramenta?"), sem dizer o que ia acontecer</td><td>no meio do trabalho, a própria ferramenta para e pergunta com o detalhe (ex.: o custo, o nome do que vai apagar)</td></tr>
+      <tr><th>Mandar arquivo</th><td>o arquivo ia para a conversa e enchia o espaço</td><td>anunciado, ainda não saiu</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mut">Hoje: segundo plano e pergunta antes de agir já estão liberados nos planos Pro, Max e Ultra (Team e Enterprise chegando); o manual está em beta, ligado em Pro, Max e Ultra e no Team quando o admin ativa; Enterprise em breve.</p>
+  <div class="numeros">
+    <div class="numero"><b>300</b><span>produtos na lojinha de mentira do demo</span></div>
+    <div class="numero"><b>299</b><span>preços novos calculados em segundo plano, em rascunho (1 já estava no limite e ficou igual)</span></div>
+    <div class="numero"><b>43</b><span>deles tiveram desconto menor que 20% para não ficar abaixo da margem mínima de 15%</span></div>
+    <div class="numero"><b>17/17</b><span>testes passaram com o servidor do kit rodando de verdade</span></div>
+  </div>
   <p class="mut">"MCP 2.0" é só o apelido que circula: tudo aqui vem do anúncio da Anthropic e do blog oficial do MCP.</p>
 </div></div></section>
 
@@ -573,6 +595,26 @@
       <tr><th>Status</th><td>beta pública</td><td>disponível</td><td>disponível</td></tr>
       <tr><th>No kit</th><td>manual da loja conferido</td><td>300 produtos, andamento de 50 em 50</td><td>sim/não para publicar; nome exato para apagar</td></tr>
       <tr><th>Nome oficial</th><td>Skills over MCP</td><td>Tasks</td><td>Elicitation</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div></section>
+
+<!-- ========== ONDE USAR ========== -->
+<section id="onde"><div class="wrap">
+  <p class="kicker">Onde usar</p>
+  <h2>A lojinha é só o exemplo. O mesmo molde serve para outras áreas.</h2>
+  <p class="mut">Ideias de uso com as mesmas três peças. O kit traz só a loja; o resto você monta em cima dele.</p>
+  <div class="tabela-wrap">
+  <table class="tabela">
+    <thead><tr><th>Área</th><th>O manual (você escreve)</th><th>Em segundo plano</th><th>Pergunta antes de</th></tr></thead>
+    <tbody>
+      <tr><th>Contabilidade</th><td>as regras de fechamento do escritório</td><td>conferir as notas fiscais do mês</td><td>enviar a declaração</td></tr>
+      <tr><th>Marketing</th><td>o tom e as regras da marca</td><td>montar as peças da campanha</td><td>publicar</td></tr>
+      <tr><th>Loja e estoque (ERP)</th><td>a margem mínima e os arredondamentos</td><td>atualizar preços e estoque</td><td>cancelar pedido</td></tr>
+      <tr><th>Programação</th><td>o jeito certo de publicar o sistema</td><td>rodar build e testes</td><td>colocar no ar</td></tr>
+      <tr><th>Atendimento</th><td>a política de troca e reembolso</td><td>ler a fila de pedidos dos clientes</td><td>devolver dinheiro</td></tr>
+      <tr><th>Pesquisa</th><td>quais fontes valem</td><td>coletar e juntar os dados</td><td>gastar crédito pago</td></tr>
     </tbody>
   </table>
   </div>
